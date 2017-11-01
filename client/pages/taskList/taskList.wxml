@@ -1,0 +1,13 @@
+<!--作业列表-->
+<view class="task-list">
+  <!--页眉-->
+  <view class="task-list__hd">2017-01-01</view>
+  <!--内容-->
+  <view class="task-list__bd">
+    <view>
+      <button class="weui-btn" type="primary" bindtap="goToIndex">页面主操作 Normal</button>
+    </view>
+  </view>
+  <!--页脚-->
+  <view class="task-list__ft">我是有底线的</view>
+</view>
