@@ -1,10 +1,16 @@
 <!--作业列表-->
 <view class="task-list">
   <!--页眉-->
-  <view class="task-list__hd">{{taskBlock.folder.name}}</view>
+  <view class="task-list__hd">{{taskBlock.folder.name}}{{taskBlock.itemCount}}</view>
   <!--内容-->
   <view class="task-list__bd">
-
+    <view class="course-panel" wx:for="{{taskBlock.courses}}">
+      <view class="course-panel__hd">{{index}}: {{item.name}}</view>
+      <view class="course-panel__bd" wx:for="{{item.taskItems}}">
+        {{index}}: {{item.title}}
+      </view>
+      <view class="course-panel__ft">{{index}}: {{item.name}}</view>
+    </view>
   </view>
   <!--页脚-->
   <view class="task-list__ft">我是有底线的</view>
