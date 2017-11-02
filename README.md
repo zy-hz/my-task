@@ -4,6 +4,20 @@
 
 为K12学生安排每日回家作业的计划表。
 
+taskFolder -> taskBlock -> taskCourse -> taskItem
+
+taskBlock 表示一份作业，是学生当下需要完成的作业集合。包括若干课程，也可以是混合多个文件夹中的不同课程。建议使用日期作为BlockId，例如20170102
+
+### taskItem数据结构
+
+- ItemId
+- FolderId 
+- BlockId
+- CourseId
+- ItemTitle
+
+
+
 ## 版本计划
 
 ### v0.1
