@@ -13,6 +13,7 @@ function createPageObject() {
   };
 
   obj.doAddNewTaskItem = doAddNewTaskItem;
+  obj.goToTaskDetail = goToTaskDetail;
   return obj;
 }
 
@@ -28,4 +29,11 @@ function doAddNewTaskItem(event) {
     console.log("aaa");
   }).bind(this), 1000);
   
+}
+
+
+function goToTaskDetail(){
+  wx.navigateTo({
+    url: '/pages/taskDetail/taskDetail',
+  })
 }

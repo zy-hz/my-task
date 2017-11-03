@@ -67,6 +67,32 @@ function mockCreateTaskBlock() {
   return block;
 }
 
+function mockCreateTaskBlock_home() {
+  var folder = new TaskFolder(123, "回家作业");
+  var block = new TaskBlock(1, "周四作业", folder.id, folder.name);
+
+  var course1 = new Course(1, "语文");
+  course1.taskItems.push(new TaskItem(1, "code 122"));
+  course1.taskItems.push(new TaskItem(3, "测试 122"));
+
+  var course2 = new Course(2, "数学");
+  course2.taskItems.push(new TaskItem(21, "政府 111"));
+  course2.taskItems.push(new TaskItem(23, "粮油 222"));
+  course2.taskItems.push(new TaskItem(25, "电商 333 电商 333 电商 333 电商 333 电商 333 电商 333"));
+
+
+  var course3 = new Course(3, "英语");
+  course3.taskItems.push(new TaskItem(31, "服务器 A"));
+  course3.taskItems.push(new TaskItem(33, "服务器 B"));
+  course3.taskItems.push(new TaskItem(35, "服务器 C"));
+
+
+  block.courses.push(course1);
+  block.courses.push(course2);
+  block.courses.push(course3);
+
+  return block;
+}
 module.exports = {
   getTaskBlock: getTaskBlock,
   addNewTaskItem: addNewTaskItem,

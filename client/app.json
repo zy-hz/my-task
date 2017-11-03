@@ -3,7 +3,8 @@
     "pages/taskList/taskList",
     "pages/index/index",
     "pages/chat/chat",
-    "pages/taskSchedule/taskSchedule"
+    "pages/taskSchedule/taskSchedule",
+    "pages/taskDetail/taskDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
