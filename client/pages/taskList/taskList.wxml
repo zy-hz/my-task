@@ -3,14 +3,20 @@
   <!--页眉-->
   <view class="task-list__hd">{{taskBlock.folder.name}}{{taskBlock.itemCount}}</view>
   <!--内容-->
-  <view class="task-list__bd">
+  <view class="weui-cells weui-cells_after-title task-list__bd">
+
+    <!--课程面板-->
     <view class="course-panel" wx:for="{{taskBlock.courses}}">
-      <view class="course-panel__hd">{{index}}: {{item.name}}</view>
-      <view class="course-panel__bd" wx:for="{{item.taskItems}}">
+      <!--课程栏目头部-->
+      <view class="weui-cell course-panel__hd">{{index}}: {{item.name}}</view>
+      <!--作业列表区-->
+      <view class="weui-cell course-panel__bd" wx:for="{{item.taskItems}}">
         {{index}}: {{item.title}}
       </view>
-      <view class="course-panel__ft">{{index}}: {{item.name}}</view>
+      <!--课程栏目底部-->
+      <view class="weui-cell"></view>
     </view>
+
   </view>
   <!--页脚-->
   <view class="task-list__ft">我是有底线的</view>
