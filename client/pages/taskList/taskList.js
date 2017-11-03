@@ -7,7 +7,10 @@ Page(createPageObject());
 // 创建页面对象
 function createPageObject() {
   var obj = new Object();
-  obj.data = { taskBlock: wetask.getTaskBlock() };
+  obj.data = {
+    taskBlock: wetask.getTaskBlock(),
+    addNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
+  };
 
   obj.doAddNewTaskItem = doAddNewTaskItem;
 
@@ -16,7 +19,9 @@ function createPageObject() {
 
 // 添加一个新作业条目
 function doAddNewTaskItem(event) {
-  if (event.detail == "") return;
-  var taskBlock = wetask.addNewTaskItem(this.data.taskBlock, event.detail);
+  if (event.detail.value == "") return;
+  var taskBlock = wetask.addNewTaskItem(this.data.taskBlock, event.detail.value, event.target.dataset.course);
+
   this.setData({ taskBlock });
+  this.setData({ addNewTaskPromotion: "" });
 }

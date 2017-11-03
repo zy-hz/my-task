@@ -1,62 +1,12 @@
 /*
 *   数据访问接口
 */
+var Task = require('./task');
 
-/**
- * @class
- * 作业文件夹
- *
- */
-var TaskFolder = function TaskFolder(id, name) {
-  this.id = id;
-  this.name = name;
-};
-
-/**
- * @class
- * 一份作业 (容器)
- *
- */
-var TaskBlock = function TaskBlock(id, name, folderId, folderName) {
-  this.id = id;
-  this.name = name;
-
-  this.folderId = folderId;
-  this.folderName = folderName;
-
-  this.courses = new Array();
-};
-
-/**
- * @class
- * 课程
- *
- */
-var Course = function Course(id, name) {
-  this.id = id;
-  this.name = name;
-
-  this.taskItems = new Array();
-};
-
-/**
- * @class
- * 作业项
- *
- */
-var TaskItem = function TaskItem(id, title, folderId, folderName, courseId, courseName, blockId, blockName) {
-  this.id = id;
-  this.title = title;
-
-  this.folderId = folderId;
-  this.folderName = folderName;
-
-  this.courseId = courseId;
-  this.courseName = courseName;
-
-  this.blockId = blockId;
-  this.blockName = blockName;
-};
+var TaskFolder = Task.TaskFolder;
+var TaskBlock = Task.TaskBlock;
+var Course = Task.Course;
+var TaskItem = Task.TaskItem;
 
 /**
  * @method
@@ -75,8 +25,11 @@ var getTaskBlock = function getTaskBlock(folderId) {
  *
  * @param {string} folderId 作业所在文件夹的编号，如果为空表示最后一次读取的文件
  */
-var addNewTaskItem = function addNewTaskItem(taskBlock , taskItemName , courseId){
-  taskBlock.courses[0].taskItems.push(new TaskItem(11, "服务器 A"));
+var addNewTaskItem = function addNewTaskItem(taskBlock, taskItemName, courseId) {
+  var course = Task.findCouseById(taskBlock, courseId);
+  if (course != null)
+    course.taskItems.push(new TaskItem(11, taskItemName));
+
   return taskBlock;
 }
 
@@ -86,7 +39,7 @@ var addNewTaskItem = function addNewTaskItem(taskBlock , taskItemName , courseId
  */
 function mockCreateTaskBlock() {
   var folder = new TaskFolder(123, "测试文件夹");
-  var block = new TaskBlock(1, "周四作业", folder.id,folder.name);
+  var block = new TaskBlock(1, "周四作业", folder.id, folder.name);
 
   var course1 = new Course(1, "大屏");
   course1.taskItems.push(new TaskItem(1, "code 122"));
