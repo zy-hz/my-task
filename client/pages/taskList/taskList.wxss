@@ -11,25 +11,11 @@
 .task-list__bd {
     padding-bottom: 40px;
 }
-.task-list__bd_spacing {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
 .task-list__ft{
     padding-bottom: 10px;
     text-align: center;
 }
 
-.task-list__title {
-    text-align: left;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.task-list__desc {
-    margin-top: 5px;
-    color: #888888;
-    text-align: left;
-    font-size: 14px;
+.course-panel__ft input{
+  width: 100%;
 }

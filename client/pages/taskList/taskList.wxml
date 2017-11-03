@@ -1,19 +1,22 @@
 <!--作业列表-->
 <view class="task-list">
   <!--页眉-->
-  <view class="task-list__hd">{{taskBlock.folder.name}}{{taskBlock.itemCount}}</view>
+  <view class="task-list__hd">{{taskBlock.folderName}}{{taskBlock.itemCount}}</view>
   <!--内容-->
   <view class="weui-cells weui-cells_after-title task-list__bd">
 
     <!--课程面板-->
     <view class="course-panel" wx:for="{{taskBlock.courses}}">
       <!--课程栏目头部-->
-      <view class="weui-cell course-panel__hd">{{index}}: {{item.name}}</view>
+      <view class="weui-cell course-panel__hd">{{item.name}}</view>
       <!--作业列表区-->
       <view class="weui-cell course-panel__bd" wx:for="{{item.taskItems}}">
-        {{index}}: {{item.title}}
+        {{index+1}}. {{item.title}}
       </view>
       <!--课程栏目底部-->
+      <view class="weui-cell course-panel__ft">
+        <input placeholder=" + 添加作业" bindblur="doAddNewTaskItem"/>
+      </view>
       <view class="weui-cell"></view>
     </view>
 

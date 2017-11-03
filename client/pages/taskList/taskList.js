@@ -9,5 +9,14 @@ function createPageObject() {
   var obj = new Object();
   obj.data = { taskBlock: wetask.getTaskBlock() };
 
+  obj.doAddNewTaskItem = doAddNewTaskItem;
+
   return obj;
+}
+
+// 添加一个新作业条目
+function doAddNewTaskItem(event) {
+  if (event.detail == "") return;
+  var taskBlock = wetask.addNewTaskItem(this.data.taskBlock, event.detail);
+  this.setData({ taskBlock });
 }
