@@ -13,7 +13,6 @@ function createPageObject() {
   };
 
   obj.doAddNewTaskItem = doAddNewTaskItem;
-
   return obj;
 }
 
@@ -24,4 +23,9 @@ function doAddNewTaskItem(event) {
 
   this.setData({ taskBlock });
   this.setData({ addNewTaskPromotion: "" });
+
+  this.timer = setInterval((function () {
+    console.log("aaa");
+  }).bind(this), 1000);
+  
 }

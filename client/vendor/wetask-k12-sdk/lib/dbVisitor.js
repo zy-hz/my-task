@@ -26,6 +26,7 @@ var getTaskBlock = function getTaskBlock(folderId) {
  * @param {string} folderId 作业所在文件夹的编号，如果为空表示最后一次读取的文件
  */
 var addNewTaskItem = function addNewTaskItem(taskBlock, taskItemName, courseId) {
+
   var course = Task.findCouseById(taskBlock, courseId);
   if (course != null)
     course.taskItems.push(new TaskItem(11, taskItemName));
@@ -46,15 +47,15 @@ function mockCreateTaskBlock() {
   course1.taskItems.push(new TaskItem(3, "测试 122"));
 
   var course2 = new Course(2, "平台");
-  course2.taskItems.push(new TaskItem(11, "政府 111"));
-  course2.taskItems.push(new TaskItem(33, "粮油 222"));
-  course2.taskItems.push(new TaskItem(55, "电商 333 电商 333 电商 333 电商 333 电商 333 电商 333"));
+  course2.taskItems.push(new TaskItem(21, "政府 111"));
+  course2.taskItems.push(new TaskItem(23, "粮油 222"));
+  course2.taskItems.push(new TaskItem(25, "电商 333 电商 333 电商 333 电商 333 电商 333 电商 333"));
 
 
   var course3 = new Course(3, "服务器");
-  course3.taskItems.push(new TaskItem(11, "服务器 A"));
+  course3.taskItems.push(new TaskItem(31, "服务器 A"));
   course3.taskItems.push(new TaskItem(33, "服务器 B"));
-  course3.taskItems.push(new TaskItem(55, "服务器 C"));
+  course3.taskItems.push(new TaskItem(35, "服务器 C"));
 
   var course4 = new Course(4, "外网脚本");
   var course5 = new Course(5, "内网脚本");

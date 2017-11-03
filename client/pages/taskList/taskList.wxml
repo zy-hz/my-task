@@ -9,13 +9,23 @@
     <view class="course-panel" wx:for="{{taskBlock.courses}}">
       <!--课程栏目头部-->
       <view class="weui-cell course-panel__hd">{{item.name}}</view>
+
       <!--作业列表区-->
-      <view class="weui-cell course-panel__bd" wx:for="{{item.taskItems}}">
-        {{index+1}}. {{item.title}}
+      <view class="weui-cell course-panel__bd" data-id="{{item.id}}" wx:for="{{item.taskItems}}">
+
+        <!--作业内容-->
+        <view class="weui-cell__bd">{{index+1}}. {{item.title}}</view>
+
+        <!--作业条目菜单区-->
+        <view class="weui-cell__ft" wx:if="{{true}}">
+          <icon class="weui-icon-radio" type="waiting" size="20"></icon>
+          <view class="weui-badge" style="margin-left: 5px;margin-right: 5px;display:none">x</view>
+        </view>
       </view>
+
       <!--课程栏目底部-->
       <view class="weui-cell course-panel__ft">
-        <input placeholder=" + 添加作业" data-course="{{item.id}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}"/>
+        <input placeholder=" + 添加作业" data-course="{{item.id}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}" />
       </view>
       <view class="weui-cell"></view>
     </view>
