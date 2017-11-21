@@ -20,23 +20,14 @@ async function get(ctx, next) {
   var verifyResult = verify_request(ctx);
 
   // 用户是否登录
-  var userId = verifyResult == "" ? ctx.state.$wxInfo.userinfo.openId : "devtest";
-
-  /**
-   * 解析微信发送过来的请求体
-   * 可查看微信文档：https://mp.weixin.qq.com/debug/wxadoc/dev/api/custommsg/receive.html#接收消息和事件
-   */
-  const body = ctx.request.body;
+  var uid = verifyResult == "" ? ctx.state.$wxInfo.userinfo.openId : "devtest";
 
   // 获得命令执行的参数
-  var pms = explain_query(ctx.query);
-  pms.uid = userId;
+  const { table, id } = ctx.query;
 
   // 获得查询结果
-  var result = execute_query(pms, execute_select);
-
-  var res = await taskdb("wetask_course");
-  ctx.body = res;
+  var result = await taskdb("wetask_" + table).where({ uid });
+  ctx.body = result;
 }
 
 /**
@@ -49,41 +40,6 @@ function verify_request(ctx) {
   if (ctx.state.$wxInfo.loginState != 1) return 'USER_HAS_NOT_LOGIN';
 
   return '';
-}
-
-/**
- * 解释查询参数
- */
-function explain_query(query) {
-  var tables = query.table.split(',');
-  return {
-    tables: tables,
-    id: query.id
-  };
-}
-
-/**
- * 执行查询获得结果
- */
-function execute_query(pms, executor) {
-  var resultGroup = new Array();
-
-  var tables = pms.tables;
-  tables.forEach(element => {
-    var obj = new Object();
-    obj[element] = executor("wetask_" + element, pms);
-    resultGroup.push(obj);
-  });
-
-  return resultGroup;
-}
-
-/**
- * 执行select命令
- */
-function execute_select(table, opts) {
-  const { uid, id } = opts;
-  return await taskdb(table).where({ uid });
 }
 
 module.exports = {
