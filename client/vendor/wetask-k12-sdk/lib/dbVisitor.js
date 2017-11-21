@@ -10,12 +10,31 @@ var TaskItem = Task.TaskItem;
 
 /**
  * @method
+ * 枚举课程
+ *
+ */
+var enumCourses = function enumCourses() {
+  return ['a'];
+}
+
+/**
+ * @method
+ * 枚举文件夹
+ *
+ */
+var enumFolders = function enumFolders(){
+  return ['系统作业'];
+}
+
+/**
+ * @method
  * 获取一份作业
  *
  * @param {string} folderId 作业所在文件夹的编号，如果为空表示最后一次读取的文件
  */
 var getTaskBlock = function getTaskBlock(folderId) {
-  return mockCreateTaskBlock();
+  return null;
+  //return mockCreateTaskBlock();
 };
 
 
@@ -93,7 +112,10 @@ function mockCreateTaskBlock_home() {
 
   return block;
 }
+
 module.exports = {
+  enumCourses: enumCourses,
+  enumFolders: enumFolders,
   getTaskBlock: getTaskBlock,
   addNewTaskItem: addNewTaskItem,
 };

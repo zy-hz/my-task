@@ -32,6 +32,10 @@ router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
 
+// --- wetask消息接口 --- //
+router.get('/wetask/enumscheme', controllers.wetask.enumscheme)
+
+
 // mydemo
 router.get('/demo', controllers.demo)
 

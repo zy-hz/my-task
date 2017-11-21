@@ -8,6 +8,8 @@ Page(createPageObject());
 function createPageObject() {
   var obj = new Object();
   obj.data = {
+    courses: wetask.enumCourses(),
+    folders: wetask.enumFolders(),
     taskBlock: wetask.getTaskBlock(),
     addNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
   };
@@ -28,11 +30,11 @@ function doAddNewTaskItem(event) {
   this.timer = setInterval((function () {
     console.log("aaa");
   }).bind(this), 1000);
-  
+
 }
 
 
-function goToTaskDetail(){
+function goToTaskDetail() {
   wx.navigateTo({
     url: '/pages/taskDetail/taskDetail',
   })
