@@ -1,4 +1,16 @@
 const { message: { checkSignature } } = require('../qcloud')
+const configs = require('../config')
+const taskdb = require('knex')({
+  client: 'mysql',
+  connection: {
+    host: configs.taskdb.host,
+    port: configs.taskdb.port,
+    user: configs.taskdb.user,
+    password: configs.taskdb.pass,
+    database: configs.taskdb.db,
+    charset: configs.taskdb.char
+  }
+})
 
 /**
  * 响应 enumscheme 请求（响应微信配置时的签名检查请求）
@@ -14,6 +26,8 @@ async function enumscheme(ctx, next) {
    */
   const body = ctx.request.body
 
+  var res = await taskdb("wetask_folder").first()
+  
   ctx.body = 'success'
 }
 
