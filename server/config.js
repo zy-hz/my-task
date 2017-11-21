@@ -26,9 +26,9 @@ const CONF = {
     },
 
     /**
-     * MySQL 配置，用来存储 session 和用户信息
-     * 若使用了腾讯云微信小程序解决方案
+     * MySQL 配置，用来存储 作业信息
      * 开发环境下，MySQL 的初始密码为您的微信小程序 appid
+     * 生产环境下，登录后台修改 /data/release/sdk.config.json 文件
      */
     taskdb: {
       host: 'localhost',

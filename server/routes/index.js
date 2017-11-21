@@ -33,7 +33,7 @@ router.get('/message', controllers.message.get)
 router.post('/message', controllers.message.post)
 
 // --- wetask消息接口 --- //
-router.get('/wetask/enumscheme', controllers.wetask.enumscheme)
+router.get('/wetask/get', controllers.wetask.get)
 
 
 // mydemo
