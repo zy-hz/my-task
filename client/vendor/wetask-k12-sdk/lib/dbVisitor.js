@@ -1,29 +1,64 @@
 /*
 *   数据访问接口
 */
-var Task = require('./task');
+var task = require('./task');
+var qcloud = require('../../wafer2-client-sdk/index');
+var config = require('../../../config.js');
 
-var TaskFolder = Task.TaskFolder;
-var TaskBlock = Task.TaskBlock;
-var Course = Task.Course;
-var TaskItem = Task.TaskItem;
+var TaskFolder = task.TaskFolder;
+var TaskBlock = task.TaskBlock;
+var Course = task.Course;
+var TaskItem = task.TaskItem;
 
 /**
  * @method
- * 枚举课程
+ * 初始化，组合多个请求
  *
+ * @param {Object} options 函数配置
+ * @param {Function} options.afterGetFolder(folders) 获得文件夹后的回调，参数 folders 文件夹信息
+ * @param {Function} options.afterGetCourse(courses) 获得课程后的回调，参数 courses 课程信息
+ * @param {Function} options.success() 登录成功后的回调函数
+ * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
-var enumCourses = function enumCourses() {
-  return ['a'];
+function init(options) {
+  get({
+    // 第一步调用folder接口
+    target: "folder",
+    success: function (folders) {
+      options.afterGetFolder(folders);
+
+      // 第二步调用course接口
+      get({
+        target: "course",
+        success: function (courses) {
+          options.afterGetCourse(courses);
+          options.success();
+        },
+        fail: options.fail
+      });
+    },
+
+    fail: options.fail
+  });
 }
 
 /**
  * @method
- * 枚举文件夹
+ * 从服务器获得指定对象数据
  *
+ * @param {Object} options 函数配置
+ * @param {Function} options.target 对象目标
+ * @param {Function} options.success(objects) 登录成功后的回调函数，参数 userInfo 微信用户信息
+ * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
-var enumFolders = function enumFolders(){
-  return ['系统作业'];
+function get(options) {
+  var url = `${config.service.host}/weapp/wetask/get?table=${options.target}`;
+  qcloud.request({
+    url: url,
+    success: function (response) { options.success(response.data) },
+    fail: options.fail
+  }
+  );
 }
 
 /**
@@ -33,8 +68,8 @@ var enumFolders = function enumFolders(){
  * @param {string} folderId 作业所在文件夹的编号，如果为空表示最后一次读取的文件
  */
 var getTaskBlock = function getTaskBlock(folderId) {
-  return null;
-  //return mockCreateTaskBlock();
+  //return null;
+  return mockCreateTaskBlock();
 };
 
 
@@ -52,6 +87,7 @@ var addNewTaskItem = function addNewTaskItem(taskBlock, taskItemName, courseId) 
 
   return taskBlock;
 }
+
 
 /***
  * @method
@@ -114,8 +150,8 @@ function mockCreateTaskBlock_home() {
 }
 
 module.exports = {
-  enumCourses: enumCourses,
-  enumFolders: enumFolders,
+  init: init,
+  get: get,
   getTaskBlock: getTaskBlock,
   addNewTaskItem: addNewTaskItem,
 };

@@ -1,7 +1,7 @@
 <!--作业列表-->
 <view class="task-list">
   <!--页眉-->
-  <view class="task-list__hd">{{taskBlock.folderName}}{{taskBlock.itemCount}}</view>
+  <view class="task-list__hd">{{currentFolder.folder_name}}{{taskBlock.itemCount}}</view>
   <!--内容-->
   <view class="weui-cells weui-cells_after-title task-list__bd">
 

@@ -1,8 +1,8 @@
 var dbVisitor = require('./lib/dbVisitor');
 
 var exports = module.exports = {
-  enumCourses: dbVisitor.enumCourses,
-  enumFolders: dbVisitor.enumFolders,
+  init: dbVisitor.init,
+  get: dbVisitor.get,
   getTaskBlock: dbVisitor.getTaskBlock , 
   addNewTaskItem: dbVisitor.addNewTaskItem ,
 };
