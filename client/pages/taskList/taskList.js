@@ -1,5 +1,7 @@
 // 引入 wetask SDK
 var wetask = require('../../vendor/wetask-k12-sdk/index');
+// 引入 QCloud 小程序增强 SDK
+var qcloud = require('../../vendor/wafer2-client-sdk/index');
 
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
@@ -29,6 +31,25 @@ function createPageObject() {
 function onLoad(options) {
   var thePage = this;
 
+  showBusy('正在登录');
+
+  // 登录之前需要调用 qcloud.setLoginUrl() 设置登录地址，不过我们在 app.js 的入口里面已经调用过了，后面就不用再调用了
+  qcloud.login({
+    success(result) {
+      init(thePage);
+    },
+
+    fail(error) {
+      showModel('登录失败', error);
+      console.log('登录失败', error);
+    }
+  });
+
+}
+
+
+// 初始化
+function init(thePage) {
   showBusy("获取数据");
   wetask.init({
 
@@ -41,12 +62,12 @@ function onLoad(options) {
     },
 
     success() {
-      showSuccess('登录成功');
+      showSuccess();
     },
 
     fail(error) {
-      showModel('登录失败', error);
-      console.log('登录失败', error);
+      showModel('初始化失败', error);
+      console.log('初始化失败', error);
     }
   });
 }
@@ -73,10 +94,17 @@ var showBusy = text => wx.showToast({
 });
 
 // 显示成功提示
-var showSuccess = text => wx.showToast({
-  title: text,
-  icon: 'success'
-});
+var showSuccess = function (text) {
+  if (text == null || text == '') {
+    wx.hideToast();
+  } else {
+    wx.showToast({
+      title: text,
+      icon: 'success'
+    });
+
+  }
+};
 
 // 显示失败提示
 var showModel = (title, content) => {
