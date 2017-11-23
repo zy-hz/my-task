@@ -22,7 +22,7 @@
         "text": "作业"
       },
       {
-        "pagePath": "pages/taskSchedule/taskSchedule",
+        "pagePath": "pages/index/index",
         "text": "时间表"
       },
       {

@@ -1,4 +1,3 @@
-const { message: { checkSignature } } = require('../qcloud')
 const configs = require('../config')
 const taskdb = require('knex')({
   client: 'mysql',
@@ -20,7 +19,7 @@ async function get(ctx, next) {
   var verifyResult = verify_request(ctx);
 
   // 用户是否登录
-  var uid = verifyResult == "" ? ctx.state.$wxInfo.userinfo.openId : "devtest";
+  var uid = verifyResult == -1 ? "devtest" : ctx.state.$wxInfo.userinfo.openId ;
 
   // 获得命令执行的参数
   const { table, id } = ctx.query;
@@ -34,14 +33,27 @@ async function get(ctx, next) {
  * 验证请求
  */
 function verify_request(ctx) {
-  // 检查签名，确认是微信发出的请求
-  const { signature, timestamp, nonce } = ctx.query;
-  if (!checkSignature(signature, timestamp, nonce)) return 'ERR_WHEN_CHECK_SIGNATURE';
-  if (ctx.state.$wxInfo.loginState != 1) return 'USER_HAS_NOT_LOGIN';
+  // 通过 Koa 中间件进行登录态校验之后
+  // 登录信息会被存储到 ctx.state.$wxInfo
+  // 具体查看：
+  if (ctx.state.$wxInfo.loginState === 1) {
+    // loginState 为 1，登录态校验成功
+    ctx.state.data = ctx.state.$wxInfo.userinfo
+  } else {
+    ctx.state.code = -1
+  }
 
-  return '';
+  return ctx.state.code;
 }
 
-module.exports = {
-  get
+module.exports = async (ctx, next) => {
+  // 通过 Koa 中间件进行登录态校验之后
+  // 登录信息会被存储到 ctx.state.$wxInfo
+  // 具体查看：
+  if (ctx.state.$wxInfo.loginState === 1) {
+    // loginState 为 1，登录态校验成功
+    ctx.state.data = ctx.state.$wxInfo.userinfo
+  } else {
+    ctx.state.code = -1
+  }
 }

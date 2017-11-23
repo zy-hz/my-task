@@ -54,6 +54,7 @@ function init(options) {
 function get(options) {
   var url = `${config.service.host}/weapp/wetask/get?table=${options.target}`;
   qcloud.request({
+    login: true,
     url: url,
     success: function (response) { options.success(response.data) },
     fail: options.fail

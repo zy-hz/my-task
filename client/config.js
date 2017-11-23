@@ -14,7 +14,7 @@ var config = {
         // 登录地址，用于建立会话
         loginUrl: `${host}/weapp/login`,
 
-        // 测试的请求地址，用于测试会话
+        // 测试的请求地址，用于测试会话 /user
         requestUrl: `${host}/weapp/user`,
 
         // 测试的信道服务地址
