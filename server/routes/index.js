@@ -33,7 +33,8 @@ router.get('/message', controllers.message.get)
 router.post('/message', controllers.message.post)
 
 // --- wetask消息接口 --- //
-router.get('/wetask/get', validationMiddleware,controllers.wetask)
+router.get('/wetask/get', validationMiddleware,controllers.wetask.get)
+router.get('/wetask/init', validationMiddleware, controllers.wetask.init)
 
 
 // mydemo

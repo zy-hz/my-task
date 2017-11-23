@@ -21,6 +21,32 @@ var TaskItem = task.TaskItem;
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function init(options) {
+  try {
+    var value = wx.getStorageSync('FirstRun');
+    if (value) {
+      // 用户已经运行过了
+      doLoad(options);
+    } else {
+      // 在服务器上初始化该用户
+      qcloud.request({
+        login: true,
+        url: `${config.service.host}/weapp/wetask/init`,
+        success: function () {
+          wx.setStorageSync('FirstRun', 'success');
+          doLoad(options);
+        },
+        fail: options.fail
+      }
+      );
+    }
+
+  } catch (e) {
+    options.fail(e.message);
+  }
+}
+
+// 载入操作
+function doLoad(options) {
   get({
     // 第一步调用folder接口
     target: "folder",
