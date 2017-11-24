@@ -25,7 +25,7 @@ function init(options) {
   qcloud.request({
     login: true,
     url: `${config.service.host}/weapp/wetask/init`,
-    success: function () {
+    success: function (response) {
       doLoad(options);
     },
     fail: options.fail
