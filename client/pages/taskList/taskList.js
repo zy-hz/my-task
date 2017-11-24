@@ -85,15 +85,12 @@ function init(thePage) {
   showBusy("获取数据");
   wetask.init({
 
-    afterGetFolder(folders) {
+    success(result) {
+      const { folders, courses} = result.data;
+
       thePage.setData({ currentFolder: folders[0], folders: folders });
-    },
-
-    afterGetCourse(courses) {
       thePage.setData({ courses: courses });
-    },
 
-    success() {
       showSuccess();
     },
 

@@ -25,36 +25,12 @@ function init(options) {
   qcloud.request({
     login: true,
     url: `${config.service.host}/weapp/wetask/init`,
-    success: function (response) {
-      doLoad(options);
-    },
+    success: options.success,
     fail: options.fail
   }
   );
 }
 
-// 载入操作
-function doLoad(options) {
-  get({
-    // 第一步调用folder接口
-    target: "folder",
-    success: function (folders) {
-      options.afterGetFolder(folders);
-
-      // 第二步调用course接口
-      get({
-        target: "course",
-        success: function (courses) {
-          options.afterGetCourse(courses);
-          options.success();
-        },
-        fail: options.fail
-      });
-    },
-
-    fail: options.fail
-  });
-}
 
 /**
  * @method
