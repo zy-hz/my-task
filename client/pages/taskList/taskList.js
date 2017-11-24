@@ -41,20 +41,20 @@ function onLoad(options) {
             // 用户已经同意小程序使用用户信息
             doLogin(options)
           },
-          fail(){
+          fail() {
             // 用户不同意使用小程序
             wx.navigateTo({
               url: '/pages/introduce/introduce',
-            })
+            });
           }
         })
-      }else{
+      } else {
         // 已经授权了
         doLogin(options);
       }
     },
 
-    fail(){
+    fail() {
       showModel('获取设置失败');
       console.log('获取设置失败');
     }

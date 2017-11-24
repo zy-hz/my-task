@@ -1,2 +1,4 @@
-<!--pages/introduce/introduce.wxml-->
-<text>pages/introduce/introduce.wxml</text>
+<view>
+<view>亲，我们需要您的授权</view>
+<button type='primary' size='default' open-type='getUserInfo' bindgetuserinfo='doGetUserInfo' disabled='{{hasAuthorized}}'>授权</button>
+</view>
