@@ -15,16 +15,20 @@ const taskdb = require('knex')({
  * 初始化一个用户
  */
 async function init(ctx, next) {
+  // 用户必须登录
   if (verify_request(ctx) == -1) return;
-
-  // 用户是否登录
   var uid = ctx.state.$wxInfo.userinfo.openId;
 
-  var folders = createDefaultFolders(uid);
-  await taskdb("wetask_folder").insert(folders);
+  // 检查是否初始化
+  if (await getTargetCount("folder", uid) == 0) {
+    var folders = createDefaultFolders(uid);
+    await taskdb("wetask_folder").insert(folders);
+  }
 
-  var courses = createDefaultCourses(uid);
-  await taskdb("wetask_course").insert(courses);
+  if (await getTargetCount("course", uid) == 0) {
+    var courses = createDefaultCourses(uid);
+    await taskdb("wetask_course").insert(courses);
+  }
 }
 
 // 为用户构建默认数组
@@ -41,6 +45,12 @@ function createDefaultCourses(uid) {
     { CourseName: "科学", uid: uid },
     { CourseName: "社会", uid: uid }
   ];
+}
+
+// 获得对象的数量
+async function getTargetCount(target, uid) {
+  var result = await taskdb("wetask_" + target).count('uid as cnt').where({ uid });
+  return result[0].cnt;
 }
 
 /**
