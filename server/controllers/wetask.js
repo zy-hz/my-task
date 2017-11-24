@@ -19,16 +19,23 @@ async function init(ctx, next) {
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
 
-  // 检查是否初始化
+  // 检查文件夹是否初始化
   if (await getTargetCount("folder", uid) == 0) {
     var folders = createDefaultFolders(uid);
     await taskdb("wetask_folder").insert(folders);
   }
+  var folders = await taskdb("wetask_folder").where({ uid });
 
+  // 检查课程是否初始化
   if (await getTargetCount("course", uid) == 0) {
     var courses = createDefaultCourses(uid);
     await taskdb("wetask_course").insert(courses);
   }
+  var courses = await taskdb("wetask_course").where({ uid });
+
+  // 载入默认文件夹下的作业块列表
+  var blocks = await taskdb("wetask_block").where({ uid, folder_id: folders[0].id });
+  ctx.body = { folders, blocks, courses };
 }
 
 // 为用户构建默认数组

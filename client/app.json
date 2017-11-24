@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/taskList/taskList",
+    "pages/taskBlock/taskBlock",
     "pages/index/index",
     "pages/chat/chat",
     "pages/taskSchedule/taskSchedule",
     "pages/taskDetail/taskDetail",
-    "pages/introduce/introduce"
+    "pages/introduce/introduce",
+    "pages/taskList/taskList"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -19,7 +20,7 @@
     "backgroundColor": "#000000",
     "list": [
       {
-        "pagePath": "pages/taskList/taskList",
+        "pagePath": "pages/taskBlock/taskBlock",
         "text": "作业"
       },
       {

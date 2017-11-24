@@ -93,7 +93,7 @@ function init(thePage) {
       thePage.setData({ currentFolder: folders[0], folders: folders });
       thePage.setData({ courses: courses });
       thePage.setData({ blocks: blocks });
-      
+
       showSuccess();
     },
 

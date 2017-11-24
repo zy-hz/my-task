@@ -1,0 +1,21 @@
+/* pages/taskList/taskList.wxss */
+
+.task-list{
+    background-color: #F8F8F8;
+    font-size: 16px;
+    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.task-list__hd {
+    padding: 5px;
+}
+.task-list__bd {
+    padding-bottom: 40px;
+}
+.task-list__ft{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.course-panel__ft input{
+  width: 100%;
+}
