@@ -29,17 +29,50 @@ function createPageObject() {
  * 页面载入事件
  */
 function onLoad(options) {
-  var thePage = this;
+  options.thePage = this;
+
+  // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
+  wx.getSetting({
+    success(res) {
+      if (!res.authSetting['scope.userInfo']) {
+        wx.authorize({
+          scope: 'scope.userInfo',
+          success() {
+            // 用户已经同意小程序使用用户信息
+            doLogin(options)
+          },
+          fail(){
+            // 用户不同意使用小程序
+            wx.navigateTo({
+              url: '/pages/introduce/introduce',
+            })
+          }
+        })
+      }else{
+        // 已经授权了
+        doLogin(options);
+      }
+    },
+
+    fail(){
+      showModel('获取设置失败');
+      console.log('获取设置失败');
+    }
+  })
+
+}
+
+// 登录过程
+function doLogin(options) {
 
   showBusy('正在登录');
 
   // 页面载入前必须清除seesion，强制qcloud重新登录
   qcloud.clearSession();
-
   // 登录之前需要调用 qcloud.setLoginUrl() 设置登录地址，不过我们在 app.js 的入口里面已经调用过了，后面就不用再调用了
   qcloud.login({
     success(result) {
-      init(thePage);
+      init(options.thePage);
     },
 
     fail(error) {
@@ -47,9 +80,7 @@ function onLoad(options) {
       console.log('登录失败', error);
     }
   });
-
 }
-
 
 // 初始化
 function init(thePage) {

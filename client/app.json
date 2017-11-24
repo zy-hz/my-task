@@ -4,7 +4,8 @@
     "pages/index/index",
     "pages/chat/chat",
     "pages/taskSchedule/taskSchedule",
-    "pages/taskDetail/taskDetail"
+    "pages/taskDetail/taskDetail",
+    "pages/introduce/introduce"
   ],
   "window": {
     "backgroundTextStyle": "light",
