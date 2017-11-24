@@ -14,7 +14,7 @@ function createPageObject() {
     folders: {},
     blocks: {},
 
-    currentFolder: {},
+    currentFolder: { FolderName: "正在载入作业列表..." },
     taskBlock: {},
     addNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
   };
