@@ -1,2 +1,8 @@
 @import 'vendor/weui-wxss/weui.wxss';
 
+.wetask-toolbar-button{
+  margin-right: 5px;
+  vertical-align: middle;
+  width:20px; 
+  height: 20px;
+}

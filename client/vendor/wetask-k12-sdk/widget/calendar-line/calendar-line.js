@@ -1,6 +1,15 @@
 var utils = require('../../lib/utils.js');
 
+var pms = {
+  dateList: [],   // 日历数据数组
+  swiperCurrent: 0, // 日历轮播正处在哪个索引位置
+  dateCurrent: new Date(),  // 正选择的当前日期
+  dateCurrentStr: '', // 正选择日期的 id
+  dateMonth: '1月',  // 正显示的月份
+  dateListArray: ['日', '一', '二', '三', '四', '五', '六'],
 
+
+}
 // 日历组件部分
 // ----------------------------
 function init(thePage) {

@@ -14,27 +14,23 @@ Page(createPageObject());
 function createPageObject() {
   var obj = new Object();
   obj.data = {
+    blocks: {},
     courses: {},
     folders: {},
-    blocks: {},
 
     currentFolder: { FolderName: "正在载入作业列表..." },
     taskBlock: {},
     addNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
 
-    dateList: [],   // 日历数据数组
-    swiperCurrent: 0, // 日历轮播正处在哪个索引位置
-    dateCurrent: new Date(),  // 正选择的当前日期
-    dateCurrentStr: '', // 正选择日期的 id
-    dateMonth: '1月',  // 正显示的月份
-    dateListArray: ['日', '一', '二', '三', '四', '五', '六'],
-
   };
 
   obj.onLoad = onLoad;
 
+  obj.doAddTaskBlock = doAddTaskBlock;
+
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.goToTaskDetail = goToTaskDetail;
+
 
   return obj;
 }
@@ -43,7 +39,6 @@ function createPageObject() {
  * 页面载入事件
  */
 function onLoad(options) {
-  calendar.init(this);
   options.thePage = this;
 
   // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
@@ -116,6 +111,12 @@ function init(thePage) {
     }
   });
 }
+
+// 添加一个作业块
+function doAddTaskBlock(options) {
+  console.log(options);
+}
+
 
 // 添加一个新作业条目
 function doAddNewTaskItem(event) {
