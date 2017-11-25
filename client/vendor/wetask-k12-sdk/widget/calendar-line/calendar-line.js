@@ -4,6 +4,10 @@ var utils = require('../../lib/utils.js');
 // 日历组件部分
 // ----------------------------
 function init(thePage) {
+  // 安装界面事件
+  thePage.dateSwiperChange = dateSwiperChange;
+  thePage.chooseDate = chooseDate;
+
   var d = new Date();
   var month = utils.addZero(d.getMonth() + 1),
     day = utils.addZero(d.getDate());
