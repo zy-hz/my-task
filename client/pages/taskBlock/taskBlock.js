@@ -1,10 +1,11 @@
 // 引入 wetask SDK
 var wetask = require('../../vendor/wetask-k12-sdk/index');
 
-var utils = require('../../vendor/wetask-k12-sdk/lib/utils.js');
-
 // 引入 QCloud 小程序增强 SDK
 var qcloud = require('../../vendor/wafer2-client-sdk/index');
+
+// 引入日历
+var calendar = require('../../vendor/wetask-k12-sdk/widget/calendar-line/calendar-line.js')
 
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
@@ -42,7 +43,7 @@ function createPageObject() {
  * 页面载入事件
  */
 function onLoad(options) {
-  initDate();
+  calendar.init(this);
   options.thePage = this;
 
   // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
@@ -166,80 +167,3 @@ function goToTaskDetail() {
   })
 }
 
-
-// 日历组件部分
-// ----------------------------
-function initDate() {
-  var d = new Date();
-  var month = utils.addZero(d.getMonth() + 1),
-    day = utils.addZero(d.getDate());
-  for (var i = -3; i <= 3; i++) {
-    updateDate(utils.DateAddDay(d, i * 7));
-  }
-  this.setData({
-    swiperCurrent: 3,
-    dateCurrent: d,
-    dateCurrentStr: d.getFullYear() + '-' + month + '-' + day,
-    dateMonth: month + '月',
-  });
-}
-
-// 获取这周从周日到周六的日期
-function calculateDate(_date) {
-  var first = utils.FirstDayInThisWeek(_date);
-  var d = {
-    'month': first.getMonth() + 1,
-    'days': [],
-  };
-  for (var i = 0; i < 7; i++) {
-    var dd = utils.DateAddDay(first, i);
-    var day = utils.addZero(dd.getDate()),
-      month = utils.addZero(dd.getMonth() + 1);
-    d.days.push({
-      'day': day,
-      'id': dd.getFullYear() + '-' + month + '-' + day,
-    });
-  }
-  return d;
-}
-
-// 更新日期数组数据
-function updateDate(_date, atBefore) {
-  var week = calculateDate(_date);
-  if (atBefore) {
-    this.setData({
-      dateList: [week].concat(this.data.dateList),
-    });
-  } else {
-    this.setData({
-      dateList: this.data.dateList.concat(week),
-    });
-  }
-}
-
-// 日历组件轮播切换
-function dateSwiperChange(e) {
-  var index = e.detail.current;
-  var d = this.data.dateList[index];
-  this.setData({
-    swiperCurrent: index,
-    dateMonth: d.month + '月',
-  });
-}
-
-// 获得日期字符串
-function getDateStr (arg) {
-  if (utils.type(arg) == 'array') {
-    return arr[0] + '-' + arr[1] + '-' + arr[2] + ' 00:00:00';
-  } else if (utils.type(arg) == 'date') {
-    return arg.getFullYear() + '-' + (arg.getMonth() + 1) + '-' + arg.getDate() + ' 00:00:00';
-  } else if (utils.type(arg) == 'object') {
-    return arg.year + '-' + arg.month + '-' + arg.day + ' 00:00:00';
-  }
-}
-
-// 点击日历某日
-function chooseDate(e) {
-  var str = e.target.id;
-  this.setData({ dateCurrentStr: str, });
-}
