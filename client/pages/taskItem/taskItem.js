@@ -43,7 +43,9 @@ function onLoad(options) {
       thePage.setData({ taskBlock, taskItems, courses });
 
       // 作业项目按照课程排序
-      var item4Course = groupItemByCourse(taskItems, courses);
+      var item4Course = groupItemByCourse(taskItems);
+      item4Course = addNotUsedCourse(item4Course, courses);
+
       thePage.setData({ item4Course });
       common.showSuccess();
     },
@@ -56,8 +58,41 @@ function onLoad(options) {
 }
 
 // 作业条目按照课程分组
-function groupItemByCourse(taskItems, courses) {
-  taskItems = taskItems
+function groupItemByCourse(taskItems) {
+  taskItems = taskItems.sort(function (a, b) { return a.course_id < b.course_id; });
+
+  var curCourse = "";
+  var curItems = new Array();
+  var itemGroup = new Array();
+
+  for (var i = 0; i < taskItems.length; i++) {
+    var it = taskItems[i];
+    if (curCourse != it.CourseName) {
+      if (curCourse != "") {
+        itemGroup.push({ courseName: curCourse, taskItems: curItems });
+      }
+
+      curCourse = it.CourseName;
+      curItem = new Array();
+    }
+
+    curItem.push(it);
+  }
+
+  if (curCourse != "") itemGroup.push({ courseName: curCourse, taskItems: curItems });
+  return itemGroup;
+}
+
+// 添加没有使用过的课程
+function addNotUsedCourse(itemGroup, courses) {
+  courses.forEach(function (element) {
+    var cname = element.CourseName;
+    if (itemGroup.findIndex(function (it) { return it.CourseName == cname; }) < 0) {
+      itemGroup.push({ courseName: cname });
+    }
+  });
+
+  return itemGroup;
 }
 
 // 添加一个新作业条目
