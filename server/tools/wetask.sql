@@ -25,6 +25,7 @@ CREATE TABLE `wetask_block` (
 	`uid` VARCHAR(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户编号',
 	INDEX `uid` (`uid`),	
 	INDEX `folder_id` (`folder_id`),	
+	INDEX `CreateDate` (`CreateDate`),	
 	PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -40,13 +41,3 @@ CREATE TABLE `wetask_item` (
 	PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ;
-
-INSERT INTO `wetask_folder` (`id`, `FolderName`, `uid`) VALUES
-	(1, '回家作业', 'devtest');
-	
-INSERT INTO `wetask_course` (`id`, `CourseName`, `uid`) VALUES
-	(1, '语文', 'devtest'),
-	(2, '数学', 'devtest'),
-	(3, '英语', 'devtest'),
-	(4, '科学', 'devtest'),
-	(5, '社会', 'devtest');

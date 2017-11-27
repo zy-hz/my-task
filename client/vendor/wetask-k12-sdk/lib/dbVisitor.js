@@ -34,7 +34,7 @@ function init(options) {
  * 获得作业文件夹列表，包括文件夹的详细信息
  *
  * @param {Object} options 函数配置
- * @param {Function} options.success(response) 登录成功后的回调函数 const { folders } = response.data
+ * @param {Function} options.success(result) 登录成功后的回调函数 const { folders } = result.data
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function getTaskFolders(options){
@@ -56,12 +56,28 @@ function getTaskFolders(options){
  * @param {Function} options.BlockName 作业名称
  * @param {Function} options.CreateDate 创建日期
  * @param {Function} options.DeliverDate 发布日期
- * @param {Function} options.success(response) 登录成功后的回调函数 const {  } = response.data
+ * @param {Function} options.success(result) 登录成功后的回调函数 const { BlockId } = result.data
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function addNewTaskBlock(options){
   options.login = true;
   options.url = `${config.service.host}/weapp/wetask/addnewtaskblock?FolderId=${options.FolderId}&BlockName=${options.BlockName}&CreateDate=${options.CreateDate}&DeliverDate=${options.DeliverDate}`;
+
+  qcloud.request(options);
+}
+
+/**
+ * @method
+ * 获得作业条目
+ *
+ * @param {Object} options 函数配置
+ * @param {Function} options.BlockId 作业块编号
+ * @param {Function} options.success(result) 登录成功后的回调函数 const { items } = result.data
+ * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
+ */
+function getTaskItems(options) {
+  options.login = true;
+  options.url = `${config.service.host}/weapp/wetask/gettaskitems?BlockId=${options.BlockId}`;
 
   qcloud.request(options);
 }
@@ -180,5 +196,6 @@ module.exports = {
   getTaskBlock: getTaskBlock,
   getTaskFolders: getTaskFolders,
   addNewTaskBlock: addNewTaskBlock,
+  getTaskItems: getTaskItems,
   addNewTaskItem: addNewTaskItem,
 };

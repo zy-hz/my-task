@@ -6,5 +6,6 @@ var exports = module.exports = {
   getTaskBlock: dbVisitor.getTaskBlock , 
   getTaskFolders: dbVisitor.getTaskFolders,
   addNewTaskBlock: dbVisitor.addNewTaskBlock,
+  getTaskItems: dbVisitor.getTaskItems,
   addNewTaskItem: dbVisitor.addNewTaskItem ,
 };

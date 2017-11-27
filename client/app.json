@@ -6,7 +6,7 @@
     "pages/taskSchedule/taskSchedule",
     "pages/taskDetail/taskDetail",
     "pages/introduce/introduce",
-    "pages/taskList/taskList",
+    "pages/taskItem/taskItem",
     "pages/createBlock/createBlock"
   ],
   "window": {

@@ -73,8 +73,9 @@ function getTaskPeriod4Folder(folder) {
 }
 
 // 获得文件夹的名称
-function getTaskBlockName(options){
-  return options.taskPeriod.createDate;
+function getTaskBlockName(options) {
+  var dt = new Date(options.taskPeriod.createDate);
+  return util.getDay_zh(dt);
 }
 
 // 创建一份作业
@@ -89,8 +90,9 @@ function doCreateTaskBlock(e) {
     DeliverDate: thePage.data.taskPeriod.deliverDate,
 
     success(result) {
+      const { BlockId } = result.data;
       wx.redirectTo({
-        url: '/pages/taskList/taskList',
+        url: `/pages/taskItem/taskItem?BlockId=${BlockId}`,
       })
     },
 
