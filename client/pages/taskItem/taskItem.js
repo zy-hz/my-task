@@ -16,6 +16,7 @@ function createPageObject() {
     courses: {},
     taskBlock: {},
     taskItems: {},
+    item4Course: {},
     addNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
   };
 
@@ -39,8 +40,11 @@ function onLoad(options) {
 
     success(result) {
       const { taskBlock, taskItems, courses } = result.data;
-      thePage.setData({ taskBlock, taskItems, courses});
+      thePage.setData({ taskBlock, taskItems, courses });
 
+      // 作业项目按照课程排序
+      var item4Course = groupItemByCourse(taskItems, courses);
+      thePage.setData({ item4Course });
       common.showSuccess();
     },
 
@@ -49,6 +53,11 @@ function onLoad(options) {
       console.log('初始化失败', error);
     }
   });
+}
+
+// 作业条目按照课程分组
+function groupItemByCourse(taskItems, courses) {
+  taskItems = taskItems
 }
 
 // 添加一个新作业条目

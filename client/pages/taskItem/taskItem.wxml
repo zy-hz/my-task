@@ -7,9 +7,9 @@
   <view class="weui-cells weui-cells_after-title task-list__bd">
 
     <!--课程面板-->
-    <view class="course-panel" wx:for="{{taskBlock.courses}}">
+    <view class="course-panel" wx:for="{{item4Course}}">
       <!--课程栏目头部-->
-      <view class="weui-cell course-panel__hd">{{item.name}}</view>
+      <view class="weui-cell course-panel__hd">{{item.courseName}}</view>
 
       <!--作业列表区-->
       <view class="weui-cell course-panel__bd" data-id="{{item.id}}" wx:for="{{item.taskItems}}">
