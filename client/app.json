@@ -6,7 +6,8 @@
     "pages/taskSchedule/taskSchedule",
     "pages/taskDetail/taskDetail",
     "pages/introduce/introduce",
-    "pages/taskList/taskList"
+    "pages/taskList/taskList",
+    "pages/createBlock/createBlock"
   ],
   "window": {
     "backgroundTextStyle": "light",
