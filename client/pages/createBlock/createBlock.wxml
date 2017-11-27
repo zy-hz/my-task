@@ -32,7 +32,7 @@
           <view class="weui-label">布置作业</view>
         </view>
         <view class="weui-cell__bd">
-          <picker mode="date" id="createDate" value="{{taskPeriod.createDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+          <picker mode="date" id="createDate" value="{{taskPeriod.createDate}}" bindchange="bindDateChange">
             <view class="weui-input">{{taskPeriod.createDate}}</view>
           </picker>
         </view>
@@ -42,7 +42,7 @@
           <view class="weui-label">上交作业</view>
         </view>
         <view class="weui-cell__bd">
-          <picker mode="date" id="deliverDate" value="{{taskPeriod.deliverDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+          <picker mode="date" id="deliverDate" value="{{taskPeriod.deliverDate}}" bindchange="bindDateChange">
             <view class="weui-input">{{taskPeriod.deliverDate}}</view>
           </picker>
         </view>

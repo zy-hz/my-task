@@ -60,6 +60,17 @@ function onLoad(e) {
   });
 }
 
+// 获得指定文件夹的作业期间
+function getTaskPeriod4Folder(folder) {
+  var dt1 = new Date();
+  var dt2 = util.DateAddDay(dt1, 1);
+  return {
+    createDate: util.formatDate(dt1, '-'),
+    deliverDate: util.formatDate(dt2, '-'),
+  };
+}
+
+
 // 以下是 界面事件处理
 //
 function showTopTips() {
@@ -90,14 +101,11 @@ function folderChange(e) {
 function bindDateChange(e) {
   var taskPeriod = this.data.taskPeriod;
   taskPeriod[e.target.id] = e.detail.value;
+
+  if (e.target.id == "createDate") {
+    var dt1 = new Date(e.detail.value);
+    var dt2 = util.DateAddDay(dt1, 1);
+    taskPeriod.deliverDate = util.formatDate(dt2, '-');
+  }
   this.setData({ taskPeriod });
-}
-
-// 获得指定文件夹的作业期间
-function getTaskPeriod4Folder(folder) {
-
-  return {
-    createDate: util.formatDate(new Date(), '-'),
-    deliverDate: util.formatDate(new Date(), '-'),
-  };
 }
