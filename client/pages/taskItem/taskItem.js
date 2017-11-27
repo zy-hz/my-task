@@ -61,25 +61,25 @@ function onLoad(options) {
 function groupItemByCourse(taskItems) {
   taskItems = taskItems.sort(function (a, b) { return a.course_id < b.course_id; });
 
-  var curCourse = "";
+  var curCourse = {};
   var curItems = new Array();
   var itemGroup = new Array();
 
   for (var i = 0; i < taskItems.length; i++) {
     var it = taskItems[i];
-    if (curCourse != it.CourseName) {
-      if (curCourse != "") {
-        itemGroup.push({ courseName: curCourse, taskItems: curItems });
+    if (curCourse.name != it.CourseName) {
+      if (curCourse.name != null) {
+        itemGroup.push({ courseName: curCourse.name, courseId: curCourse.id, taskItems: curItems });
       }
 
-      curCourse = it.CourseName;
+      curCourse = { name: it.CourseName, id: course_id };
       curItem = new Array();
     }
 
     curItem.push(it);
   }
 
-  if (curCourse != "") itemGroup.push({ courseName: curCourse, taskItems: curItems });
+  if (curCourse.name != null) itemGroup.push({ courseName: curCourse.name, courseId: curCourse.id, taskItems: curItems });
   return itemGroup;
 }
 
@@ -88,7 +88,7 @@ function addNotUsedCourse(itemGroup, courses) {
   courses.forEach(function (element) {
     var cname = element.CourseName;
     if (itemGroup.findIndex(function (it) { return it.CourseName == cname; }) < 0) {
-      itemGroup.push({ courseName: cname });
+      itemGroup.push({ courseName: cname, courseId: element.id });
     }
   });
 
@@ -102,11 +102,6 @@ function doAddNewTaskItem(event) {
 
   this.setData({ taskBlock });
   this.setData({ addNewTaskPromotion: "" });
-
-  this.timer = setInterval((function () {
-    console.log("aaa");
-  }).bind(this), 1000);
-
 }
 
 function goToTaskDetail() {

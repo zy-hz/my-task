@@ -26,7 +26,7 @@
 
       <!--课程栏目底部-->
       <view class="weui-cell course-panel__ft">
-        <input placeholder=" + 添加作业" data-course="{{item.id}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}" />
+        <input placeholder=" + 添加作业" data-course="{{item.courseId}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}" />
       </view>
       <view class="weui-cell"></view>
     </view>
