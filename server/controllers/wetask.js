@@ -86,7 +86,16 @@ async function addnewtaskblock(ctx,next){
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
 
-  const { FolderId, CreateDate, DeliverDate } = ctx.query;
+  const { FolderId, BlockName , CreateDate, DeliverDate } = ctx.query;
+  var taskBlock = {
+    folder_id: FolderId,
+    BlockName,
+    CreateDate,
+    DeliverDate,
+    uid
+  };
+
+  await taskdb("wetask_block").insert(taskBlock);
   ctx.body = { FolderId };
 }
 

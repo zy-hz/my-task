@@ -72,6 +72,11 @@ function getTaskPeriod4Folder(folder) {
   };
 }
 
+// 获得文件夹的名称
+function getTaskBlockName(options){
+  return options.taskPeriod.createDate;
+}
+
 // 创建一份作业
 function doCreateTaskBlock(e) {
   var thePage = this;
@@ -79,6 +84,7 @@ function doCreateTaskBlock(e) {
 
   wetask.addNewTaskBlock({
     FolderId: thePage.data.selectedFolder.id,
+    BlockName: getTaskBlockName(thePage.data),
     CreateDate: thePage.data.taskPeriod.createDate,
     DeliverDate: thePage.data.taskPeriod.deliverDate,
 

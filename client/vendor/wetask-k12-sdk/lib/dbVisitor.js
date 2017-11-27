@@ -53,6 +53,7 @@ function getTaskFolders(options){
  *
  * @param {Object} options 函数配置
  * @param {Function} options.FolderId 作业文件夹编号
+ * @param {Function} options.BlockName 作业名称
  * @param {Function} options.CreateDate 创建日期
  * @param {Function} options.DeliverDate 发布日期
  * @param {Function} options.success(response) 登录成功后的回调函数 const {  } = response.data
@@ -60,7 +61,7 @@ function getTaskFolders(options){
  */
 function addNewTaskBlock(options){
   options.login = true;
-  options.url = `${config.service.host}/weapp/wetask/addnewtaskblock?FolderId=${options.FolderId}&CreateDate=${options.CreateDate}&DeliverDate=${options.DeliverDate}`;
+  options.url = `${config.service.host}/weapp/wetask/addnewtaskblock?FolderId=${options.FolderId}&BlockName=${options.BlockName}&CreateDate=${options.CreateDate}&DeliverDate=${options.DeliverDate}`;
 
   qcloud.request(options);
 }
