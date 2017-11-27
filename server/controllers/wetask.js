@@ -34,7 +34,7 @@ async function init(ctx, next) {
   var courses = await taskdb("wetask_course").where({ uid });
 
   // 获得用户所有的作业块
-  var blocks = await taskdb("wetask_block").where({ 'wetask_block.uid': uid }).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_folder.id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id').orderBy('wetask_block.CreateDate', 'desc');
+  var blocks = await taskdb("wetask_block").where({ 'wetask_block.uid': uid }).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_block.folder_id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id').orderBy('wetask_block.CreateDate', 'desc');
   ctx.body = { folders, blocks, courses };
 }
 
