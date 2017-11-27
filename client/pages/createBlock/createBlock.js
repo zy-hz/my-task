@@ -1,5 +1,16 @@
-Page({
-  data: {
+// 引入 wetask SDK
+var wetask = require('../../vendor/wetask-k12-sdk/index');
+
+// 引入通用脚本
+var common = require('../../common.js');
+
+// 页面函数，传入一个object对象作为参数
+Page(createPageObject());
+
+// 创建页面对象
+function createPageObject() {
+  var obj = new Object();
+  obj.data = {
     showTopTips: false,
 
     radioItems: [
@@ -11,37 +22,61 @@ Page({
     ],
 
     date: "2016-09-01",
-    time: "12:01",
 
-  },
+  };
 
-  showTopTips: function () {
-    var that = this;
-    this.setData({
-      showTopTips: true
-    });
-    setTimeout(function () {
-      that.setData({
-        showTopTips: false
-      });
-    }, 3000);
-  },
+  obj.showTopTips = showTopTips;
+  obj.radioChange = radioChange;
+  obj.bindDateChange = bindDateChange;
 
-  radioChange: function (e) {
+  obj.onLoad = onLoad;
+  return obj;
+}
 
-    var radioItems = this.data.radioItems;
-    for (var i = 0, len = radioItems.length; i < len; ++i) {
-      radioItems[i].checked = radioItems[i].value == e.detail.value;
+// 页面载入
+function onLoad(e) {
+  common.showBusy("预备数据");
+  wetask.getTaskFolderWithDetail({
+
+    success(result) {
+
+     },
+
+    fail() {
+      showModel('获取设置失败');
+      console.log('获取设置失败');
     }
+  });
+}
 
-    this.setData({
-      radioItems: radioItems
+// 以下是 界面事件处理
+//
+function showTopTips() {
+  var that = this;
+  this.setData({
+    showTopTips: true
+  });
+  setTimeout(function () {
+    that.setData({
+      showTopTips: false
     });
-  },
+  }, 3000);
+}
 
-  bindDateChange: function (e) {
-    this.setData({
-      date: e.detail.value
-    })
-  },
-});
+function radioChange(e) {
+
+  var radioItems = this.data.radioItems;
+  for (var i = 0, len = radioItems.length; i < len; ++i) {
+    radioItems[i].checked = radioItems[i].value == e.detail.value;
+  }
+
+  this.setData({
+    radioItems: radioItems
+  });
+};
+
+function bindDateChange(e) {
+  this.setData({
+    date: e.detail.value
+  })
+}

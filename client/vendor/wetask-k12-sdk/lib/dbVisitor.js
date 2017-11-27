@@ -15,9 +15,7 @@ var TaskItem = task.TaskItem;
  * 初始化，组合多个请求
  *
  * @param {Object} options 函数配置
- * @param {Function} options.afterGetFolder(folders) 获得文件夹后的回调，参数 folders 文件夹信息
- * @param {Function} options.afterGetCourse(courses) 获得课程后的回调，参数 courses 课程信息
- * @param {Function} options.success() 登录成功后的回调函数
+ * @param {Function} options.success(response) 登录成功后的回调函数 const { folders, blocks, courses } = response.data
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function init(options) {
@@ -31,6 +29,17 @@ function init(options) {
   );
 }
 
+/**
+ * @method
+ * 初始化，组合多个请求
+ *
+ * @param {Object} options 函数配置
+ * @param {Function} options.success(response) 登录成功后的回调函数 const { folders } = response.data
+ * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
+ */
+function getTaskFolderWithDetail(options){
+
+}
 
 /**
  * @method
@@ -143,6 +152,7 @@ function mockCreateTaskBlock_home() {
 module.exports = {
   init: init,
   get: get,
+  getTaskFolderWithDetail: getTaskFolderWithDetail,
   getTaskBlock: getTaskBlock,
   addNewTaskItem: addNewTaskItem,
 };
