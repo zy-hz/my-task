@@ -36,7 +36,7 @@ function createPageObject() {
 // 页面载入
 function onLoad(e) {
   common.showBusy("预备数据");
-  wetask.getTaskFolderWithDetail({
+  wetask.getTaskFolders({
 
     success(result) {
 

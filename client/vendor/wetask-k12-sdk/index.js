@@ -4,6 +4,6 @@ var exports = module.exports = {
   init: dbVisitor.init,
   get: dbVisitor.get,
   getTaskBlock: dbVisitor.getTaskBlock , 
-  getTaskFolderWithDetail: dbVisitor.getTaskFolderWithDetail,
+  getTaskFolders: dbVisitor.getTaskFolders,
   addNewTaskItem: dbVisitor.addNewTaskItem ,
 };

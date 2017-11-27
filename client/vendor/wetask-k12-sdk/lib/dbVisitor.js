@@ -31,14 +31,20 @@ function init(options) {
 
 /**
  * @method
- * 初始化，组合多个请求
+ * 获得作业文件夹列表，包括文件夹的详细信息
  *
  * @param {Object} options 函数配置
  * @param {Function} options.success(response) 登录成功后的回调函数 const { folders } = response.data
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
-function getTaskFolderWithDetail(options){
-
+function getTaskFolders(options){
+  qcloud.request({
+    login: true,
+    url: `${config.service.host}/weapp/wetask/gettaskfolders`,
+    success: options.success,
+    fail: options.fail
+  }
+  );
 }
 
 /**
@@ -152,7 +158,7 @@ function mockCreateTaskBlock_home() {
 module.exports = {
   init: init,
   get: get,
-  getTaskFolderWithDetail: getTaskFolderWithDetail,
+  getTaskFolders: getTaskFolders,
   getTaskBlock: getTaskBlock,
   addNewTaskItem: addNewTaskItem,
 };

@@ -61,6 +61,18 @@ async function getTargetCount(target, uid) {
 }
 
 /**
+ * 获得用户的文件夹
+ */
+async function gettaskfolders(ctx, next) {
+  // 用户必须登录
+  if (verify_request(ctx) == -1) return;
+  var uid = ctx.state.$wxInfo.userinfo.openId;
+
+  var folders = await taskdb("wetask_folder").where({ uid });
+  ctx.body = { folders };
+}
+
+/**
  * 响应 get 请求
  */
 async function get(ctx, next) {
