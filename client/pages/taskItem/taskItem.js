@@ -14,11 +14,8 @@ function createPageObject() {
   var obj = new Object();
   obj.data = {
     courses: {},
-    folders: {},
-    blocks: {},
-
-    currentFolder: {},
     taskBlock: {},
+    taskItems: {},
     addNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
   };
 
@@ -34,14 +31,15 @@ function createPageObject() {
  * 页面载入事件
  */
 function onLoad(options) {
-  options.thePage = this;
+  var thePage = this;
   common.showBusy("载入作业");
 
   wetask.getTaskItems({
     BlockId: options.BlockId,
 
     success(result) {
-      const { items } = result.data;
+      const { taskBlock, taskItems, courses } = result.data;
+      thePage.setData({ taskBlock, taskItems, courses});
 
       common.showSuccess();
     },

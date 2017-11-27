@@ -37,7 +37,7 @@ function init(options) {
  * @param {Function} options.success(result) 登录成功后的回调函数 const { folders } = result.data
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
-function getTaskFolders(options){
+function getTaskFolders(options) {
   qcloud.request({
     login: true,
     url: `${config.service.host}/weapp/wetask/gettaskfolders`,
@@ -59,7 +59,7 @@ function getTaskFolders(options){
  * @param {Function} options.success(result) 登录成功后的回调函数 const { BlockId } = result.data
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
-function addNewTaskBlock(options){
+function addNewTaskBlock(options) {
   options.login = true;
   options.url = `${config.service.host}/weapp/wetask/addnewtaskblock?FolderId=${options.FolderId}&BlockName=${options.BlockName}&CreateDate=${options.CreateDate}&DeliverDate=${options.DeliverDate}`;
 
@@ -72,7 +72,7 @@ function addNewTaskBlock(options){
  *
  * @param {Object} options 函数配置
  * @param {Function} options.BlockId 作业块编号
- * @param {Function} options.success(result) 登录成功后的回调函数 const { items } = result.data
+ * @param {Function} options.success(result) 登录成功后的回调函数 const { taskBlock, taskItems, courses } = result.data;
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function getTaskItems(options) {

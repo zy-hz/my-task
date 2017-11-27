@@ -118,9 +118,17 @@ async function gettaskitems(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
+  const { BlockId } = ctx.query;
 
-  var items = [];
-  ctx.body = { items };
+  // 获得作业块对象
+  var block = await taskdb("wetask_block").where('wetask_block.id', BlockId).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_folder.id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id');
+
+  // 获得作业列表
+  var taskItems = await taskdb("wetask_item").where('block_id', BlockId).select('wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName').leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
+
+  var courses = await taskdb("wetask_course").where({ uid });
+
+  ctx.body = { taskBlock: block[0], taskItems, courses };
 }
 
 /**

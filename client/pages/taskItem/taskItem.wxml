@@ -1,14 +1,7 @@
 <!--作业列表-->
 <view class="task-list">
   <!--页眉-->
-  <view class="task-list__hd">{{currentFolder.FolderName}}{{taskBlock.itemCount}}</view>
-
-  <!--作业块列表-->
-  <view class="weui-cells weui-cells_after-title block-list__bd">
-    <view class="block-panel" wx:for="{{blocks}}">
-      <view>{{item.BlockName}}</view>
-    </view>
-  </view>
+  <view class="task-list__hd">{{taskBlock.BlockName}} {{taskBlock.FolderName}}</view>
 
   <!--一份作业-->
   <view class="weui-cells weui-cells_after-title task-list__bd">

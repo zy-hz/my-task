@@ -38,6 +38,8 @@ CREATE TABLE `wetask_item` (
 	`ItemTitle` VARCHAR(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '作业标题',
 	`uid` VARCHAR(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户编号',
 	INDEX `uid` (`uid`),	
+	INDEX `block_id` (`block_id`),	
+	INDEX `course_id` (`course_id`),	
 	PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ;
