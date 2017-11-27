@@ -13,12 +13,9 @@ function createPageObject() {
   obj.data = {
     showTopTips: false,
 
-    radioItems: [
+    folders: [
       { name: '回家作业', value: '0', checked: true },
-      { name: '新东方', value: '1' },
-      { name: '学而思', value: '2' },
-      { name: '暑假作业', value: '3' },
-      { name: '寒假作业', value: '4' }
+      { name: '其他作业', value: '1' },
     ],
 
     date: "2016-09-01",
@@ -26,7 +23,7 @@ function createPageObject() {
   };
 
   obj.showTopTips = showTopTips;
-  obj.radioChange = radioChange;
+  obj.folderChange = folderChange;
   obj.bindDateChange = bindDateChange;
 
   obj.onLoad = onLoad;
@@ -35,15 +32,22 @@ function createPageObject() {
 
 // 页面载入
 function onLoad(e) {
+  var thePage = this;
   common.showBusy("预备数据");
+
   wetask.getTaskFolders({
 
     success(result) {
+      const { folders } = result.data;
 
-     },
+      // 设置第一个文件夹为默认选择的文件夹
+      folders[0].checked = true;
+      thePage.setData({ folders });
+      common.showSuccess();
+    },
 
     fail() {
-      showModel('获取设置失败');
+      common.showModel('获取设置失败');
       console.log('获取设置失败');
     }
   });
@@ -63,15 +67,15 @@ function showTopTips() {
   }, 3000);
 }
 
-function radioChange(e) {
+function folderChange(e) {
 
-  var radioItems = this.data.radioItems;
-  for (var i = 0, len = radioItems.length; i < len; ++i) {
-    radioItems[i].checked = radioItems[i].value == e.detail.value;
+  var folders = this.data.folders;
+  for (var i = 0, len = folders.length; i < len; ++i) {
+    folders[i].checked = folders[i].value == e.detail.value;
   }
 
   this.setData({
-    radioItems: radioItems
+    folders: folders
   });
 };
 

@@ -7,6 +7,9 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index');
 // 引入日历
 var calendar = require('../../vendor/wetask-k12-sdk/widget/calendar-line/calendar-line.js')
 
+// 引入通用脚本
+var common = require('../../common.js');
+
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
 
@@ -63,7 +66,7 @@ function onLoad(options) {
     },
 
     fail() {
-      showModel('获取设置失败');
+      common.showModel('获取设置失败');
       console.log('获取设置失败');
     }
   })
@@ -73,7 +76,7 @@ function onLoad(options) {
 // 登录过程
 function doLogin(options) {
 
-  showBusy('正在登录');
+  common.showBusy('正在登录');
 
   // 页面载入前必须清除seesion，强制qcloud重新登录
   qcloud.clearSession();
@@ -84,7 +87,7 @@ function doLogin(options) {
     },
 
     fail(error) {
-      showModel('登录失败', error);
+      common.showModel('登录失败', error);
       console.log('登录失败', error);
     }
   });
@@ -92,7 +95,7 @@ function doLogin(options) {
 
 // 初始化
 function init(thePage) {
-  showBusy("获取数据");
+  common.showBusy("获取数据");
   wetask.init({
 
     success(result) {
@@ -102,11 +105,11 @@ function init(thePage) {
       thePage.setData({ courses: courses });
       thePage.setData({ blocks: blocks });
 
-      showSuccess();
+      common.showSuccess();
     },
 
     fail(error) {
-      showModel('初始化失败', error);
+      common.showModel('初始化失败', error);
       console.log('初始化失败', error);
     }
   });
