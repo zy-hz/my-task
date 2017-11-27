@@ -40,7 +40,13 @@ async function init(ctx, next) {
 
 // 为用户构建默认数组
 function createDefaultFolders(uid) {
-  return { FolderName: "回家作业", uid: uid };
+  return [
+    { FolderName: "回家作业", uid: uid },
+    { FolderName: "新东方", uid: uid },
+    { FolderName: "学而思", uid: uid },
+    { FolderName: "暑假作业", uid: uid },
+    { FolderName: "寒假作业", uid: uid }
+  ];
 }
 
 // 默认课目
@@ -109,6 +115,6 @@ function verify_request(ctx) {
 
 module.exports = {
   get,
-  init
-
+  init,
+  gettaskfolders,
 }

@@ -35,6 +35,7 @@ router.post('/message', controllers.message.post)
 // --- wetask消息接口 --- //
 router.get('/wetask/get', validationMiddleware,controllers.wetask.get)
 router.get('/wetask/init', validationMiddleware, controllers.wetask.init)
+router.get('/wetask/gettaskfolders', validationMiddleware, controllers.wetask.gettaskfolders)
 
 
 // mydemo

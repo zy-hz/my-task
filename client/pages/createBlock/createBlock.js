@@ -4,6 +4,9 @@ var wetask = require('../../vendor/wetask-k12-sdk/index');
 // 引入通用脚本
 var common = require('../../common.js');
 
+// 引入工具脚本
+var util = require('../../utils.js');
+
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
 
@@ -13,12 +16,12 @@ function createPageObject() {
   obj.data = {
     showTopTips: false,
 
-    folders: [
-      { name: '回家作业', value: '0', checked: true },
-      { name: '其他作业', value: '1' },
-    ],
+    folders: {},
 
-    date: "2016-09-01",
+    taskPeriod: {
+      createDate: '0000-00-00',
+      deliverDate: '0000-00-00',
+    },
 
   };
 
@@ -43,6 +46,10 @@ function onLoad(e) {
       // 设置第一个文件夹为默认选择的文件夹
       folders[0].checked = true;
       thePage.setData({ folders });
+
+      // 设置文件夹对于的作业日期
+      thePage.setData({ taskPeriod: getTaskPeriod4Folder(folders[0]) });
+
       common.showSuccess();
     },
 
@@ -70,17 +77,27 @@ function showTopTips() {
 function folderChange(e) {
 
   var folders = this.data.folders;
+  var taskPeriod;
   for (var i = 0, len = folders.length; i < len; ++i) {
-    folders[i].checked = folders[i].value == e.detail.value;
+    folders[i].checked = folders[i].id == e.detail.value;
+
+    if (folders[i].checked) taskPeriod = getTaskPeriod4Folder(folders[i]);
   }
 
-  this.setData({
-    folders: folders
-  });
+  this.setData({ folders, taskPeriod });
 };
 
 function bindDateChange(e) {
-  this.setData({
-    date: e.detail.value
-  })
+  var taskPeriod = this.data.taskPeriod;
+  taskPeriod[e.target.id] = e.detail.value;
+  this.setData({ taskPeriod });
+}
+
+// 获得指定文件夹的作业期间
+function getTaskPeriod4Folder(folder) {
+
+  return {
+    createDate: util.formatDate(new Date(), '-'),
+    deliverDate: util.formatDate(new Date(), '-'),
+  };
 }

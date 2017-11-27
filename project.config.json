@@ -39,7 +39,8 @@
 				{
 					"id": -1,
 					"name": "新建作业",
-					"pathName": "pages/createBlock/createBlock"
+					"pathName": "pages/createBlock/createBlock",
+					"query": ""
 				}
 			]
 		}
