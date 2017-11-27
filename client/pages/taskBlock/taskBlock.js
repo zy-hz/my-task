@@ -117,7 +117,9 @@ function init(thePage) {
 
 // 添加一个作业块
 function doAddTaskBlock(options) {
-  console.log(options);
+  wx.navigateTo({
+    url: '/pages/createBlock/createBlock',
+  })
 }
 
 

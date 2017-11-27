@@ -30,6 +30,7 @@ function createPageObject() {
   obj.bindDateChange = bindDateChange;
 
   obj.onLoad = onLoad;
+  obj.doCreateTaskBlock = doCreateTaskBlock;
   return obj;
 }
 
@@ -71,6 +72,13 @@ function getTaskPeriod4Folder(folder) {
 }
 
 
+// 创建一份作业
+function doCreateTaskBlock(e) {
+  wx.redirectTo({
+    url: '/pages/taskList/taskList',
+  })
+}
+
 // 以下是 界面事件处理
 //
 function showTopTips() {
@@ -108,4 +116,9 @@ function bindDateChange(e) {
     taskPeriod.deliverDate = util.formatDate(dt2, '-');
   }
   this.setData({ taskPeriod });
+}
+
+// 创建一份作业
+function doCreateBlock(e){
+
 }
