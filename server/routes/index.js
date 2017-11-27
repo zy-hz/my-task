@@ -36,6 +36,7 @@ router.post('/message', controllers.message.post)
 router.get('/wetask/get', validationMiddleware,controllers.wetask.get)
 router.get('/wetask/init', validationMiddleware, controllers.wetask.init)
 router.get('/wetask/gettaskfolders', validationMiddleware, controllers.wetask.gettaskfolders)
+router.get('/wetask/addnewtaskblock', validationMiddleware, controllers.wetask.addnewtaskblock)
 
 
 // mydemo

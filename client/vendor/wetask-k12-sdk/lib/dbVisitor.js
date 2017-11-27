@@ -49,6 +49,24 @@ function getTaskFolders(options){
 
 /**
  * @method
+ * 添加一份新作业
+ *
+ * @param {Object} options 函数配置
+ * @param {Function} options.FolderId 作业文件夹编号
+ * @param {Function} options.CreateDate 创建日期
+ * @param {Function} options.DeliverDate 发布日期
+ * @param {Function} options.success(response) 登录成功后的回调函数 const {  } = response.data
+ * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
+ */
+function addNewTaskBlock(options){
+  options.login = true;
+  options.url = `${config.service.host}/weapp/wetask/addnewtaskblock?FolderId=${options.FolderId}&CreateDate=${options.CreateDate}&DeliverDate=${options.DeliverDate}`;
+
+  qcloud.request(options);
+}
+
+/**
+ * @method
  * 从服务器获得指定对象数据
  *
  * @param {Object} options 函数配置
@@ -158,7 +176,8 @@ function mockCreateTaskBlock_home() {
 module.exports = {
   init: init,
   get: get,
-  getTaskFolders: getTaskFolders,
   getTaskBlock: getTaskBlock,
+  getTaskFolders: getTaskFolders,
+  addNewTaskBlock: addNewTaskBlock,
   addNewTaskItem: addNewTaskItem,
 };

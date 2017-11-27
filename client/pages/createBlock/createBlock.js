@@ -17,6 +17,7 @@ function createPageObject() {
     showTopTips: false,
 
     folders: {},
+    selectedFolder: {},
 
     taskPeriod: {
       createDate: '0000-00-00',
@@ -46,7 +47,7 @@ function onLoad(e) {
 
       // 设置第一个文件夹为默认选择的文件夹
       folders[0].checked = true;
-      thePage.setData({ folders });
+      thePage.setData({ folders, selectedFolder: folders[0] });
 
       // 设置文件夹对于的作业日期
       thePage.setData({ taskPeriod: getTaskPeriod4Folder(folders[0]) });
@@ -71,12 +72,28 @@ function getTaskPeriod4Folder(folder) {
   };
 }
 
-
 // 创建一份作业
 function doCreateTaskBlock(e) {
-  wx.redirectTo({
-    url: '/pages/taskList/taskList',
-  })
+  var thePage = this;
+  common.showBusy("添加中");
+
+  wetask.addNewTaskBlock({
+    FolderId: thePage.data.selectedFolder.id,
+    CreateDate: thePage.data.taskPeriod.createDate,
+    DeliverDate: thePage.data.taskPeriod.deliverDate,
+
+    success(result) {
+      wx.redirectTo({
+        url: '/pages/taskList/taskList',
+      })
+    },
+
+    fail() {
+      common.showModel('获取设置失败');
+      console.log('获取设置失败');
+    }
+  });
+
 }
 
 // 以下是 界面事件处理
@@ -97,13 +114,18 @@ function folderChange(e) {
 
   var folders = this.data.folders;
   var taskPeriod;
+  var selectedFolder;
+
   for (var i = 0, len = folders.length; i < len; ++i) {
     folders[i].checked = folders[i].id == e.detail.value;
 
-    if (folders[i].checked) taskPeriod = getTaskPeriod4Folder(folders[i]);
+    if (folders[i].checked) {
+      taskPeriod = getTaskPeriod4Folder(folders[i]);
+      selectedFolder = folders[i];
+    }
   }
 
-  this.setData({ folders, taskPeriod });
+  this.setData({ folders, taskPeriod, selectedFolder });
 };
 
 function bindDateChange(e) {
@@ -119,6 +141,6 @@ function bindDateChange(e) {
 }
 
 // 创建一份作业
-function doCreateBlock(e){
+function doCreateBlock(e) {
 
 }

@@ -79,6 +79,18 @@ async function gettaskfolders(ctx, next) {
 }
 
 /**
+ * 添加作业块
+ */
+async function addnewtaskblock(ctx,next){
+  // 用户必须登录
+  if (verify_request(ctx) == -1) return;
+  var uid = ctx.state.$wxInfo.userinfo.openId;
+
+  const { FolderId, CreateDate, DeliverDate } = ctx.query;
+  ctx.body = { FolderId };
+}
+
+/**
  * 响应 get 请求
  */
 async function get(ctx, next) {
@@ -117,4 +129,5 @@ module.exports = {
   get,
   init,
   gettaskfolders,
+  addnewtaskblock,
 }
