@@ -33,5 +33,5 @@
 
   </view>
   <!--页脚-->
-  <view class="task-list__ft">我是有底线的</view>
+  <view class="task-list__ft"></view>
 </view>
