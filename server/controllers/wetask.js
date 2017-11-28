@@ -11,6 +11,8 @@ const taskdb = require('knex')({
   }
 })
 
+var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName'];
+
 /**
  * 初始化一个用户
  */
@@ -124,8 +126,9 @@ async function gettaskitems(ctx, next) {
   var block = await taskdb("wetask_block").where('wetask_block.id', BlockId).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_block.folder_id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id');
 
   // 获得作业列表
-  var taskItems = await taskdb("wetask_item").where('block_id', BlockId).select('wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName').leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
+  var taskItems = await taskdb("wetask_item").where('block_id', BlockId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
 
+  // 获得这个用户的课程
   var courses = await taskdb("wetask_course").where({ uid });
 
   ctx.body = { taskBlock: block[0], taskItems, courses };
@@ -149,8 +152,10 @@ async function addnewtaskitem(ctx, next) {
   };
 
   var result = await taskdb("wetask_item").returning('id').insert(item);
-  ctx.body = { itemId: result[0] };
+  var taskItems = await taskdb("wetask_item").where('wetask_item.id', result[0]).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
+  ctx.body = { taskItem: taskItems[0] };
 }
+
 /**
  * 响应 get 请求
  */

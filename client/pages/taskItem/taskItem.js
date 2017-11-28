@@ -64,7 +64,7 @@ function groupItemByCourse(taskItems, courses) {
   for (var i = 0; i < courses.length; i++) {
     var course = courses[i];
     course.taskItems = getTaskItemsByCourse(taskItems, course);
-    course.itemCount = Array.isArray(course.taskItems) ? course.taskItems.length : 0 ;
+    course.itemCount = course.taskItems.length;
     item4Course.push(course);
   }
 
@@ -77,7 +77,7 @@ function getTaskItemsByCourse(taskItems, course) {
   var start = taskItems.findIndex(function (a) { return a.course_id == course.id; });
   var end = taskItems.findIndex(function (a) { return a.course_id > course.id; });
 
-  if (start < 0 ) return {};
+  if (start < 0) return new Array();
   if (end < 0) end = taskItems.length;
 
   return taskItems.slice(start, end)
@@ -95,9 +95,10 @@ function doAddNewTaskItem(event) {
     ItemTitle: event.detail.value,
 
     success(result) {
-      const { itemId } = result.data;
+      const { taskItem } = result.data;
 
-      thePage.setData({ addNewTaskPromotion: "" });
+      var item4Course = insertItem4Group(thePage.data.item4Course, taskItem);
+      thePage.setData({ item4Course, addNewTaskPromotion: "" });
       common.showSuccess();
     },
 
@@ -108,6 +109,20 @@ function doAddNewTaskItem(event) {
 
   });
 
+}
+
+// 插入到视图列表
+function insertItem4Group(item4Course, taskItem) {
+  var courseIndex = item4Course.findIndex(function (x) { return x.id == taskItem.course_id; });
+  if (courseIndex < 0) {
+    common.showModel("没有发现对于对应的课程&{taskItem.CourseName}", error);
+  }
+  else {
+    item4Course[courseIndex].taskItems.push(taskItem);
+    item4Course[courseIndex].itemCount++;
+  }
+
+  return item4Course;
 }
 
 function goToTaskDetail() {
