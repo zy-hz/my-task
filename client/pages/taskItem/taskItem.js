@@ -132,27 +132,25 @@ function onEditTaskItems(event) {
   const { itemid, courseid } = event.currentTarget.dataset;
   if (itemid < 0 || courseid < 0) return;
 
-  var itemGroup = this.data.item4Course;
-  var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseid; });
-
-  if (courseIndex < 0) return;
-  var course = itemGroup[courseIndex];
-
-  var itemIndex = course.taskItems.findIndex(function (x) { return x.id == itemid; });
-  if (itemIndex < 0) return;
-
-  var item = course.taskItems[itemIndex];
-  item.canRemove = !item.canRemove;
-
-  this.setData({ item4Course: itemGroup });
+  op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
+    var item = course.taskItems[itemIndex];
+    item.canRemove = !item.canRemove;
+  });
 }
 
-// 删除作业项时间
+// 删除作业项
 function onRemoveTaskItem(event) {
   const { itemid, courseid } = event.currentTarget.dataset;
   if (itemid < 0 || courseid < 0) return;
 
-  var itemGroup = this.data.item4Course;
+  op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
+    course.taskItems.splice(itemIndex, 1);
+  });
+}
+
+// 操作作业项数据集
+function op_Item4CourseGroup(thePage, itemid, courseid, callback) {
+  var itemGroup = thePage.data.item4Course;
   var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseid; });
 
   if (courseIndex < 0) return;
@@ -161,9 +159,9 @@ function onRemoveTaskItem(event) {
   var itemIndex = course.taskItems.findIndex(function (x) { return x.id == itemid; });
   if (itemIndex < 0) return;
 
-  // 删除
-  course.taskItems.splice(itemIndex , 1);
-  this.setData({ item4Course: itemGroup });
+  callback(itemIndex, course);
+
+  thePage.setData({ item4Course: itemGroup });
 }
 
 function goToTaskDetail() {
