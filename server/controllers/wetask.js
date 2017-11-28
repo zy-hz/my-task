@@ -121,7 +121,7 @@ async function gettaskitems(ctx, next) {
   const { BlockId } = ctx.query;
 
   // 获得作业块对象
-  var block = await taskdb("wetask_block").where('wetask_block.id', BlockId).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_folder.id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id');
+  var block = await taskdb("wetask_block").where('wetask_block.id', BlockId).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_block.folder_id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id');
 
   // 获得作业列表
   var taskItems = await taskdb("wetask_item").where('block_id', BlockId).select('wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName').leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
@@ -131,6 +131,26 @@ async function gettaskitems(ctx, next) {
   ctx.body = { taskBlock: block[0], taskItems, courses };
 }
 
+/**
+ * 添加作业项
+ */
+async function addnewtaskitem(ctx, next) {
+  // 用户必须登录
+  if (verify_request(ctx) == -1) return;
+  var uid = ctx.state.$wxInfo.userinfo.openId;
+  const { FolderId, BlockId, CourseId, ItemTitle } = ctx.query;
+
+  var item = {
+    folder_id: FolderId,
+    block_id: BlockId,
+    course_id: CourseId,
+    ItemTitle,
+    uid
+  };
+
+  var result = await taskdb("wetask_item").returning('id').insert(item);
+  ctx.body = { itemId: result[0] };
+}
 /**
  * 响应 get 请求
  */
@@ -172,4 +192,5 @@ module.exports = {
   gettaskfolders,
   addnewtaskblock,
   gettaskitems,
+  addnewtaskitem,
 }

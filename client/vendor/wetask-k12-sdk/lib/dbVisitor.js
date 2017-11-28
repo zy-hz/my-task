@@ -60,8 +60,12 @@ function getTaskFolders(options) {
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function addNewTaskBlock(options) {
+
+  // 处理作业名称中文字符
+  var blockName = encodeURI(options.BlockName);
+
   options.login = true;
-  options.url = `${config.service.host}/weapp/wetask/addnewtaskblock?FolderId=${options.FolderId}&BlockName=${options.BlockName}&CreateDate=${options.CreateDate}&DeliverDate=${options.DeliverDate}`;
+  options.url = `${config.service.host}/weapp/wetask/addnewtaskblock?FolderId=${options.FolderId}&BlockName=${blockName}&CreateDate=${options.CreateDate}&DeliverDate=${options.DeliverDate}`;
 
   qcloud.request(options);
 }
@@ -81,6 +85,31 @@ function getTaskItems(options) {
 
   qcloud.request(options);
 }
+
+
+/**
+ * @method
+ * 添加一个新作业项
+ *
+ * @param {Object} options 函数配置
+ * @param {Function} options.FolderId 文件夹编号
+ * @param {Function} options.BlockId 作业块编号
+ * @param {Function} options.CourseId 作业块编号
+ * @param {Function} options.ItemTitle 作业项名称
+ * @param {Function} options.success(result) 登录成功后的回调函数 const { itemId } = result.data;
+ * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
+ */
+var addNewTaskItem = function addNewTaskItem(options) {
+
+  // 作业项的中文
+  var ItemTitle = encodeURI(options.ItemTitle);
+
+  options.login = true;
+  options.url = `${config.service.host}/weapp/wetask/addnewtaskitem?FolderId=${options.FolderId}&BlockId=${options.BlockId}&CourseId=${options.CourseId}&ItemTitle=${ItemTitle}`;
+
+  qcloud.request(options);
+}
+
 
 /**
  * @method
@@ -113,21 +142,6 @@ var getTaskBlock = function getTaskBlock(folderId) {
   return mockCreateTaskBlock();
 };
 
-
-/**
- * @method
- * 添加一个新作业
- *
- * @param {string} folderId 作业所在文件夹的编号，如果为空表示最后一次读取的文件
- */
-var addNewTaskItem = function addNewTaskItem(taskBlock, taskItemName, courseId) {
-
-  var course = Task.findCouseById(taskBlock, courseId);
-  if (course != null)
-    course.taskItems.push(new TaskItem(11, taskItemName));
-
-  return taskBlock;
-}
 
 
 /***

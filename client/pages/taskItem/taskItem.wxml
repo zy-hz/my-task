@@ -9,13 +9,13 @@
     <!--课程面板-->
     <view class="course-panel" wx:for="{{item4Course}}">
       <!--课程栏目头部-->
-      <view class="weui-cell course-panel__hd">{{item.courseName}}</view>
+      <view class="weui-cell course-panel__hd">{{item.CourseName}}</view>
 
       <!--作业列表区-->
       <view class="weui-cell course-panel__bd" data-id="{{item.id}}" wx:for="{{item.taskItems}}">
 
         <!--作业内容-->
-        <view class="weui-cell__bd">{{index+1}}. {{item.title}}</view>
+        <view class="weui-cell__bd">{{index+1}}. {{item.ItemTitle}}</view>
 
         <!--作业条目菜单区-->
         <view class="weui-cell__ft" wx:if="{{true}}">
@@ -26,7 +26,7 @@
 
       <!--课程栏目底部-->
       <view class="weui-cell course-panel__ft">
-        <input placeholder=" + 添加作业" data-course="{{item.courseId}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}" />
+        <input placeholder=" + 添加作业" id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}" />
       </view>
       <view class="weui-cell"></view>
     </view>
