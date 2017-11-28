@@ -31,3 +31,8 @@
     text-align: left;
     font-size: 14px;
 }
+
+.remove_item{
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -18,7 +18,7 @@
       <!--作业列表区-->
       <view class="weui-cells weui-cells_after-title">
 
-        <view class="weui-cell" data-id="{{item.id}}" wx:for="{{item.taskItems}}" bindlongpress='onEditTaskItems'>
+        <view class="weui-cell" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" wx:for="{{item.taskItems}}" bindlongpress='onEditTaskItems'>
 
           <!--作业内容-->
           <view class="weui-cell__hd"></view>
@@ -26,13 +26,13 @@
 
           <!--作业条目菜单区-->
           <view class="weui-cell__ft" wx:if="{{true}}">
-            <icon class="weui-icon-radio" type="waiting" size="20" bindtap="goToTaskDetail"></icon>
-            <view class="weui-badge" style="margin-left: 5px;margin-right: 5px;display:none">x</view>
+            <icon class="weui-icon-radio" type="waiting" size="20" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" bindtap="goToTaskDetail" hidden="{{item.canRemove}}"></icon>
+            <view class="weui-badge remove_item" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" bindtap="onRemoveTaskItem" hidden="{{item.canRemove == false}}">x</view>
           </view>
         </view>
 
         <!--课程栏目底部-->
-        <view class="weui-cell  weui-cell_link">
+        <view class="weui-cell weui-cell_link">
           <view class="weui-cell__bd">
             <input placeholder=" + 添加作业" id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}" />
           </view>

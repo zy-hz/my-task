@@ -23,6 +23,7 @@ function createPageObject() {
   obj.onLoad = onLoad;
   obj.onEditTaskItems = onEditTaskItems;
   obj.doAddNewTaskItem = doAddNewTaskItem;
+  obj.onRemoveTaskItem = onRemoveTaskItem;
   obj.goToTaskDetail = goToTaskDetail;
 
   return obj;
@@ -64,6 +65,7 @@ function groupItemByCourse(taskItems, courses) {
   for (var i = 0; i < courses.length; i++) {
     var course = courses[i];
     course.taskItems = getTaskItemsByCourse(taskItems, course);
+    course.taskItems.forEach(x => x.canRemove = false);
     course.itemCount = course.taskItems.length;
     item4Course.push(course);
   }
@@ -127,7 +129,41 @@ function insertItem4Group(item4Course, taskItem) {
 
 // 编辑作业项事件
 function onEditTaskItems(event) {
-  console.log(event);
+  const { itemid, courseid } = event.currentTarget.dataset;
+  if (itemid < 0 || courseid < 0) return;
+
+  var itemGroup = this.data.item4Course;
+  var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseid; });
+
+  if (courseIndex < 0) return;
+  var course = itemGroup[courseIndex];
+
+  var itemIndex = course.taskItems.findIndex(function (x) { return x.id == itemid; });
+  if (itemIndex < 0) return;
+
+  var item = course.taskItems[itemIndex];
+  item.canRemove = !item.canRemove;
+
+  this.setData({ item4Course: itemGroup });
+}
+
+// 删除作业项时间
+function onRemoveTaskItem(event) {
+  const { itemid, courseid } = event.currentTarget.dataset;
+  if (itemid < 0 || courseid < 0) return;
+
+  var itemGroup = this.data.item4Course;
+  var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseid; });
+
+  if (courseIndex < 0) return;
+  var course = itemGroup[courseIndex];
+
+  var itemIndex = course.taskItems.findIndex(function (x) { return x.id == itemid; });
+  if (itemIndex < 0) return;
+
+  // 删除
+  course.taskItems.splice(itemIndex , 1);
+  this.setData({ item4Course: itemGroup });
 }
 
 function goToTaskDetail() {
