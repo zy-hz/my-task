@@ -1,37 +1,48 @@
 <!--作业列表-->
-<view class="task-list">
+<view class="task-item__page">
   <!--页眉-->
-  <view class="task-list__hd">{{taskBlock.BlockName}} {{taskBlock.FolderName}}</view>
+  <view class="task-item__hd">
+    <view class="task-item__title">{{taskBlock.BlockName}} {{taskBlock.FolderName}}</view>
+    <view class="task-item__desc"></view>
+  </view>
 
   <!--一份作业-->
-  <view class="weui-cells weui-cells_after-title task-list__bd">
+  <view class="task-item__bd">
 
     <!--课程面板-->
-    <view class="course-panel" wx:for="{{item4Course}}">
+    <block wx:for="{{item4Course}}">
+
       <!--课程栏目头部-->
-      <view class="weui-cell course-panel__hd">{{item.CourseName}}</view>
+      <view class="weui-cells__title">{{item.CourseName}}</view>
 
       <!--作业列表区-->
-      <view class="weui-cell course-panel__bd" data-id="{{item.id}}" wx:for="{{item.taskItems}}">
+      <view class="weui-cells weui-cells_after-title">
 
-        <!--作业内容-->
-        <view class="weui-cell__bd">{{index+1}}. {{item.ItemTitle}}</view>
+        <view class="weui-cell" data-id="{{item.id}}" wx:for="{{item.taskItems}}" bindlongpress='onEditTaskItems'>
 
-        <!--作业条目菜单区-->
-        <view class="weui-cell__ft" wx:if="{{true}}">
-          <icon class="weui-icon-radio" type="waiting" size="20" bindtap="goToTaskDetail"></icon>
-          <view class="weui-badge" style="margin-left: 5px;margin-right: 5px;display:none">x</view>
+          <!--作业内容-->
+          <view class="weui-cell__hd"></view>
+          <view class="weui-cell__bd">{{index+1}}. {{item.ItemTitle}}</view>
+
+          <!--作业条目菜单区-->
+          <view class="weui-cell__ft" wx:if="{{true}}">
+            <icon class="weui-icon-radio" type="waiting" size="20" bindtap="goToTaskDetail"></icon>
+            <view class="weui-badge" style="margin-left: 5px;margin-right: 5px;display:none">x</view>
+          </view>
         </view>
+
+        <!--课程栏目底部-->
+        <view class="weui-cell  weui-cell_link">
+          <view class="weui-cell__bd">
+            <input placeholder=" + 添加作业" id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}" />
+          </view>
+        </view>
+
       </view>
 
-      <!--课程栏目底部-->
-      <view class="weui-cell course-panel__ft">
-        <input placeholder=" + 添加作业" id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{addNewTaskPromotion}}" />
-      </view>
-      <view class="weui-cell"></view>
-    </view>
-
+    </block>
   </view>
+
   <!--页脚-->
-  <view class="task-list__ft"></view>
+  <view class="task-item__ft"></view>
 </view>

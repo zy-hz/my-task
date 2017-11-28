@@ -21,7 +21,7 @@ function createPageObject() {
   };
 
   obj.onLoad = onLoad;
-
+  obj.onEditTaskItems = onEditTaskItems;
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.goToTaskDetail = goToTaskDetail;
 
@@ -123,6 +123,11 @@ function insertItem4Group(item4Course, taskItem) {
   }
 
   return item4Course;
+}
+
+// 编辑作业项事件
+function onEditTaskItems(event) {
+  console.log(event);
 }
 
 function goToTaskDetail() {

@@ -1,21 +1,33 @@
-/* pages/taskList/taskList.wxss */
-
-.task-list{
+.task-item__page{
     background-color: #F8F8F8;
     font-size: 16px;
     font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
 }
-.task-list__hd {
-    padding: 5px;
+.task-item__hd {
+    padding: 40px;
 }
-.task-list__bd {
+.task-item__bd {
     padding-bottom: 40px;
 }
-.task-list__ft{
+.task-item__bd_spacing {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.task-item__ft{
     padding-bottom: 10px;
     text-align: center;
 }
 
-.course-panel__ft input{
-  width: 100%;
+.task-item__title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.task-item__desc {
+    margin-top: 5px;
+    color: #888888;
+    text-align: left;
+    font-size: 14px;
 }
