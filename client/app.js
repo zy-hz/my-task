@@ -4,12 +4,14 @@
 
 var qcloud = require('./vendor/wafer2-client-sdk/index');
 var config = require('./config');
+const Event = require('./vendor/wetask-k12-sdk/lib/event.js')
 
 App({
-    /**
-     * 小程序初始化时执行，我们初始化客户端的登录地址，以支持所有的会话操作
-     */
-    onLaunch() {
-        qcloud.setLoginUrl(config.service.loginUrl);
-    }
+  event: new Event(),
+  /**
+   * 小程序初始化时执行，我们初始化客户端的登录地址，以支持所有的会话操作
+   */
+  onLaunch() {
+    qcloud.setLoginUrl(config.service.loginUrl);
+  }
 });
