@@ -1,22 +1,33 @@
 .item-panel__hd {
   height: 250px;
   background-color: #3297ed;
+  text-align: center;
+  color: #fff;
 }
 
-.item-title{
-    padding: 0 10px;
-    text-align: center;
-    background-color: #EBEBEB;
-    height: 2.3em;
-    line-height: 2.3em;
-    color: #888888;
-    font-size: 13pt;
+.item-course {
+  padding: 30px 0px 10px 0px;
+  font-size: 12pt;
 }
 
-.op-panel{
-    padding: 20px 0px;
+.item-spend {
+    font-size: 50pt;
 }
 
-.op-panel button{
+.item-title {
+  padding: 0 10px;
+  text-align: center;
+  background-color: #ebebeb;
+  height: 2.3em;
+  line-height: 2.3em;
+  color: #888;
+  font-size: 13pt;
+}
+
+.op-panel {
+  padding: 20px 20px;
+}
+
+.op-panel button {
   margin: 40px;
 }
