@@ -4,8 +4,13 @@ var wetask = require('../../vendor/wetask-k12-sdk/index');
 // 引入 QCloud 小程序增强 SDK
 var qcloud = require('../../vendor/wafer2-client-sdk/index');
 
-// 引入日历
-var calendar = require('../../vendor/wetask-k12-sdk/widget/calendar-line/calendar-line.js')
+// 注册事件
+var onfire = require('../../vendor/wetask-k12-sdk/lib/onfire.js');
+
+// 当添加新作业块消息被传递时，做具体的事
+var eventObj = onfire.on('add_new_block', function (data) {
+
+});
 
 // 引入通用脚本
 var common = require('../../common.js');

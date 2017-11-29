@@ -9,6 +9,14 @@ var common = require('../../common.js');
 // 引入工具脚本
 var util = require('../../utils.js');
 
+// 注册事件
+var onfire = require("../../vendor/wetask-k12-sdk/lib/onfire.js");
+
+// 当添加新作业块消息被传递时，做具体的事
+var eventObj = onfire.on('add_new_block', function (data) {
+  
+});
+
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
 
