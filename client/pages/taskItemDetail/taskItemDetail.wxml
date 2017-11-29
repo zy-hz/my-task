@@ -1,2 +1,9 @@
-<!--pages/taskItemDetail/taskItemDetail.wxml-->
-<text>pages/taskItemDetail/taskItemDetail.wxml</text>
+<!-- 作业项 细节头-->
+<view class="item-panel__hd">
+</view>
+
+<view class="weui-flex">
+  <view class="weui-flex__item">
+    <view class="item-title">{{ItemTitle}}</view>
+  </view>
+</view>
