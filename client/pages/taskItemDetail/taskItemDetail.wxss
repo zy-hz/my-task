@@ -12,3 +12,11 @@
     color: #888888;
     font-size: 13pt;
 }
+
+.op-panel{
+    padding: 20px 0px;
+}
+
+.op-panel button{
+  margin: 40px;
+}
