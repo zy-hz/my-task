@@ -64,23 +64,30 @@ function onLoad(options) {
 // 事件：开始
 function onStart(event) {
   var isRunning = this.data.isRunning;
+  var timeType = isRunning ? "pause" : "start";
+  var thePage = this;
 
-  if (!isRunning) {
-    this.timer = setInterval((function () {
-      updateTimer(this)
-    }).bind(this), 1000)
-  } else {
-    stopTimer(this)
-  }
+  recordTime(this.data.id, timeType, function () {
+    if (!isRunning) {
+      thePage.timer = setInterval((function () {
+        updateTimer(this)
+      }).bind(thePage), 1000)
+    } else {
+      stopTimer(thePage)
+    }
 
-  this.setData({ isRunning: !isRunning });
+    thePage.setData({ isRunning: !isRunning });
+  });
 }
 
 // 事件：完成
 function onComplete(event) {
-
-  stopTimer(this);
-  wx.navigateBack();
+  var thePage = this;
+  
+  recordTime(this.data.id, "done", function () {
+    stopTimer(thePage);
+    wx.navigateBack();
+  });
 }
 
 // 更新定时器
@@ -103,12 +110,14 @@ function stopTimer(thePage) {
 // 成功后的回调
 function recordTime(itemId, timeType, callback) {
   var dtString = util.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
+
   wetask.recordItemTime({
     ItemId: itemId,
     CurrentTime: dtString,
+    TimeType: timeType,
 
     success(result) {
-
+      callback();
       common.showSuccess();
     },
 

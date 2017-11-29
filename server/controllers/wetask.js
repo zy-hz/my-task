@@ -184,6 +184,28 @@ async function findtaskitem(ctx, next) {
 }
 
 /**
+ * 记录作业项的开始，暂停，完成时间（pause,start,done）
+ */
+async function recorditemtime(ctx, next) {
+  // 用户必须登录
+  if (verify_request(ctx) == -1) return;
+  var uid = ctx.state.$wxInfo.userinfo.openId;
+  const { ItemId, CurrentTime, TimeType } = ctx.query;
+
+  //  记录这些操作的时间
+  var recordTime = {
+    item_id: ItemId,
+    CurrentTime,
+    TimeType,
+    uid
+  };
+  var result = await taskdb("wetask_time").insert(recordTime).returning('id');
+
+  // 计算用时
+  ctx.body = { result };
+}
+
+/**
  * 响应 get 请求
  */
 async function get(ctx, next) {
@@ -227,4 +249,5 @@ module.exports = {
   addnewtaskitem,
   deletetaskitem,
   findtaskitem,
+  recorditemtime,
 }
