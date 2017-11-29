@@ -126,7 +126,7 @@ async function gettaskitems(ctx, next) {
   var block = await taskdb("wetask_block").where('wetask_block.id', BlockId).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_block.folder_id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id');
 
   // 获得作业列表
-  var taskItems = await taskdb("wetask_item").where('block_id', BlockId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
+  var taskItems = await taskdb("wetask_item").where({ block_id: BlockId, IsDeleted: 0 }).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
 
   // 获得这个用户的课程
   var courses = await taskdb("wetask_course").where({ uid });
@@ -154,6 +154,19 @@ async function addnewtaskitem(ctx, next) {
   var result = await taskdb("wetask_item").returning('id').insert(item);
   var taskItems = await taskdb("wetask_item").where('wetask_item.id', result[0]).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
   ctx.body = { taskItem: taskItems[0] };
+}
+
+/**
+ * 删除作业项
+ */
+async function deletetaskitem(ctx, next) {
+  // 用户必须登录
+  if (verify_request(ctx) == -1) return;
+  var uid = ctx.state.$wxInfo.userinfo.openId;
+  const { ItemId } = ctx.query;
+
+  var result = await taskdb("wetask_item").where('id', ItemId).update({ IsDeleted: 1 }, 'id');
+  ctx.body = { result };
 }
 
 /**
@@ -198,4 +211,5 @@ module.exports = {
   addnewtaskblock,
   gettaskitems,
   addnewtaskitem,
+  deletetaskitem,
 }

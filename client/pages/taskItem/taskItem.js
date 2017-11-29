@@ -144,9 +144,25 @@ function onRemoveTaskItem(event) {
   const { itemid, courseid } = event.currentTarget.dataset;
   if (itemid < 0 || courseid < 0) return;
 
-  op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
-    course.taskItems.splice(itemIndex, 1);
+  var thePage = this;
+
+  wetask.deleteTaskItem({
+    ItemId: itemid,
+
+    success() {
+      op_Item4CourseGroup(thePage, itemid, courseid, function (itemIndex, course) {
+        course.taskItems.splice(itemIndex, 1);
+      });
+
+      common.showSuccess();
+    },
+
+    fail(error) {
+      common.showModel('删除作业项失败', error);
+      console.log('删除作业项失败', error);
+    }
   });
+
 }
 
 // 操作作业项数据集

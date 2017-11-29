@@ -8,4 +8,5 @@ var exports = module.exports = {
   addNewTaskBlock: dbVisitor.addNewTaskBlock,
   getTaskItems: dbVisitor.getTaskItems,
   addNewTaskItem: dbVisitor.addNewTaskItem ,
+  deleteTaskItem: dbVisitor.deleteTaskItem,
 };
