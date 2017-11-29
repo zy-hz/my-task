@@ -195,7 +195,8 @@ function onTapItem(event) {
       item.canRemove = false;
     } else {
       //  导航到作业项细节页面
-
+      var url = `/pages/taskItemDetail/taskItemDetail?ItemId=${item.id}`;
+      wx.navigateTo({ url });
     }
 
   });

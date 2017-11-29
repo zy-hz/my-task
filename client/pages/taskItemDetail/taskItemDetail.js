@@ -60,7 +60,33 @@ function onLoad(options) {
 
 // 开始
 function onStart(event) {
+  var isRunning = this.data.isRunning;
 
+  if (!isRunning) {
+    this.timer = setInterval((function () {
+      updateTimer(this)
+    }).bind(this), 1000)
+  } else {
+    stopTimer(this)
+  }
+
+  this.setData({ isRunning: !isRunning });
+}
+
+// 更新定时器
+function updateTimer(thePage) {
+  // 记录开始时间
+
+  var SpendSecond = thePage.data.SpendSecond + 1;
+  var DisplayTime = getDisplayTime(SpendSecond);
+  thePage.setData({ SpendSecond, DisplayTime });
+
+}
+
+// 停止定时器
+function stopTimer(thePage) {
+  // clear timer
+  thePage.timer && clearInterval(thePage.timer);
 }
 
 function getDisplayTime(sec) {
