@@ -30,9 +30,10 @@ function getDisplayTime(sec) {
   var dt = new Date();
   var zone = dt.getTimezoneOffset();
   dt.setTime(sec * 1000 + zone * 60 * 1000);
-  
-  var Hour = dt.getHours() + "";
-  var min = dt.getMinutes();
-  
-  return { hour: , minute: , second: dt.getSeconds() };
+
+  return {
+    Hour: util.formatDate(dt, "H"),
+    Minute: util.formatDate(dt, "m"),
+    Second: util.formatDate(dt, "s")
+  };
 }
