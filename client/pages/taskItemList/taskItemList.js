@@ -6,6 +6,9 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index');
 // 引入通用脚本
 var common = require('../../common.js');
 
+// 引入工具脚本
+var util = require('../../utils.js');
+
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
 
@@ -66,7 +69,15 @@ function groupItemByCourse(taskItems, courses) {
   for (var i = 0; i < courses.length; i++) {
     var course = courses[i];
     course.taskItems = getTaskItemsByCourse(taskItems, course);
-    course.taskItems.forEach(x => x.canRemove = false);
+    course.taskItems.forEach(x => {
+      x.canRemove = false;
+
+      var dt = new Date();
+      var zone = dt.getTimezoneOffset();
+      dt.setTime(x.SpendSecond * 1000 + zone * 60 * 1000);
+
+      x.DisplayTime = util.formatDate(dt,"H:mm");
+    });
     course.itemCount = course.taskItems.length;
     item4Course.push(course);
   }

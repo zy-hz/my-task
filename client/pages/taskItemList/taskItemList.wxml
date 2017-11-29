@@ -28,7 +28,7 @@
 
           <!--作业条目菜单区-->
           <view class="weui-cell__ft" wx:if="{{true}}">
-            <view class="task-item__info" hidden="{{item.canRemove}}">0:00</view>
+            <view class="task-item__info" hidden="{{item.canRemove}}">{{item.DisplayTime}}</view>
             <view class="weui-badge remove_item" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" bindtap="onRemoveTaskItem" hidden="{{item.canRemove == false}}">x</view>
           </view>
         </view>
