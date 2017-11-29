@@ -14,6 +14,7 @@ Page(createPageObject());
 function createPageObject() {
   var obj = new Object();
   obj.data = {
+    id: 0,
     CourseName: '课程',
     ItemTitle: '载入作业项...',
     DisplayTime: { Hour: "0", Minute: '00', Second: '00' },
@@ -25,6 +26,8 @@ function createPageObject() {
 
   obj.onLoad = onLoad;
   obj.onStart = onStart;
+  obj.onComplete = onComplete;
+
   return obj;
 }
 
@@ -40,10 +43,10 @@ function onLoad(options) {
       if (taskItems.length <= 0) {
         common.showModel('没有发现作业项', taskItems);
       } else {
-        const { CourseName, ItemTitle, SpendSecond } = taskItems[0];
+        const { id, CourseName, ItemTitle, SpendSecond } = taskItems[0];
 
         var DisplayTime = getDisplayTime(SpendSecond);
-        thePage.setData({ CourseName, ItemTitle, SpendSecond, DisplayTime });
+        thePage.setData({ id, CourseName, ItemTitle, SpendSecond, DisplayTime });
 
         common.showSuccess();
       }
@@ -58,7 +61,7 @@ function onLoad(options) {
 
 }
 
-// 开始
+// 事件：开始
 function onStart(event) {
   var isRunning = this.data.isRunning;
 
@@ -73,9 +76,15 @@ function onStart(event) {
   this.setData({ isRunning: !isRunning });
 }
 
+// 事件：完成
+function onComplete(event) {
+
+  stopTimer(this);
+  wx.navigateBack();
+}
+
 // 更新定时器
 function updateTimer(thePage) {
-  // 记录开始时间
 
   var SpendSecond = thePage.data.SpendSecond + 1;
   var DisplayTime = getDisplayTime(SpendSecond);
@@ -89,6 +98,29 @@ function stopTimer(thePage) {
   thePage.timer && clearInterval(thePage.timer);
 }
 
+// 记录时间到服务器
+// timeType - 时间类型
+// 成功后的回调
+function recordTime(itemId, timeType, callback) {
+  var dtString = util.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
+  wetask.recordItemTime({
+    ItemId: itemId,
+    CurrentTime: dtString,
+
+    success(result) {
+
+      common.showSuccess();
+    },
+
+    fail(error) {
+      common.showModel('计时到服务器失败', error);
+      console.log('计时到服务器失败');
+    }
+
+  });
+}
+
+// 时钟的显示
 function getDisplayTime(sec) {
   var dt = new Date();
   var zone = dt.getTimezoneOffset();

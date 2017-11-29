@@ -19,7 +19,7 @@
   <view class="weui-flex__item ">
     <button type='primary' bindtap="onStart">{{!isRunning ? '开始' : '暂停'}}</button>
   </view>
-  <view class="weui-flex__item ">
+  <view class="weui-flex__item " bindtap="onComplete">
     <button type='primary'>完成</button>
   </view>
 </view>
