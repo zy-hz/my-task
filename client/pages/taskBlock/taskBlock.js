@@ -4,16 +4,19 @@ var wetask = require('../../vendor/wetask-k12-sdk/index');
 // 引入 QCloud 小程序增强 SDK
 var qcloud = require('../../vendor/wafer2-client-sdk/index');
 
+// 引入通用脚本
+var common = require('../../common.js');
+
 // 注册事件
 var onfire = require('../../vendor/wetask-k12-sdk/lib/onfire.js');
 
+var thatPage;
+
 // 当添加新作业块消息被传递时，做具体的事
 var eventObj = onfire.on('add_new_block', function (data) {
-
+  console.log(data);
+  console.log(thatPage);
 });
-
-// 引入通用脚本
-var common = require('../../common.js');
 
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
@@ -39,7 +42,6 @@ function createPageObject() {
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.goToTaskDetail = goToTaskDetail;
 
-
   return obj;
 }
 
@@ -48,7 +50,8 @@ function createPageObject() {
  */
 function onLoad(options) {
   options.thePage = this;
-
+  thatPage = this;
+  
   // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
   wx.getSetting({
     success(res) {

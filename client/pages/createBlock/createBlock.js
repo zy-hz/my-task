@@ -7,6 +7,9 @@ var common = require('../../common.js');
 // 引入工具脚本
 var util = require('../../utils.js');
 
+// 注册事件
+var onfire = require('../../vendor/wetask-k12-sdk/lib/onfire.js');
+
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
 
@@ -56,7 +59,7 @@ function onLoad(e) {
     },
 
     fail(error) {
-      common.showModel('获取设置失败',error);
+      common.showModel('获取设置失败', error);
       console.log('获取设置失败');
     }
   });
@@ -91,6 +94,8 @@ function doCreateTaskBlock(e) {
 
     success(result) {
       const { BlockId } = result.data;
+      onfire.fire('add_new_block', 'aaa');
+
       wx.redirectTo({
         url: `/pages/taskItemList/taskItemList?BlockId=${BlockId}`,
       })
