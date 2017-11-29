@@ -40,7 +40,7 @@ router.get('/wetask/addnewtaskblock', validationMiddleware, controllers.wetask.a
 router.get('/wetask/gettaskitems', validationMiddleware, controllers.wetask.gettaskitems)
 router.get('/wetask/addnewtaskitem', validationMiddleware, controllers.wetask.addnewtaskitem)
 router.get('/wetask/deletetaskitem', validationMiddleware, controllers.wetask.deletetaskitem)
-
+router.get('/wetask/findtaskitem', validationMiddleware, controllers.wetask.findtaskitem)
 
 // mydemo
 router.get('/demo', controllers.demo)

@@ -36,6 +36,7 @@ CREATE TABLE `wetask_item` (
 	`block_id` BIGINT(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '一次作业的编号，昨夜分组用',
 	`course_id` BIGINT(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '作业所在课目',
 	`ItemTitle` VARCHAR(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '作业标题',
+	`SpendSecond` INT(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '用时，单位秒',
 	`IsCompleted` TINYINT(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '是否完成',
 	`IsDeleted` TINYINT(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '是否删除',
 	`uid` VARCHAR(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户编号',

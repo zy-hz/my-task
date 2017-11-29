@@ -9,4 +9,5 @@ var exports = module.exports = {
   getTaskItems: dbVisitor.getTaskItems,
   addNewTaskItem: dbVisitor.addNewTaskItem ,
   deleteTaskItem: dbVisitor.deleteTaskItem,
+  findTaskItem: dbVisitor.findTaskItem,
 };

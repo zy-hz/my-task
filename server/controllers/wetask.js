@@ -11,7 +11,7 @@ const taskdb = require('knex')({
   }
 })
 
-var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName', 'wetask_item.IsCompleted'];
+var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName', 'wetask_item.SpendSecond', 'wetask_item.IsCompleted'];
 
 /**
  * 初始化一个用户
@@ -170,6 +170,20 @@ async function deletetaskitem(ctx, next) {
 }
 
 /**
+ * 查找作业项
+ */
+async function findtaskitem(ctx, next) {
+  // 用户必须登录
+  if (verify_request(ctx) == -1) return;
+  var uid = ctx.state.$wxInfo.userinfo.openId;
+  const { ItemId } = ctx.query;
+
+  // 获得作业列表
+  var taskItems = await taskdb("wetask_item").where('wetask_item.id', ItemId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
+  ctx.body = { taskItems };
+}
+
+/**
  * 响应 get 请求
  */
 async function get(ctx, next) {
@@ -212,4 +226,5 @@ module.exports = {
   gettaskitems,
   addnewtaskitem,
   deletetaskitem,
+  findtaskitem,
 }

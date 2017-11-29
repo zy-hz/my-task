@@ -18,9 +18,13 @@ function createPageObject() {
     ItemTitle: '载入作业项...',
     DisplayTime: { Hour: "0", Minute: '00', Second: '00' },
     SpendSecond: 0,
+
+    //  是否计时标记
+    isRunning: false,
   };
 
   obj.onLoad = onLoad;
+  obj.onStart = onStart;
   return obj;
 }
 
@@ -36,7 +40,7 @@ function onLoad(options) {
       if (taskItems.length <= 0) {
         common.showModel('没有发现作业项', taskItems);
       } else {
-        const { CourseName, ItemTitle, SpendSecond} = taskItems[0];
+        const { CourseName, ItemTitle, SpendSecond } = taskItems[0];
 
         var DisplayTime = getDisplayTime(SpendSecond);
         thePage.setData({ CourseName, ItemTitle, SpendSecond, DisplayTime });
@@ -51,6 +55,11 @@ function onLoad(options) {
     }
 
   });
+
+}
+
+// 开始
+function onStart(event) {
 
 }
 

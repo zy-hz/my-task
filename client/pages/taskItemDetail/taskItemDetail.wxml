@@ -17,7 +17,7 @@
 <!-- 操作区 -->
 <view class="weui-flex op-panel ">
   <view class="weui-flex__item ">
-    <button type='primary'>开始</button>
+    <button type='primary' bindtap="onStart">{{!isRunning ? '开始' : '暂停'}}</button>
   </view>
   <view class="weui-flex__item ">
     <button type='primary'>完成</button>
