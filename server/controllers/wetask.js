@@ -202,7 +202,54 @@ async function recorditemtime(ctx, next) {
   var result = await taskdb("wetask_time").insert(recordTime).returning('id');
 
   // 计算用时
+  var timeGroup = await taskdb("wetask_time").where({ item_id: ItemId }).select();
+  var spendInfo = getTaskItemSpendInfo(timeGroup);
+  await taskdb("wetask_item").where('id', ItemId).update(spendInfo);
+
   ctx.body = { result };
+}
+
+// 计算用时，timeGroup 按照时间排序的数组
+function getTaskItemSpendInfo(timeGroup) {
+  var FirstDoTime;
+  var LastDoTime;
+  var SpendSecond = 0;
+  var PauseSecond = 0;
+  var PauseCount = 0;
+  var IsCompleted = false;
+
+  for (var i = 0; i < timeGroup.length; i++) {
+    var tm = timeGroup[i];
+
+    if (FirstDoTime == null) FirstDoTime = tm.CurrentTime;
+    if (i == timeGroup.length - 1) LastDoTime = tm.CurrentTime;
+
+    if (tm.TimeType == "start") {
+      var nextIndex = i + 1;
+      if (nextIndex < timeGroup.length) {
+        // 计算工作时间
+        SpendSecond = SpendSecond + getPassSecond(tm.CurrentTime, timeGroup[nextIndex].CurrentTime);
+      }
+    } else if (tm.TimeType == "pause") {
+      var nextIndex = i + 1;
+      if (nextIndex < timeGroup.length) {
+        // 计算工作时间
+        PauseSecond = PauseSecond + getPassSecond(tm.CurrentTime, timeGroup[nextIndex].CurrentTime);
+        PauseCount = PauseCount + 1;
+      }
+
+    } else {
+      // 完成
+      IsCompleted = true;
+    }
+  }
+
+  return { FirstDoTime, LastDoTime, SpendSecond, PauseSecond, PauseCount, IsCompleted };
+}
+
+// 计算两个时间的差
+function getPassSecond(tm1, tm2) {
+  return (tm2.getTime() - tm1.getTime()) / 1000;
 }
 
 /**
