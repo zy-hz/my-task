@@ -18,15 +18,17 @@
       <!--作业列表区-->
       <view class="weui-cells weui-cells_after-title">
 
-        <view class="weui-cell" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" wx:for="{{item.taskItems}}" bindlongpress='onEditTaskItems'>
+        <view class="weui-cell weui-cell_link" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" wx:for="{{item.taskItems}}" bindlongpress='onEditTaskItems' bindtap='onTapItem'>
 
           <!--作业内容-->
           <view class="weui-cell__hd"></view>
-          <view class="weui-cell__bd">{{index+1}}. {{item.ItemTitle}}</view>
+          <view class="weui-cell__bd">{{index+1}}. {{item.ItemTitle}}
+            <icon class="weui-icon-radio" type="success_no_circle" size="16" hidden='{{item.IsCompleted == false}}'></icon>
+          </view>
 
           <!--作业条目菜单区-->
           <view class="weui-cell__ft" wx:if="{{true}}">
-            <icon class="weui-icon-radio" type="waiting" size="20" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" bindtap="goToTaskDetail" hidden="{{item.canRemove}}"></icon>
+            <view class="task-item__info" hidden="{{item.canRemove}}">0:00</view>
             <view class="weui-badge remove_item" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" bindtap="onRemoveTaskItem" hidden="{{item.canRemove == false}}">x</view>
           </view>
         </view>

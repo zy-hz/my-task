@@ -11,7 +11,7 @@ const taskdb = require('knex')({
   }
 })
 
-var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName'];
+var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName', 'wetask_item.IsCompleted'];
 
 /**
  * 初始化一个用户

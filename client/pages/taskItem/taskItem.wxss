@@ -1,38 +1,46 @@
-.task-item__page{
-    background-color: #F8F8F8;
-    font-size: 16px;
-    font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
-}
-.task-item__hd {
-    padding: 40px;
-}
-.task-item__bd {
-    padding-bottom: 40px;
-}
-.task-item__bd_spacing {
-    padding-left: 15px;
-    padding-right: 15px;
+.task-item__page {
+  background-color: #f8f8f8;
+  font-size: 16px;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
 
-.task-item__ft{
-    padding-bottom: 10px;
-    text-align: center;
+.task-item__hd {
+  padding: 40px;
+}
+
+.task-item__bd {
+  padding-bottom: 40px;
+}
+
+.task-item__bd_spacing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.task-item__ft {
+  padding-bottom: 10px;
+  text-align: center;
 }
 
 .task-item__title {
-    text-align: left;
-    font-size: 20px;
-    font-weight: 400;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .task-item__desc {
-    margin-top: 5px;
-    color: #888888;
-    text-align: left;
-    font-size: 14px;
+  margin-top: 5px;
+  color: #888;
+  text-align: left;
+  font-size: 14px;
 }
 
-.remove_item{
+.task-item__info {
+  font-size: 14px;
+  display: inline;
+}
+
+.remove_item {
   margin-left: 5px;
   margin-right: 5px;
 }

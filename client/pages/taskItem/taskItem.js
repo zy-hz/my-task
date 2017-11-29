@@ -24,7 +24,8 @@ function createPageObject() {
   obj.onEditTaskItems = onEditTaskItems;
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.onRemoveTaskItem = onRemoveTaskItem;
-  obj.goToTaskDetail = goToTaskDetail;
+
+  obj.onTapItem = onTapItem;
 
   return obj;
 }
@@ -151,6 +152,7 @@ function onRemoveTaskItem(event) {
 
     success() {
       op_Item4CourseGroup(thePage, itemid, courseid, function (itemIndex, course) {
+        // 从数组中删除
         course.taskItems.splice(itemIndex, 1);
       });
 
@@ -181,8 +183,21 @@ function op_Item4CourseGroup(thePage, itemid, courseid, callback) {
   thePage.setData({ item4Course: itemGroup });
 }
 
-function goToTaskDetail() {
-  wx.navigateTo({
-    url: '/pages/taskDetail/taskDetail',
-  })
+// 点击作业项目，有两种操作，如果是remove状态，则是取消remove;否则是进入细节
+function onTapItem(event) {
+  const { itemid, courseid } = event.currentTarget.dataset;
+  if (itemid < 0 || courseid < 0) return;
+
+  op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
+    var item = course.taskItems[itemIndex];
+    if (item.canRemove) {
+      // 取消删除状态
+      item.canRemove = false;
+    } else {
+      //  导航到作业项细节页面
+
+    }
+
+  });
+
 }
