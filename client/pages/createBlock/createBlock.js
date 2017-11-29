@@ -92,7 +92,7 @@ function doCreateTaskBlock(e) {
     success(result) {
       const { BlockId } = result.data;
       wx.redirectTo({
-        url: `/pages/taskItem/taskItem?BlockId=${BlockId}`,
+        url: `/pages/taskItemList/taskItemList?BlockId=${BlockId}`,
       })
     },
 
