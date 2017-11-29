@@ -1,3 +1,9 @@
+// 引入 wetask SDK
+var wetask = require('../../vendor/wetask-k12-sdk/index');
+
+// 引入通用脚本
+var common = require('../../common.js');
+
 // 引入工具脚本
 var util = require('../../utils.js');
 
@@ -10,7 +16,7 @@ function createPageObject() {
   obj.data = {
     CourseName: '课程',
     ItemTitle: '载入作业项...',
-    DisplayTime: {},
+    DisplayTime: { Hour: "0", Minute: '00', Second: '00' },
     SpendSecond: 0,
   };
 
@@ -20,10 +26,32 @@ function createPageObject() {
 
 // 页面载入
 function onLoad(options) {
-  const { CourseName, ItemTitle, SpendSecond } = options;
+  var thePage = this;
 
-  var DisplayTime = getDisplayTime(SpendSecond);
-  this.setData({ CourseName, ItemTitle, SpendSecond, DisplayTime });
+  wetask.findTaskItem({
+    ItemId: options.ItemId,
+
+    success(result) {
+      const { taskItems } = result.data;
+      if (taskItems.length <= 0) {
+        common.showModel('没有发现作业项', taskItems);
+      } else {
+        const { CourseName, ItemTitle, SpendSecond} = taskItems[0];
+
+        var DisplayTime = getDisplayTime(SpendSecond);
+        thePage.setData({ CourseName, ItemTitle, SpendSecond, DisplayTime });
+
+        common.showSuccess();
+      }
+    },
+
+    fail(error) {
+      common.showModel('获取设置失败', error);
+      console.log('获取设置失败');
+    }
+
+  });
+
 }
 
 function getDisplayTime(sec) {
@@ -33,7 +61,7 @@ function getDisplayTime(sec) {
 
   return {
     Hour: util.formatDate(dt, "H"),
-    Minute: util.formatDate(dt, "m"),
-    Second: util.formatDate(dt, "s")
+    Minute: util.formatDate(dt, "mm"),
+    Second: util.formatDate(dt, "ss")
   };
 }

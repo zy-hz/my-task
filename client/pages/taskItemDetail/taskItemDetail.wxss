@@ -10,8 +10,14 @@
   font-size: 12pt;
 }
 
-.item-spend {
-    font-size: 50pt;
+.item-spend__minute {
+  display: inline;
+  font-size: 50pt;
+}
+
+.item-spend__second {
+  display: inline;
+  font-size: 20pt;
 }
 
 .item-title {

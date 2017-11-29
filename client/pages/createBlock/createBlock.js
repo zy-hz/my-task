@@ -55,8 +55,8 @@ function onLoad(e) {
       common.showSuccess();
     },
 
-    fail() {
-      common.showModel('获取设置失败');
+    fail(error) {
+      common.showModel('获取设置失败',error);
       console.log('获取设置失败');
     }
   });
