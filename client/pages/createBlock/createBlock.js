@@ -67,8 +67,8 @@ function getTaskPeriod4Folder(folder) {
   var dt1 = new Date();
   var dt2 = util.DateAddDay(dt1, 1);
   return {
-    createDate: util.formatDate(dt1, '-'),
-    deliverDate: util.formatDate(dt2, '-'),
+    createDate: util.formatDate(dt1, 'yyyy-MM-dd'),
+    deliverDate: util.formatDate(dt2, 'yyyy-MM-dd'),
   };
 }
 
@@ -143,7 +143,7 @@ function bindDateChange(e) {
   if (e.target.id == "createDate") {
     var dt1 = new Date(e.detail.value);
     var dt2 = util.DateAddDay(dt1, 1);
-    taskPeriod.deliverDate = util.formatDate(dt2, '-');
+    taskPeriod.deliverDate = util.formatDate(dt2, 'yyyy-MM-dd');
   }
   this.setData({ taskPeriod });
 }
