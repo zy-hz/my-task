@@ -53,7 +53,6 @@ function onLoad(options) {
       const { taskBlock, taskItems, courses } = result.data;
 
       // 作业项目按照课程排序
-      taskItems.sort(function (a, b) { return a.course_id - b.course_id; });
       var item4Course = groupItemByCourse(taskItems, courses);
       thePage.setData({ taskBlock, taskItems, courses, item4Course });
 
@@ -74,6 +73,7 @@ function onLoad(options) {
 
 // 作业条目按照课程分组
 function groupItemByCourse(taskItems, courses) {
+  taskItems.sort(function (a, b) { return a.course_id - b.course_id; });
   var item4Course = new Array();
 
   for (var i = 0; i < courses.length; i++) {
@@ -127,10 +127,16 @@ function doAddNewTaskItem(event) {
 
     success(result) {
       const { taskItem } = result.data;
-      taskItem.canRemove = false;
 
-      var item4Course = insertItem4Group(thePage.data.item4Course, taskItem);
-      thePage.setData({ item4Course, addNewTaskPromotion: "" });
+      // 添加到作业列表
+      var taskItems = thePage.data.taskItems;
+      var courses = thePage.data.courses;
+      taskItems.push(taskItem);
+
+      // 作业项目按照课程排序
+      var item4Course = groupItemByCourse(taskItems, courses);
+      thePage.setData({ taskItems , item4Course, addNewTaskPromotion: "" });
+
       common.showSuccess();
     },
 
