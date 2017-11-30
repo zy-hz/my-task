@@ -99,7 +99,7 @@ async function addnewtaskblock(ctx, next) {
     uid
   };
 
-  // 查询是否存在相同作业：条件 folder_id和CreateDate相同
+  // 查询是否存在相同作业：条件 FolderId和CreateDate相同
   var result = await taskdb("wetask_block").where({ FolderId, CreateDate }).select('id');
   var blockId = result == null || result.length == 0 ? 0 : result[0].id;
 
@@ -184,7 +184,7 @@ async function findtaskitem(ctx, next) {
   const { ItemId } = ctx.query;
 
   // 获得作业列表
-  var taskItems = await taskdb("wetask_item").where('wetask_item.id', ItemId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
+  var taskItems = await taskdb("wetask_item").where('wetask_item.id', ItemId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
   ctx.body = { taskItems };
 }
 
