@@ -188,8 +188,13 @@ function onRemoveTaskItem(event) {
 
     success() {
       op_Item4CourseGroup(thePage, itemid, courseid, function (itemIndex, course) {
-        // 从数组中删除
+        // 从课程视图数组中删除
         course.TaskItems.splice(itemIndex, 1);
+      });
+
+      op_TaskItems(thePage,itemid,function(idx){
+        // 从作业数组中删除
+        thePage.data.TaskItems.splice(idx, 1);
       });
 
       common.showSuccess();
@@ -203,20 +208,31 @@ function onRemoveTaskItem(event) {
 
 }
 
-// 操作作业项数据集
-function op_Item4CourseGroup(thePage, itemid, courseid, callback) {
+// 操作作业项数据集 - 课程视图
+function op_Item4CourseGroup(thePage, itemId, courseid, callback) {
   var itemGroup = thePage.data.Item4Course;
   var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseid; });
 
   if (courseIndex < 0) return;
   var course = itemGroup[courseIndex];
 
-  var itemIndex = course.TaskItems.findIndex(function (x) { return x.id == itemid; });
+  var itemIndex = course.TaskItems.findIndex(function (x) { return x.id == itemId; });
   if (itemIndex < 0) return;
 
   callback(itemIndex, course);
 
   thePage.setData({ Item4Course: itemGroup });
+}
+
+// 操作作业项数据集 - 原始数据集
+function op_TaskItems(thePage,itemId ,callback){
+  var taskItems = thePage.data.TaskItems;
+
+  var idx = taskItems.findIndex(function (x) { return x.id == itemId; });
+  if (idx < 0) return;
+
+  callback(idx);
+  thePage.setData({ TaskItems: taskItems });
 }
 
 // 点击作业项目，有两种操作，如果是remove状态，则是取消remove;否则是进入细节
