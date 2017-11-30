@@ -1,5 +1,6 @@
 // 引入 wetask SDK
 var wetask = require('../../vendor/wetask-k12-sdk/index');
+
 // 引入 QCloud 小程序增强 SDK
 var qcloud = require('../../vendor/wafer2-client-sdk/index');
 
@@ -77,9 +78,11 @@ function groupItemByCourse(taskItems, courses) {
 
   for (var i = 0; i < courses.length; i++) {
     var course = courses[i];
-    course.spendTime = 0;  // 课程花费的时间
-    course.taskItems = getTaskItemsByCourse(taskItems, course);
-    course.taskItems.forEach(x => {
+    course.SpendTime = 0;  // 课程花费的时间
+    course.DoneItemCount = 0; // 完成的作业项数量
+
+    course.TaskItems = getTaskItemsByCourse(taskItems, course);
+    course.TaskItems.forEach(x => {
       // 能删除
       x.canRemove = false;
 
@@ -87,10 +90,12 @@ function groupItemByCourse(taskItems, courses) {
       x.DisplayTime = getTaskItemSpendDisplayTime(x.SpendSecond);
 
       // 合计课程用时
-      course.spendTime = course.spendTime + x.SpendSecond;
+      course.SpendTime = course.SpendTime + x.SpendSecond;
+      if (x.IsCompleted) course.DoneItemCount = course.DoneItemCount + 1;
     });
 
-    course.itemCount = course.taskItems.length;
+    course.SpendTimeDisplay = getTaskItemSpendDisplayTime(course.SpendTime);
+    course.ItemCount = course.TaskItems.length;
     item4Course.push(course);
   }
 

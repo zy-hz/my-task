@@ -10,7 +10,7 @@
   <view class="task-item__bd">
 
     <!--课程面板-->
-    <block wx:for="{{item4Course}}">
+    <block wx:for="{{item4Course}}" wx:key="*this">
 
       <!--课程栏目头部-->
       <view class="weui-cells__title">{{item.CourseName}}</view>
@@ -18,7 +18,7 @@
       <!--作业列表区-->
       <view class="weui-cells weui-cells_after-title">
 
-        <view class="weui-cell weui-cell_link" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" wx:for="{{item.taskItems}}" bindlongpress='onEditTaskItems' bindtap='onTapItem'>
+        <view class="weui-cell weui-cell_link" data-itemid="{{item.id}}" data-courseid="{{item.course_id}}" wx:for="{{item.TaskItems}}" wx:key="*this" bindlongpress='onEditTaskItems' bindtap='onTapItem'>
 
           <!--作业内容-->
           <view class="weui-cell__hd"></view>
