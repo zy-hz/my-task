@@ -73,7 +73,7 @@ function onStart(event) {
   var timeType = isRunning ? "pause" : "start";
   var thePage = this;
 
-  recordTime(this.data.id, timeType, function () {
+  recordTime(this.data.CourseId, this.data.id, timeType, function () {
     if (!isRunning) {
       thePage.timer = setInterval((function () {
         updateTimer(this)
@@ -90,7 +90,7 @@ function onStart(event) {
 function onComplete(event) {
   var thePage = this;
 
-  recordTime(this.data.id, "done", function () {
+  recordTime(this.data.CourseId, this.data.id, "done", function () {
     stopTimer(thePage);
     wx.navigateBack();
   });
@@ -114,7 +114,7 @@ function stopTimer(thePage) {
 // 记录时间到服务器
 // timeType - 时间类型
 // callback - 回调函数
-function recordTime(itemId, timeType, callback) {
+function recordTime(courseId, itemId, timeType, callback) {
   var dtString = util.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
 
   wetask.recordItemTime({
@@ -125,6 +125,9 @@ function recordTime(itemId, timeType, callback) {
     success(result) {
       callback();
       common.showSuccess();
+
+      // 触发课程作业项信息变更事件
+      onfire.fire('change_item_detail', { CourseId: courseId, ItemId: itemId });
     },
 
     fail(error) {
