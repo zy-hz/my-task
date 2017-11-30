@@ -1,10 +1,10 @@
 <!--作业列表-->
-<view class="task-item__page">
+<view class="task-list__page">
   <!--页眉-->
-
+  <view class="task-list__hd"></view>
 
   <!--一份作业-->
-  <view class="task-item__bd">
+  <view>
 
     <!--课程面板-->
     <block wx:for="{{Item4Course}}" wx:key="*this">
@@ -26,7 +26,7 @@
           <!--作业条目菜单区-->
           <view class="weui-cell__ft" wx:if="{{true}}">
             <view class="task-item__info" hidden="{{item.EnableRemove == true}}">{{item.DisplayTime}}</view>
-            <view class="weui-badge remove_item" data-itemid="{{item.id}}" data-courseid="{{item.CourseId}}" bindtap="onRemoveTaskItem" hidden="{{item.EnableRemove == false}}">x</view>
+            <view class="weui-badge" data-itemid="{{item.id}}" data-courseid="{{item.CourseId}}" bindtap="onRemoveTaskItem" hidden="{{item.EnableRemove == false}}">x</view>
           </view>
         </view>
 
