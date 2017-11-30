@@ -121,11 +121,12 @@ function recordTime(taskItem, timeType, callback) {
       // 从服务器获得重新计算后的作业项
       const { TaskItem } = result.data;
 
-      callback(TaskItem);
-      common.showSuccess();
-
       // 触发课程作业项信息变更事件
       onfire.fire('change_item_detail', { TaskItem });
+
+      // 处理回调
+      callback(TaskItem);
+      common.showSuccess();
     },
 
     fail(error) {
