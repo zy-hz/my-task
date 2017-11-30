@@ -41,31 +41,15 @@ function onLoad(options) {
   var thePage = this;
   var taskItem = util.getObjectFromOptions(options);
 
-  wetask.findTaskItem({
-    ItemId: taskItem.id,
+  if (taskItem == null){
+    common.fail('没有作业项',null);
+    return;
+  }
 
-    success(result) {
-      // 返回的结果是一个作业项数组
-      const { taskItems } = result.data;
-      if (taskItems.length <= 0) {
-        common.showModel('没有发现作业项', taskItems);
-      }
-      else {
-        const { id, course_id, CourseName, ItemTitle, SpendSecond } = taskItems[0];
+  const { id, course_id, CourseName, ItemTitle, SpendSecond } = taskItem;
 
-        var DisplayTime = getDisplayTime(SpendSecond);
-        thePage.setData({ id, CourseId: course_id, CourseName, ItemTitle, SpendSecond, DisplayTime });
-
-        common.showSuccess();
-      }
-    },
-
-    fail(error) {
-      common.showModel('获取设置失败', error);
-      console.log('获取设置失败');
-    }
-
-  });
+  var DisplayTime = getDisplayTime(SpendSecond);
+  thePage.setData({ id, CourseId: course_id, CourseName, ItemTitle, SpendSecond, DisplayTime });
 
 }
 
