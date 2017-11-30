@@ -199,7 +199,7 @@ async function recorditemtime(ctx, next) {
 
   //  记录这些操作的时间
   var recordTime = {
-    item_id: ItemId,
+    ItemId,
     CurrentTime,
     TimeType,
     uid
@@ -207,7 +207,7 @@ async function recorditemtime(ctx, next) {
   var result = await taskdb("wetask_time").insert(recordTime).returning('id');
 
   // 计算用时
-  var timeGroup = await taskdb("wetask_time").where({ item_id: ItemId }).select();
+  var timeGroup = await taskdb("wetask_time").where({ ItemId }).select();
   var spendInfo = getTaskItemSpendInfo(timeGroup);
   await taskdb("wetask_item").where('id', ItemId).update(spendInfo);
 
