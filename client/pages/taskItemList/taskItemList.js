@@ -21,6 +21,11 @@ var eventObj = onfire.on('change_item_detail', function (data) {
   // 判断是否为作业块对象
   if (thatPage == null || data == null) return;
 
+  const { TaskItem } = data;
+  if (TaskItem == null) return;
+
+  console.log(TaskItem);
+
 });
 
 // 页面函数，传入一个object对象作为参数
@@ -192,7 +197,7 @@ function onRemoveTaskItem(event) {
         course.TaskItems.splice(itemIndex, 1);
       });
 
-      op_TaskItems(thePage,itemid,function(idx){
+      op_TaskItems(thePage, itemid, function (idx) {
         // 从作业数组中删除
         thePage.data.TaskItems.splice(idx, 1);
       });
@@ -225,7 +230,7 @@ function op_Item4CourseGroup(thePage, itemId, courseid, callback) {
 }
 
 // 操作作业项数据集 - 原始数据集
-function op_TaskItems(thePage,itemId ,callback){
+function op_TaskItems(thePage, itemId, callback) {
   var taskItems = thePage.data.TaskItems;
 
   var idx = taskItems.findIndex(function (x) { return x.id == itemId; });
@@ -247,7 +252,7 @@ function onTapItem(event) {
       item.canRemove = false;
     } else {
       //  导航到作业项细节页面
-      var url = util.buildUrlWithObjectParams("/pages/taskItemDetail/taskItemDetail",item);
+      var url = util.buildUrlWithObjectParams("/pages/taskItemDetail/taskItemDetail", item);
       //var url = `/pages/taskItemDetail/taskItemDetail?ItemId=${item.id}`;
       wx.navigateTo({ url });
     }

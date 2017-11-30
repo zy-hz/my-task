@@ -20,9 +20,6 @@ function createPageObject() {
     TaskItem: {},
 
     DisplayTime: { Hour: "0", Minute: '00', Second: '00' },
-
-    //  是否计时标记
-    isRunning: false,
   };
 
   obj.onLoad = onLoad;
@@ -49,20 +46,22 @@ function onLoad(options) {
 
 // 事件：开始
 function onStart(event) {
-  var isRunning = this.data.isRunning;
+  var isRunning = this.data.TaskItem.IsRunning;
   var timeType = isRunning ? "pause" : "start";
   var thePage = this;
 
-  recordTime(this.data.TaskItem, timeType, function () {
+  recordTime(this.data.TaskItem, timeType, function (taskItem) {
     if (!isRunning) {
       thePage.timer = setInterval((function () {
         updateTimer(this)
       }).bind(thePage), 1000)
-    } else {
+    }
+    else {
       stopTimer(thePage)
     }
 
-    thePage.setData({ isRunning: !isRunning });
+    thePage.setData({ TaskItem: taskItem });
+
   });
 }
 
@@ -108,7 +107,7 @@ function recordTime(taskItem, timeType, callback) {
       // 从服务器获得重新计算后的作业项
       const { TaskItem } = result.data;
 
-      callback();
+      callback(TaskItem);
       common.showSuccess();
 
       // 触发课程作业项信息变更事件
