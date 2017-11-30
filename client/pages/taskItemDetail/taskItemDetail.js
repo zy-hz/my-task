@@ -7,6 +7,9 @@ var common = require('../../common.js');
 // 引入工具脚本
 var util = require('../../utils.js');
 
+// 注册事件
+var onfire = require("../../vendor/wetask-k12-sdk/lib/onfire.js");
+
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
 
@@ -107,7 +110,7 @@ function stopTimer(thePage) {
 
 // 记录时间到服务器
 // timeType - 时间类型
-// 成功后的回调
+// callback - 回调函数
 function recordTime(itemId, timeType, callback) {
   var dtString = util.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
 
