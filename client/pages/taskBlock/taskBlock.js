@@ -10,12 +10,18 @@ var common = require('../../common.js');
 // 注册事件
 var onfire = require('../../vendor/wetask-k12-sdk/lib/onfire.js');
 
+// 用户保存当前页面引用
 var thatPage;
 
 // 当添加新作业块消息被传递时，做具体的事
-var eventObj = onfire.on('add_new_block', function (data) {
-  console.log(data);
-  console.log(thatPage);
+var eventObj = onfire.on('add_new_block', function (taskBlock) {
+  // 判断是否为作业块对象
+  if (taskBlock == null || taskBlock.BlockName == null) return;
+
+  var blockGroup = thatPage.data.blocks;
+  blockGroup.unshift(taskBlock);
+
+  thatPage.setData({ blocks: blockGroup });
 });
 
 // 页面函数，传入一个object对象作为参数
@@ -48,7 +54,7 @@ function createPageObject() {
 function onLoad(options) {
   options.thePage = this;
   thatPage = this;
-  
+
   // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
   wx.getSetting({
     success(res) {
