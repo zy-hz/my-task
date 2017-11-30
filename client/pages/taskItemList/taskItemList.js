@@ -13,6 +13,16 @@ var util = require('../../utils.js');
 // 注册事件
 var onfire = require("../../vendor/wetask-k12-sdk/lib/onfire.js");
 
+// 用户保存当前页面引用
+var thatPage;
+
+// 当添加新作业块消息被传递时，做具体的事
+var eventObj = onfire.on('change_item_detail', function (data) {
+  // 判断是否为作业块对象
+  if (thatPage == null) return;
+
+});
+
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
 
@@ -28,6 +38,11 @@ function createPageObject() {
   };
 
   obj.onLoad = onLoad;
+  obj.onUnload = function (event) {
+    onfire.un('change_item_detail');
+    onfire.un(eventObj);
+  };
+
   obj.onEditTaskItems = onEditTaskItems;
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.onRemoveTaskItem = onRemoveTaskItem;
@@ -135,7 +150,7 @@ function doAddNewTaskItem(event) {
 
       // 作业项目按照课程排序
       var item4Course = groupItemByCourse(taskItems, courses);
-      thePage.setData({ taskItems , item4Course, addNewTaskPromotion: "" });
+      thePage.setData({ taskItems, item4Course, addNewTaskPromotion: "" });
 
       common.showSuccess();
     },
