@@ -149,20 +149,6 @@ function doAddNewTaskItem(event) {
 
 }
 
-// 插入到视图列表
-function insertItem4Group(item4Course, taskItem) {
-  var courseIndex = item4Course.findIndex(function (x) { return x.id == taskItem.course_id; });
-  if (courseIndex < 0) {
-    common.showModel("没有发现对于对应的课程&{taskItem.CourseName}", error);
-  }
-  else {
-    item4Course[courseIndex].TaskItems.push(taskItem);
-    item4Course[courseIndex].ItemCount++;
-  }
-
-  return item4Course;
-}
-
 // 编辑作业项事件
 function onEditTaskItems(event) {
   const { itemid, courseid } = event.currentTarget.dataset;
