@@ -26,6 +26,9 @@ var eventObj = onfire.on('change_item_detail', function (data) {
 
   // 更新作业项视图
   op_Item4CourseGroup(thatPage, TaskItem.id, TaskItem.CourseId, function (itemIndex, course) {
+    
+    // 显示用时
+    TaskItem.DisplayTime = getTaskItemSpendDisplayTime(TaskItem.SpendSecond);
     course.TaskItems[itemIndex] = TaskItem;
   })
 
