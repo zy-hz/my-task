@@ -18,6 +18,7 @@ function createPageObject() {
   var obj = new Object();
   obj.data = {
     id: 0,
+    CourseId: 0,
     CourseName: '课程',
     ItemTitle: '载入作业项...',
     DisplayTime: { Hour: "0", Minute: '00', Second: '00' },
@@ -42,14 +43,16 @@ function onLoad(options) {
     ItemId: options.ItemId,
 
     success(result) {
+      // 返回的结果是一个作业项数组
       const { taskItems } = result.data;
       if (taskItems.length <= 0) {
         common.showModel('没有发现作业项', taskItems);
-      } else {
-        const { id, CourseName, ItemTitle, SpendSecond } = taskItems[0];
+      }
+      else {
+        const { id, course_id, CourseName, ItemTitle, SpendSecond } = taskItems[0];
 
         var DisplayTime = getDisplayTime(SpendSecond);
-        thePage.setData({ id, CourseName, ItemTitle, SpendSecond, DisplayTime });
+        thePage.setData({ id, CourseId: course_id, CourseName, ItemTitle, SpendSecond, DisplayTime });
 
         common.showSuccess();
       }
@@ -86,7 +89,7 @@ function onStart(event) {
 // 事件：完成
 function onComplete(event) {
   var thePage = this;
-  
+
   recordTime(this.data.id, "done", function () {
     stopTimer(thePage);
     wx.navigateBack();
