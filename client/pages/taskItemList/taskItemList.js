@@ -38,11 +38,11 @@ Page(createPageObject());
 function createPageObject() {
   var obj = new Object();
   obj.data = {
-    courses: {},
-    taskBlock: {},
-    taskItems: {},
-    item4Course: {},
-    addNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
+    Courses: {},
+    TaskBlock: {},
+    TaskItems: {},
+    Item4Course: {},
+    AddNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
   };
 
   obj.onLoad = onLoad;
@@ -78,7 +78,7 @@ function onLoad(options) {
 
       // 作业项目按照课程排序
       var item4Course = groupItemByCourse(TaskItems, Courses);
-      thePage.setData({ taskBlock: TaskBlock, taskItems: TaskItems, courses: Courses, item4Course });
+      thePage.setData({ TaskBlock, TaskItems, Courses, Item4Course: item4Course });
 
       // 如果是新的作业块，触发新建作业块事件
       if (IsNewBlock) {
@@ -145,21 +145,21 @@ function doAddNewTaskItem(event) {
 
   wetask.addNewTaskItem({
     CourseId: event.target.id,
-    BlockId: thePage.data.taskBlock.id,
-    FolderId: thePage.data.taskBlock.folder_id,
+    BlockId: thePage.data.TaskBlock.id,
+    FolderId: thePage.data.TaskBlock.FolderId,
     ItemTitle: event.detail.value,
 
     success(result) {
       const { taskItem } = result.data;
 
       // 添加到作业列表
-      var taskItems = thePage.data.taskItems;
-      var courses = thePage.data.courses;
+      var taskItems = thePage.data.TaskItems;
+      var courses = thePage.data.Courses;
       taskItems.push(taskItem);
 
       // 作业项目按照课程排序
       var item4Course = groupItemByCourse(taskItems, courses);
-      thePage.setData({ taskItems, item4Course, addNewTaskPromotion: "" });
+      thePage.setData({ TaskItems: taskItems, Item4Course: item4Course, AddNewTaskPromotion: "" });
 
       common.showSuccess();
     },
