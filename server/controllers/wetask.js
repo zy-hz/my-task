@@ -128,10 +128,10 @@ async function gettaskitems(ctx, next) {
   const { BlockId } = ctx.query;
 
   // 获得作业块对象
-  var block = await taskdb("wetask_block").where('wetask_block.id', BlockId).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_block.folder_id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id');
+  var block = await taskdb("wetask_block").where('wetask_block.id', BlockId).select(SELECT_TASKBLOCK).leftJoin('wetask_folder', 'wetask_block.FolderId', 'wetask_folder.id');
 
   // 获得作业列表
-  var taskItems = await taskdb("wetask_item").where({ block_id: BlockId, IsDeleted: 0 }).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
+  var taskItems = await taskdb("wetask_item").where({ BlockId, IsDeleted: 0 }).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
 
   // 获得这个用户的课程
   var courses = await taskdb("wetask_course").where({ uid });
