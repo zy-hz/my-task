@@ -17,6 +17,7 @@ Page(createPageObject());
 function createPageObject() {
   var obj = new Object();
   obj.data = {
+    TaskItem : {},
     id: 0,
     CourseId: 0,
     CourseName: '课程',
@@ -38,9 +39,10 @@ function createPageObject() {
 // 页面载入
 function onLoad(options) {
   var thePage = this;
+  var taskItem = options;
 
   wetask.findTaskItem({
-    ItemId: options.ItemId,
+    ItemId: taskItem.id,
 
     success(result) {
       // 返回的结果是一个作业项数组

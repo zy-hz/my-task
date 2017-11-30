@@ -67,6 +67,27 @@ function getDay_zh(obj) {
   return "星期天";
 }
 
+// 构建连接带入对象参数
+// 构建连接带入对象参数
+function buildUrlWithObjectParams(url, obj) {
+  if (obj == null) return url;
+
+  // 参数组
+  var pms = new Array();
+  for (var key in obj) {
+
+    // 忽略方法
+    if (typeof (obj[key]) == "function") continue;
+
+    var val = encodeURI(obj[key]);
+    var pm = `${key}=${val}`;
+
+    pms.push(pm);
+  }
+
+  pms = pms.join('&');
+  return `${url}?${pms}`;
+}
 
 module.exports = {
   formatDate: formatDate,
@@ -75,4 +96,5 @@ module.exports = {
   typeOf: Type,
   isEmpty: isEmpty,
   getDay_zh: getDay_zh,
+  buildUrlWithObjectParams: buildUrlWithObjectParams,
 }

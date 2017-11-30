@@ -22,13 +22,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "taskItemDetail",
 					"pathName": "pages/taskItemDetail/taskItemDetail",
-					"query": "ItemId=1"
+					"query": "id=1&FolderId=1&BlockId=1&CourseId=1&ItemTitle=aaa&CourseName=%E8%AF%AD%E6%96%87&SpendSecond=64&IsCompleted=1&canRemove=false&DisplayTime=0:01"
 				},
 				{
 					"id": -1,
