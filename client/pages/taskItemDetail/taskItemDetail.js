@@ -18,12 +18,8 @@ function createPageObject() {
   var obj = new Object();
   obj.data = {
     TaskItem : {},
-    id: 0,
-    CourseId: 0,
-    CourseName: '课程',
-    ItemTitle: '载入作业项...',
+
     DisplayTime: { Hour: "0", Minute: '00', Second: '00' },
-    SpendSecond: 0,
 
     //  是否计时标记
     isRunning: false,
@@ -46,10 +42,8 @@ function onLoad(options) {
     return;
   }
 
-  const { id, course_id, CourseName, ItemTitle, SpendSecond } = taskItem;
-
-  var DisplayTime = getDisplayTime(SpendSecond);
-  thePage.setData({ id, CourseId: course_id, CourseName, ItemTitle, SpendSecond, DisplayTime });
+  var DisplayTime = getDisplayTime(taskItem.SpendSecond);
+  thePage.setData({ TaskItem: taskItem, DisplayTime });
 
 }
 
@@ -59,7 +53,7 @@ function onStart(event) {
   var timeType = isRunning ? "pause" : "start";
   var thePage = this;
 
-  recordTime(this.data.CourseId, this.data.id, timeType, function () {
+  recordTime(this.data.TaskItem , timeType, function () {
     if (!isRunning) {
       thePage.timer = setInterval((function () {
         updateTimer(this)
@@ -76,7 +70,7 @@ function onStart(event) {
 function onComplete(event) {
   var thePage = this;
 
-  recordTime(this.data.CourseId, this.data.id, "done", function () {
+  recordTime(this.data.TaskItem, "done", function () {
     stopTimer(thePage);
     wx.navigateBack();
   });
@@ -85,9 +79,11 @@ function onComplete(event) {
 // 更新定时器
 function updateTimer(thePage) {
 
-  var SpendSecond = thePage.data.SpendSecond + 1;
-  var DisplayTime = getDisplayTime(SpendSecond);
-  thePage.setData({ SpendSecond, DisplayTime });
+  var taskItem = thePage.data.TaskItem;
+  taskItem.SpendSecond = taskItem.SpendSecond + 1;
+
+  var displayTime = getDisplayTime(taskItem.SpendSecond);
+  thePage.setData({ TaskItem: taskItem, DisplayTime: displayTime });
 
 }
 
@@ -100,11 +96,11 @@ function stopTimer(thePage) {
 // 记录时间到服务器
 // timeType - 时间类型
 // callback - 回调函数
-function recordTime(courseId, itemId, timeType, callback) {
+function recordTime(taskItem, timeType, callback) {
   var dtString = util.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
 
   wetask.recordItemTime({
-    ItemId: itemId,
+    ItemId: taskItem.id,
     CurrentTime: dtString,
     TimeType: timeType,
 
@@ -113,7 +109,7 @@ function recordTime(courseId, itemId, timeType, callback) {
       common.showSuccess();
 
       // 触发课程作业项信息变更事件
-      onfire.fire('change_item_detail', { CourseId: courseId, ItemId: itemId });
+      onfire.fire('change_item_detail', { taskItem });
     },
 
     fail(error) {
