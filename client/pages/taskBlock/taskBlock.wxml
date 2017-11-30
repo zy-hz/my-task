@@ -11,7 +11,7 @@
   <!--作业块列表-->
   <view class="weui-cells weui-cells_after-title block-list__bd">
 
-    <navigator url="/pages/taskItemList/taskItemList?BlockId={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{blocks}}">
+    <navigator url="/pages/taskItemList/taskItemList?BlockId={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{blocks}}" wx:key="{{item.id}}">
       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
         <image class="weui-media-box__thumb" src="/images/folder_1.png" />
       </view>

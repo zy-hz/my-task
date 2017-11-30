@@ -4,10 +4,9 @@
     "pages/index/index",
     "pages/chat/chat",
     "pages/taskSchedule/taskSchedule",
-    "pages/taskDetail/taskDetail",
     "pages/introduce/introduce",
-    "pages/taskItemList/taskItemList",
     "pages/createBlock/createBlock",
+    "pages/taskItemList/taskItemList",
     "pages/taskItemDetail/taskItemDetail"
   ],
   "window": {

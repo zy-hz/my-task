@@ -11,7 +11,9 @@ const taskdb = require('knex')({
   }
 })
 
-var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.folder_id', 'wetask_item.block_id', 'wetask_item.course_id', 'wetask_item.ItemTitle', 'wetask_course.CourseName', 'wetask_item.SpendSecond', 'wetask_item.IsCompleted'];
+var SELECT_TASKBLOCK = ['wetask_block.id', 'wetask_block.BlockName', 'wetask_block.FolderId', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate'];
+
+var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.FolderId', 'wetask_item.BlockId', 'wetask_item.CourseId', 'wetask_item.ItemTitle', 'wetask_course.CourseName', 'wetask_item.SpendSecond', 'wetask_item.IsCompleted'];
 
 /**
  * 初始化一个用户
@@ -36,7 +38,7 @@ async function init(ctx, next) {
   var courses = await taskdb("wetask_course").where({ uid });
 
   // 获得用户所有的作业块
-  var blocks = await taskdb("wetask_block").where({ 'wetask_block.uid': uid }).select('wetask_block.id', 'wetask_block.BlockName', 'wetask_block.folder_id', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate').leftJoin('wetask_folder', 'wetask_block.folder_id', 'wetask_folder.id').orderBy('wetask_block.CreateDate', 'desc');
+  var blocks = await taskdb("wetask_block").where({ 'wetask_block.uid': uid }).select(SELECT_TASKBLOCK).leftJoin('wetask_folder', 'wetask_block.FolderId', 'wetask_folder.id').orderBy('wetask_block.CreateDate', 'desc');
   ctx.body = { folders, blocks, courses };
 }
 
