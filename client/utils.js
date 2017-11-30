@@ -67,26 +67,20 @@ function getDay_zh(obj) {
   return "星期天";
 }
 
-// 构建连接带入对象参数
-// 构建连接带入对象参数
+// 构建连接带入对象参数,使用json
 function buildUrlWithObjectParams(url, obj) {
   if (obj == null) return url;
 
-  // 参数组
-  var pms = new Array();
-  for (var key in obj) {
+  var str = encodeURI(JSON.stringify(obj));
+  return `${url}?json=${str}`;
+}
 
-    // 忽略方法
-    if (typeof (obj[key]) == "function") continue;
-
-    var val = encodeURI(obj[key]);
-    var pm = `${key}=${val}`;
-
-    pms.push(pm);
-  }
-
-  pms = pms.join('&');
-  return `${url}?${pms}`;
+// 获得json对象
+function getObjectFromOptions(options) {
+  if (options == null || options.json == null) return null;
+  
+  var str = decodeURI(options.json);
+  return JSON.parse(str);
 }
 
 module.exports = {
@@ -97,4 +91,5 @@ module.exports = {
   isEmpty: isEmpty,
   getDay_zh: getDay_zh,
   buildUrlWithObjectParams: buildUrlWithObjectParams,
+  getObjectFromOptions: getObjectFromOptions
 }

@@ -39,7 +39,7 @@ function createPageObject() {
 // 页面载入
 function onLoad(options) {
   var thePage = this;
-  var taskItem = options;
+  var taskItem = util.getObjectFromOptions(options);
 
   wetask.findTaskItem({
     ItemId: taskItem.id,
