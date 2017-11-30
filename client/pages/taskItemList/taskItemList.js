@@ -52,6 +52,7 @@ function onLoad(options) {
       const { taskBlock, taskItems, courses } = result.data;
 
       // 作业项目按照课程排序
+      taskItems.sort(function (a, b) { return a.course_id - b.course_id; });
       var item4Course = groupItemByCourse(taskItems, courses);
       thePage.setData({ taskBlock, taskItems, courses, item4Course });
 
@@ -59,7 +60,7 @@ function onLoad(options) {
       if (IsNewBlock) {
         onfire.fire('add_new_block', taskBlock);
       }
-      
+
       common.showSuccess();
     },
 
@@ -72,21 +73,23 @@ function onLoad(options) {
 
 // 作业条目按照课程分组
 function groupItemByCourse(taskItems, courses) {
-  taskItems.sort(function (a, b) { return a.course_id - b.course_id; });
   var item4Course = new Array();
 
   for (var i = 0; i < courses.length; i++) {
     var course = courses[i];
+    course.spendTime = 0;  // 课程花费的时间
     course.taskItems = getTaskItemsByCourse(taskItems, course);
     course.taskItems.forEach(x => {
+      // 能删除
       x.canRemove = false;
 
-      var dt = new Date();
-      var zone = dt.getTimezoneOffset();
-      dt.setTime(x.SpendSecond * 1000 + zone * 60 * 1000);
+      // 显示用时
+      x.DisplayTime = getTaskItemSpendDisplayTime(x.SpendSecond);
 
-      x.DisplayTime = util.formatDate(dt, "H:mm");
+      // 合计课程用时
+      course.spendTime = course.spendTime + x.SpendSecond;
     });
+
     course.itemCount = course.taskItems.length;
     item4Course.push(course);
   }
@@ -221,4 +224,13 @@ function onTapItem(event) {
 
   });
 
+}
+
+// 作业项的用时显示
+function getTaskItemSpendDisplayTime(sec) {
+  var dt = new Date();
+  var zone = dt.getTimezoneOffset();
+  dt.setTime(sec * 1000 + zone * 60 * 1000);
+
+  return util.formatDate(dt, "H:mm");
 }
