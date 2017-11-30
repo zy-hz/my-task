@@ -74,15 +74,15 @@ function onLoad(options) {
     BlockId: BlockId,
 
     success(result) {
-      const { taskBlock, taskItems, courses } = result.data;
+      const { TaskBlock, TaskItems, Courses } = result.data;
 
       // 作业项目按照课程排序
-      var item4Course = groupItemByCourse(taskItems, courses);
-      thePage.setData({ taskBlock, taskItems, courses, item4Course });
+      var item4Course = groupItemByCourse(TaskItems, Courses);
+      thePage.setData({ taskBlock: TaskBlock, taskItems: TaskItems, courses: Courses, item4Course });
 
       // 如果是新的作业块，触发新建作业块事件
       if (IsNewBlock) {
-        onfire.fire('add_new_block', taskBlock);
+        onfire.fire('add_new_block', TaskBlock);
       }
 
       common.showSuccess();

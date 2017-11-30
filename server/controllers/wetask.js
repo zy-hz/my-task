@@ -136,7 +136,7 @@ async function gettaskitems(ctx, next) {
   // 获得这个用户的课程
   var courses = await taskdb("wetask_course").where({ uid });
 
-  ctx.body = { taskBlock: block[0], taskItems, courses };
+  ctx.body = { TaskBlock: block[0], TaskItems: taskItems, Courses: courses };
 }
 
 /**
