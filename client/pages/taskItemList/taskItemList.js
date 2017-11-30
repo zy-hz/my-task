@@ -12,11 +12,6 @@ var util = require('../../utils.js');
 // 注册事件
 var onfire = require("../../vendor/wetask-k12-sdk/lib/onfire.js");
 
-// 当添加新作业块消息被传递时，做具体的事
-var eventObj = onfire.on('add_new_block', function (data) {
-  
-});
-
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
 
@@ -45,20 +40,26 @@ function createPageObject() {
  * 页面载入事件
  */
 function onLoad(options) {
+  const { BlockId, IsNewBlock } = options;
   var thePage = this;
+
   common.showBusy("载入作业");
 
   wetask.getTaskItems({
-    BlockId: options.BlockId,
+    BlockId: BlockId,
 
     success(result) {
       const { taskBlock, taskItems, courses } = result.data;
-      thePage.setData({ taskBlock, taskItems, courses });
 
       // 作业项目按照课程排序
       var item4Course = groupItemByCourse(taskItems, courses);
+      thePage.setData({ taskBlock, taskItems, courses, item4Course });
 
-      thePage.setData({ item4Course });
+      // 如果是新的作业块，触发新建作业块事件
+      if (IsNewBlock) {
+        onfire.fire('add_new_block', taskBlock);
+      }
+      
       common.showSuccess();
     },
 
@@ -84,7 +85,7 @@ function groupItemByCourse(taskItems, courses) {
       var zone = dt.getTimezoneOffset();
       dt.setTime(x.SpendSecond * 1000 + zone * 60 * 1000);
 
-      x.DisplayTime = util.formatDate(dt,"H:mm");
+      x.DisplayTime = util.formatDate(dt, "H:mm");
     });
     course.itemCount = course.taskItems.length;
     item4Course.push(course);

@@ -46,7 +46,7 @@
 					"id": 3,
 					"name": "作业项列表",
 					"pathName": "pages/taskItemList/taskItemList",
-					"query": "BlockId=1"
+					"query": "BlockId=1&IsNewBlock=true"
 				}
 			]
 		}

@@ -39,9 +39,6 @@ function createPageObject() {
 
   obj.doAddTaskBlock = doAddTaskBlock;
 
-  obj.doAddNewTaskItem = doAddNewTaskItem;
-  obj.goToTaskDetail = goToTaskDetail;
-
   return obj;
 }
 
@@ -129,25 +126,3 @@ function doAddTaskBlock(options) {
     url: '/pages/createBlock/createBlock',
   })
 }
-
-
-// 添加一个新作业条目
-function doAddNewTaskItem(event) {
-  if (event.detail.value == "") return;
-  var taskBlock = wetask.addNewTaskItem(this.data.taskBlock, event.detail.value, event.target.dataset.course);
-
-  this.setData({ taskBlock });
-  this.setData({ addNewTaskPromotion: "" });
-
-  this.timer = setInterval((function () {
-    console.log("aaa");
-  }).bind(this), 1000);
-
-}
-
-function goToTaskDetail() {
-  wx.navigateTo({
-    url: '/pages/taskDetail/taskDetail',
-  })
-}
-

@@ -101,6 +101,9 @@ async function addnewtaskblock(ctx, next) {
   var result = await taskdb("wetask_block").where({ folder_id: FolderId, CreateDate: CreateDate }).select('id');
   var block_id = result == null || result.length == 0 ? 0 : result[0].id;
 
+  // 是否为新作业
+  var IsNewBlock = block_id > 0 ? false : true;
+
   if (block_id > 0) {
     // 存在该作业，启动更新流程
     await taskdb("wetask_block").where({ folder_id: FolderId, CreateDate: CreateDate }).update(taskBlock);
@@ -110,7 +113,7 @@ async function addnewtaskblock(ctx, next) {
     result = await taskdb("wetask_block").returning('id').insert(taskBlock);
     block_id = result[0];
   }
-  ctx.body = { BlockId: block_id };
+  ctx.body = { BlockId: block_id, IsNewBlock };
 }
 
 /**

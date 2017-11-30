@@ -56,7 +56,7 @@ function getTaskFolders(options) {
  * @param {Function} options.BlockName 作业名称
  * @param {Function} options.CreateDate 创建日期
  * @param {Function} options.DeliverDate 发布日期
- * @param {Function} options.success(result) 登录成功后的回调函数 const { BlockId } = result.data
+ * @param {Function} options.success(result) 登录成功后的回调函数 const { BlockId , IsNewBlock} = result.data
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function addNewTaskBlock(options) {
@@ -154,7 +154,7 @@ function findTaskItem(options) {
  * @param {Function} options.success(result) 登录成功后的回调函数 ,result.data = 保留
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
-function recordItemTime(options){
+function recordItemTime(options) {
   var CurrentTime = encodeURI(options.CurrentTime);
   options.login = true;
   options.url = `${config.service.host}/weapp/wetask/recorditemtime?ItemId=${options.ItemId}&CurrentTime=${CurrentTime}&TimeType=${options.TimeType}`;
