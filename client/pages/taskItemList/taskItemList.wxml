@@ -21,10 +21,12 @@
           <view class="weui-cell__hd"></view>
           <view class="weui-cell__bd">{{index+1}}. {{item.ItemTitle}}
             <icon class="weui-icon-radio" type="success_no_circle" size="16" hidden='{{item.IsCompleted == false}}'></icon>
+            <icon class="weui-icon-radio" type="info_circle" size="16" color='#e64340' hidden='{{item.IsRunning == false}}'></icon>
           </view>
 
           <!--作业条目菜单区-->
-          <view class="weui-cell__ft" wx:if="{{true}}">
+          <view class="weui-cell__ft">
+
             <view class="task-item__info" hidden="{{item.EnableRemove == true}}">{{item.DisplayTime}}</view>
             <view class="weui-badge" data-itemid="{{item.id}}" data-courseid="{{item.CourseId}}" bindtap="onRemoveTaskItem" hidden="{{item.EnableRemove == false}}">x</view>
           </view>
