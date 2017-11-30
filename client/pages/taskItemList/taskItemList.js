@@ -21,14 +21,6 @@ var eventObj = onfire.on('change_item_detail', function (data) {
   // 判断是否为作业块对象
   if (thatPage == null || data == null) return;
 
-  // 添加到作业列表
-  var taskItems = thatPage.data.taskItems;
-  var courses = thatPage.data.courses;
-
-  // 作业项目按照课程排序
-  var item4Course = groupItemByCourse(taskItems, courses);
-  thatPage.setData({ item4Course });
-
 });
 
 // 页面函数，传入一个object对象作为参数
