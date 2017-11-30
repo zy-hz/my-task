@@ -223,6 +223,7 @@ function getTaskItemSpendInfo(timeGroup) {
   var PauseSecond = 0;
   var PauseCount = 0;
   var IsCompleted = false;
+  var IsRunning = false;
 
   for (var i = 0; i < timeGroup.length; i++) {
     var tm = timeGroup[i];
@@ -231,12 +232,17 @@ function getTaskItemSpendInfo(timeGroup) {
     if (i == timeGroup.length - 1) LastDoTime = tm.CurrentTime;
 
     if (tm.TimeType == "start") {
+      IsCompleted = false;
+      IsRunning = true;
+      
       var nextIndex = i + 1;
       if (nextIndex < timeGroup.length) {
         // 计算工作时间
         SpendSecond = SpendSecond + getPassSecond(tm.CurrentTime, timeGroup[nextIndex].CurrentTime);
       }
     } else if (tm.TimeType == "pause") {
+      IsCompleted = false;
+      IsRunning = false;
       var nextIndex = i + 1;
       if (nextIndex < timeGroup.length) {
         // 计算工作时间
@@ -247,10 +253,11 @@ function getTaskItemSpendInfo(timeGroup) {
     } else {
       // 完成
       IsCompleted = true;
+      IsRunning = false;
     }
   }
 
-  return { FirstDoTime, LastDoTime, SpendSecond, PauseSecond, PauseCount, IsCompleted };
+  return { FirstDoTime, LastDoTime, SpendSecond, PauseSecond, PauseCount, IsCompleted, IsRunning };
 }
 
 // 计算两个时间的差
