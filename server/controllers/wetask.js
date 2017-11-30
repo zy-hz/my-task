@@ -92,7 +92,7 @@ async function addnewtaskblock(ctx, next) {
 
   const { FolderId, BlockName, CreateDate, DeliverDate } = ctx.query;
   var taskBlock = {
-    folder_id: FolderId,
+    FolderId,
     BlockName,
     CreateDate,
     DeliverDate,
@@ -100,22 +100,22 @@ async function addnewtaskblock(ctx, next) {
   };
 
   // 查询是否存在相同作业：条件 folder_id和CreateDate相同
-  var result = await taskdb("wetask_block").where({ folder_id: FolderId, CreateDate: CreateDate }).select('id');
-  var block_id = result == null || result.length == 0 ? 0 : result[0].id;
+  var result = await taskdb("wetask_block").where({ FolderId, CreateDate }).select('id');
+  var blockId = result == null || result.length == 0 ? 0 : result[0].id;
 
   // 是否为新作业
-  var IsNewBlock = block_id > 0 ? false : true;
+  var IsNewBlock = blockId > 0 ? false : true;
 
-  if (block_id > 0) {
+  if (blockId > 0) {
     // 存在该作业，启动更新流程
-    await taskdb("wetask_block").where({ folder_id: FolderId, CreateDate: CreateDate }).update(taskBlock);
+    await taskdb("wetask_block").where({ FolderId, CreateDate }).update(taskBlock);
   }
   else {
     // 不存在启动添加流程
     result = await taskdb("wetask_block").returning('id').insert(taskBlock);
-    block_id = result[0];
+    blockId = result[0];
   }
-  ctx.body = { BlockId: block_id, IsNewBlock };
+  ctx.body = { BlockId: blockId, IsNewBlock };
 }
 
 /**
