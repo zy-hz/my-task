@@ -24,7 +24,10 @@ var eventObj = onfire.on('change_item_detail', function (data) {
   const { TaskItem } = data;
   if (TaskItem == null) return;
 
-  console.log(TaskItem);
+  // 更新作业项视图
+  op_Item4CourseGroup(thatPage, TaskItem.id, TaskItem.CourseId, function (itemIndex, course) {
+    course.TaskItems[itemIndex] = TaskItem;
+  })
 
 });
 
@@ -214,9 +217,9 @@ function onRemoveTaskItem(event) {
 }
 
 // 操作作业项数据集 - 课程视图
-function op_Item4CourseGroup(thePage, itemId, courseid, callback) {
+function op_Item4CourseGroup(thePage, itemId, courseId, callback) {
   var itemGroup = thePage.data.Item4Course;
-  var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseid; });
+  var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseId; });
 
   if (courseIndex < 0) return;
   var course = itemGroup[courseIndex];
