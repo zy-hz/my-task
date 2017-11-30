@@ -39,22 +39,29 @@ function onLoad(options) {
     return;
   }
 
+  // 如果是中途离开，计算离开时间
+  if (taskItem.IsRunning) taskItem.SpendSecond = taskItem.SpendSecond + calcuateLeaveTime(taskItem.LastDoTime);
+
   var DisplayTime = getDisplayTime(taskItem.SpendSecond);
   thePage.setData({ TaskItem: taskItem, DisplayTime });
 
+  // 是否需要自动启动
+  if (taskItem.IsRunning) doAutoStart(thePage);
 }
 
 // 事件：开始
 function onStart(event) {
-  var isRunning = this.data.TaskItem.IsRunning;
-  var timeType = isRunning ? "pause" : "start";
   var thePage = this;
 
-  recordTime(this.data.TaskItem, timeType, function (taskItem) {
+  var isRunning = thePage.data.TaskItem.IsRunning;
+  var timeType = isRunning ? "pause" : "start";
+
+  recordTime(thePage.data.TaskItem, timeType, function (taskItem) {
     if (!isRunning) {
       thePage.timer = setInterval((function () {
-        updateTimer(this)
+        updateTimer(thePage)
       }).bind(thePage), 1000)
+
     }
     else {
       stopTimer(thePage)
@@ -63,6 +70,13 @@ function onStart(event) {
     thePage.setData({ TaskItem: taskItem });
 
   });
+}
+
+// 自动启动
+function doAutoStart(thePage) {
+  thePage.timer = setInterval((function () {
+    updateTimer(thePage)
+  }).bind(thePage), 1000)
 }
 
 // 事件：完成
@@ -133,4 +147,11 @@ function getDisplayTime(sec) {
     Minute: util.formatDate(dt, "mm"),
     Second: util.formatDate(dt, "ss")
   };
+}
+
+// 计算离开的时间
+function calcuateLeaveTime(lastDoTime) {
+  var start = util.formatDate(new Date(lastDoTime), 'yyyy-MM-dd HH:mm:ss');
+  var end = util.formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss');
+  return util.DateDiff(start, end, "second");
 }
