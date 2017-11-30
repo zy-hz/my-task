@@ -97,7 +97,7 @@ function onLoad(options) {
 
 // 作业条目按照课程分组
 function groupItemByCourse(taskItems, courses) {
-  taskItems.sort(function (a, b) { return a.course_id - b.course_id; });
+  taskItems.sort(function (a, b) { return a.CourseId - b.CourseId; });
   var item4Course = new Array();
 
   for (var i = 0; i < courses.length; i++) {
@@ -127,10 +127,10 @@ function groupItemByCourse(taskItems, courses) {
 }
 
 // 获得一个课程的作业项
-// taskItems 按照course_id,升序排序
+// taskItems 按照CourseId,升序排序
 function getTaskItemsByCourse(taskItems, course) {
-  var start = taskItems.findIndex(function (a) { return a.course_id == course.id; });
-  var end = taskItems.findIndex(function (a) { return a.course_id > course.id; });
+  var start = taskItems.findIndex(function (a) { return a.CourseId == course.id; });
+  var end = taskItems.findIndex(function (a) { return a.CourseId > course.id; });
 
   if (start < 0) return new Array();
   if (end < 0) end = taskItems.length;
@@ -150,12 +150,12 @@ function doAddNewTaskItem(event) {
     ItemTitle: event.detail.value,
 
     success(result) {
-      const { taskItem } = result.data;
+      const { TaskItem } = result.data;
 
       // 添加到作业列表
       var taskItems = thePage.data.TaskItems;
       var courses = thePage.data.Courses;
-      taskItems.push(taskItem);
+      taskItems.push(TaskItem);
 
       // 作业项目按照课程排序
       var item4Course = groupItemByCourse(taskItems, courses);
@@ -213,7 +213,7 @@ function onRemoveTaskItem(event) {
 
 // 操作作业项数据集
 function op_Item4CourseGroup(thePage, itemid, courseid, callback) {
-  var itemGroup = thePage.data.item4Course;
+  var itemGroup = thePage.data.Item4Course;
   var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseid; });
 
   if (courseIndex < 0) return;
@@ -224,7 +224,7 @@ function op_Item4CourseGroup(thePage, itemid, courseid, callback) {
 
   callback(itemIndex, course);
 
-  thePage.setData({ item4Course: itemGroup });
+  thePage.setData({ Item4Course: itemGroup });
 }
 
 // 点击作业项目，有两种操作，如果是remove状态，则是取消remove;否则是进入细节

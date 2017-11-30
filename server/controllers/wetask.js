@@ -149,16 +149,16 @@ async function addnewtaskitem(ctx, next) {
   const { FolderId, BlockId, CourseId, ItemTitle } = ctx.query;
 
   var item = {
-    folder_id: FolderId,
-    block_id: BlockId,
-    course_id: CourseId,
+    FolderId,
+    BlockId,
+    CourseId,
     ItemTitle,
     uid
   };
 
   var result = await taskdb("wetask_item").returning('id').insert(item);
-  var taskItems = await taskdb("wetask_item").where('wetask_item.id', result[0]).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.course_id', 'wetask_course.id');
-  ctx.body = { taskItem: taskItems[0] };
+  var taskItems = await taskdb("wetask_item").where('wetask_item.id', result[0]).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
+  ctx.body = { TaskItem: taskItems[0] };
 }
 
 /**

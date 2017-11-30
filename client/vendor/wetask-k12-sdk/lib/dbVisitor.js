@@ -96,7 +96,7 @@ function getTaskItems(options) {
  * @param {Function} options.BlockId 作业块编号
  * @param {Function} options.CourseId 作业块编号
  * @param {Function} options.ItemTitle 作业项名称
- * @param {Function} options.success(result) 登录成功后的回调函数 const { itemId } = result.data;
+ * @param {Function} options.success(result) 登录成功后的回调函数 const { TaskItem } = result.data;
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function addNewTaskItem(options) {
