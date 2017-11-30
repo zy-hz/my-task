@@ -209,9 +209,10 @@ async function recorditemtime(ctx, next) {
   // 计算用时
   var timeGroup = await taskdb("wetask_time").where({ ItemId }).select();
   var spendInfo = getTaskItemSpendInfo(timeGroup);
-  await taskdb("wetask_item").where('id', ItemId).update(spendInfo);
+  await taskdb("wetask_item").where('id', ItemId).update(spendInfo).returning();
 
-  ctx.body = { result };
+  var taskItems = await taskdb("wetask_item").where('wetask_item.id', ItemId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
+  ctx.body = { TaskItem: taskItems[0] };
 }
 
 // 计算用时，timeGroup 按照时间排序的数组

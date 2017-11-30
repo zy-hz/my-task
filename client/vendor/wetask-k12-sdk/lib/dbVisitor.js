@@ -151,7 +151,7 @@ function findTaskItem(options) {
  * @param {Function} options.ItemId 作业项编号
  * @param {Function} options.CurrentTime 当前时间
  * @param {Function} options.TimeType 时间类型
- * @param {Function} options.success(result) 登录成功后的回调函数 ,result.data = 保留
+ * @param {Function} options.success(result) 登录成功后的回调函数 ,result.data = TaskItem
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function recordItemTime(options) {

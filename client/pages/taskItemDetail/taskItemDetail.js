@@ -17,7 +17,7 @@ Page(createPageObject());
 function createPageObject() {
   var obj = new Object();
   obj.data = {
-    TaskItem : {},
+    TaskItem: {},
 
     DisplayTime: { Hour: "0", Minute: '00', Second: '00' },
 
@@ -37,8 +37,8 @@ function onLoad(options) {
   var thePage = this;
   var taskItem = util.getObjectFromOptions(options);
 
-  if (taskItem == null){
-    common.fail('没有作业项',null);
+  if (taskItem == null) {
+    common.fail('没有作业项', null);
     return;
   }
 
@@ -53,7 +53,7 @@ function onStart(event) {
   var timeType = isRunning ? "pause" : "start";
   var thePage = this;
 
-  recordTime(this.data.TaskItem , timeType, function () {
+  recordTime(this.data.TaskItem, timeType, function () {
     if (!isRunning) {
       thePage.timer = setInterval((function () {
         updateTimer(this)
@@ -105,11 +105,14 @@ function recordTime(taskItem, timeType, callback) {
     TimeType: timeType,
 
     success(result) {
+      // 从服务器获得重新计算后的作业项
+      const { TaskItem } = result.data;
+
       callback();
       common.showSuccess();
 
       // 触发课程作业项信息变更事件
-      onfire.fire('change_item_detail', { taskItem });
+      onfire.fire('change_item_detail', { TaskItem });
     },
 
     fail(error) {
