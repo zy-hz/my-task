@@ -107,9 +107,6 @@ function groupItemByCourse(taskItems, courses) {
 
     course.TaskItems = getTaskItemsByCourse(taskItems, course);
     course.TaskItems.forEach(x => {
-      // 能删除
-      x.canRemove = false;
-
       // 显示用时
       x.DisplayTime = getTaskItemSpendDisplayTime(x.SpendSecond);
 
@@ -180,7 +177,7 @@ function onEditTaskItems(event) {
 
   op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
     var item = course.TaskItems[itemIndex];
-    item.canRemove = !item.canRemove;
+    item.EnableRemove = !item.EnableRemove;
   });
 }
 
@@ -250,9 +247,9 @@ function onTapItem(event) {
 
   op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
     var item = course.TaskItems[itemIndex];
-    if (item.canRemove) {
+    if (item.EnableRemove) {
       // 取消删除状态
-      item.canRemove = false;
+      item.EnableRemove = false;
     } else {
       //  导航到作业项细节页面
       var url = util.buildUrlWithObjectParams("/pages/taskItemDetail/taskItemDetail", item);

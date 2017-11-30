@@ -28,8 +28,8 @@
 
           <!--作业条目菜单区-->
           <view class="weui-cell__ft" wx:if="{{true}}">
-            <view class="task-item__info" hidden="{{item.canRemove}}">{{item.DisplayTime}}</view>
-            <view class="weui-badge remove_item" data-itemid="{{item.id}}" data-courseid="{{item.CourseId}}" bindtap="onRemoveTaskItem" hidden="{{item.canRemove == false}}">x</view>
+            <view class="task-item__info" hidden="{{item.EnableRemove == true}}">{{item.DisplayTime}}</view>
+            <view class="weui-badge remove_item" data-itemid="{{item.id}}" data-courseid="{{item.CourseId}}" bindtap="onRemoveTaskItem" hidden="{{item.EnableRemove == false}}">x</view>
           </view>
         </view>
 
