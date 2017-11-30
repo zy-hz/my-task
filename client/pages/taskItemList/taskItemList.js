@@ -150,8 +150,8 @@ function insertItem4Group(item4Course, taskItem) {
     common.showModel("没有发现对于对应的课程&{taskItem.CourseName}", error);
   }
   else {
-    item4Course[courseIndex].taskItems.push(taskItem);
-    item4Course[courseIndex].itemCount++;
+    item4Course[courseIndex].TaskItems.push(taskItem);
+    item4Course[courseIndex].ItemCount++;
   }
 
   return item4Course;
@@ -163,7 +163,7 @@ function onEditTaskItems(event) {
   if (itemid < 0 || courseid < 0) return;
 
   op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
-    var item = course.taskItems[itemIndex];
+    var item = course.TaskItems[itemIndex];
     item.canRemove = !item.canRemove;
   });
 }
@@ -181,7 +181,7 @@ function onRemoveTaskItem(event) {
     success() {
       op_Item4CourseGroup(thePage, itemid, courseid, function (itemIndex, course) {
         // 从数组中删除
-        course.taskItems.splice(itemIndex, 1);
+        course.TaskItems.splice(itemIndex, 1);
       });
 
       common.showSuccess();
@@ -203,7 +203,7 @@ function op_Item4CourseGroup(thePage, itemid, courseid, callback) {
   if (courseIndex < 0) return;
   var course = itemGroup[courseIndex];
 
-  var itemIndex = course.taskItems.findIndex(function (x) { return x.id == itemid; });
+  var itemIndex = course.TaskItems.findIndex(function (x) { return x.id == itemid; });
   if (itemIndex < 0) return;
 
   callback(itemIndex, course);
@@ -217,7 +217,7 @@ function onTapItem(event) {
   if (itemid < 0 || courseid < 0) return;
 
   op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
-    var item = course.taskItems[itemIndex];
+    var item = course.TaskItems[itemIndex];
     if (item.canRemove) {
       // 取消删除状态
       item.canRemove = false;
