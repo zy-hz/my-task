@@ -1,10 +1,7 @@
 <!--作业列表-->
 <view class="task-item__page">
   <!--页眉-->
-  <view class="task-item__hd">
-    <view class="task-item__title">{{TaskBlock.BlockName}} {{TaskBlock.FolderName}}</view>
-    <view class="task-item__desc"></view>
-  </view>
+
 
   <!--一份作业-->
   <view class="task-item__bd">
@@ -36,7 +33,7 @@
         <!--课程栏目底部-->
         <view class="weui-cell weui-cell_link">
           <view class="weui-cell__bd">
-            <input placeholder=" + 添加作业" id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{AddNewTaskPromotion}}" />
+            <input placeholder=" + " id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{AddNewTaskPromotion}}" />
           </view>
         </view>
 
@@ -46,5 +43,4 @@
   </view>
 
   <!--页脚-->
-  <view class="task-item__ft"></view>
 </view>
