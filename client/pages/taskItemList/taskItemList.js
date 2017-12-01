@@ -60,7 +60,7 @@ function createPageObject() {
     onfire.un(eventObj);
   };
 
-  obj.onTouchMove = onTouchMove;
+  obj.onTouchEnd = onTouchEnd;
   obj.onEditTaskItems = onEditTaskItems;
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.onRemoveTaskItem = onRemoveTaskItem;
@@ -296,6 +296,9 @@ function onTapTopBar(event) {
 }
 
 // 
-function onTouchMove(event) {
-  console.log(event);
+function onTouchEnd(event) {
+  if (this.data.IsExpand ) return;
+  
+  var action = anim.getExpandAction(this.data.IsExpand, 120);
+  this.setData({ ExpandAction: action, IsExpand: !this.data.IsExpand });
 }
