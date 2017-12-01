@@ -20,8 +20,8 @@
           <!--作业内容-->
           <view class="weui-cell__hd"></view>
           <view class="weui-cell__bd">{{index+1}}. {{item.ItemTitle}}
-            <icon class="weui-icon-radio" type="success_no_circle" size="16" hidden='{{item.IsCompleted == false}}'></icon>
-            <icon class="weui-icon-radio" type="info_circle" size="16" color='#e64340' hidden='{{item.IsRunning == false}}'></icon>
+            <icon class="weui-icon-radio" type="success_no_circle" size="18" hidden='{{item.IsCompleted == false}}'></icon>
+            <icon class="weui-icon-radio" type="info_circle" size="18" color='#e64340' hidden='{{item.IsRunning == false}}'></icon>
           </view>
 
           <!--作业条目菜单区-->
