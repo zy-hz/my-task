@@ -35,10 +35,7 @@ function createPageObject() {
     courses: {},
     folders: {},
 
-    currentFolder: { FolderName: "正在载入作业列表..." },
     taskBlock: {},
-    addNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
-
   };
 
   obj.onLoad = onLoad;
@@ -116,7 +113,7 @@ function init(thePage) {
     success(result) {
       const { folders, blocks, courses } = result.data;
 
-      thePage.setData({ currentFolder: folders[0], folders: folders });
+      thePage.setData({ folders: folders });
       thePage.setData({ courses: courses });
       thePage.setData({ blocks: blocks });
 
