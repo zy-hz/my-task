@@ -4,8 +4,9 @@
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
 
-.task-list__hd{
-  height: 1px;
+.task-list__hd {
+  height: 120px;
+  background-color: #2a5caa;
 }
 
 .task-list__ft {
@@ -17,4 +18,3 @@
   font-size: 14px;
   display: inline;
 }
-

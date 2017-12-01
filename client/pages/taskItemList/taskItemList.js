@@ -47,6 +47,8 @@ function createPageObject() {
     TaskItems: {},
     Item4Course: {},
     AddNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
+
+    TopBarAnimation:{},  // 顶部栏目动画
   };
 
   obj.onLoad = onLoad;
@@ -60,6 +62,7 @@ function createPageObject() {
   obj.onRemoveTaskItem = onRemoveTaskItem;
 
   obj.onTapItem = onTapItem;
+  obj.onTapTopBar = onTapTopBar;
 
   return obj;
 }
@@ -276,4 +279,18 @@ function getTaskItemSpendDisplayTime(sec) {
   dt.setTime(sec * 1000 + zone * 60 * 1000);
 
   return util.formatDate(dt, "H:mm");
+}
+
+//
+// 动画
+//
+
+// 顶部动画
+function onTopBarAnimation(isCollapse){
+
+}
+
+// 点击顶部栏目
+function onTapTopBar(event){
+
 }

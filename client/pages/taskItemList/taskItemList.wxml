@@ -1,7 +1,7 @@
 <!--作业列表-->
-<view class="task-list__page">
+<view class="task-list__page" animation="{{TopBarAnimation}}">
   <!--页眉-->
-  <view class="task-list__hd"></view>
+  <view class="task-list__hd" bindtap="onTapTopBar"></view>
 
   <!--一份作业-->
   <view>
