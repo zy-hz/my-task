@@ -11,14 +11,14 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#333",
-    "navigationBarTitleText": "腾讯云小程序解决方案",
+    "navigationBarBackgroundColor": "#2a5caa",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#ffffff",
-    "selectedColor": "#ff0000",
-    "backgroundColor": "#000000",
+    "color": "#2a5caa",
+    "selectedColor": "#2a5caa",
+    "backgroundColor": "#fffef9",
     "list": [
       {
         "pagePath": "pages/taskBlock/taskBlock",
