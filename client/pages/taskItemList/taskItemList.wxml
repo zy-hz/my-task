@@ -1,5 +1,5 @@
 <!--作业列表-->
-<view class="task-list__page" animation="{{TopBarAnimation}}">
+<view class="task-list__page" animation="{{ExpandAction}}" bindtouchmove="onTouchMove">
   <!--页眉-->
   <view class="task-list__hd" bindtap="onTapTopBar"></view>
 
@@ -7,7 +7,7 @@
   <view>
 
     <!--课程面板-->
-    <block wx:for="{{Item4Course}}" wx:key="*this">
+    <block wx:for="{{Item4Course}}" wx:key="{{item.id}}">
 
       <!--课程栏目头部-->
       <view class="weui-cells__title">{{item.CourseName}}</view>

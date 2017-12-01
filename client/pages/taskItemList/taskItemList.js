@@ -10,6 +10,8 @@ var common = require('../../common.js');
 // 引入工具脚本
 var util = require('../../utils.js');
 
+var anim = require('../../vendor/wetask-k12-sdk/lib/animation.js')
+
 // 注册事件
 var onfire = require("../../vendor/wetask-k12-sdk/lib/onfire.js");
 
@@ -48,7 +50,8 @@ function createPageObject() {
     Item4Course: {},
     AddNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
 
-    TopBarAnimation:{},  // 顶部栏目动画
+    // 工具页面展开
+    IsExpand: true,
   };
 
   obj.onLoad = onLoad;
@@ -57,6 +60,7 @@ function createPageObject() {
     onfire.un(eventObj);
   };
 
+  obj.onTouchMove = onTouchMove;
   obj.onEditTaskItems = onEditTaskItems;
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.onRemoveTaskItem = onRemoveTaskItem;
@@ -86,7 +90,7 @@ function onLoad(options) {
       wx.setNavigationBarTitle({
         title: `${TaskBlock.BlockName} ${TaskBlock.FolderName}`
       })
-      
+
       // 作业项目按照课程排序
       var item4Course = groupItemByCourse(TaskItems, Courses);
       thePage.setData({ TaskBlock, TaskItems, Courses, Item4Course: item4Course });
@@ -285,12 +289,13 @@ function getTaskItemSpendDisplayTime(sec) {
 // 动画
 //
 
-// 顶部动画
-function onTopBarAnimation(isCollapse){
-
+// 点击顶部栏目
+function onTapTopBar(event) {
+  var action = anim.getExpandAction(this.data.IsExpand, 120);
+  this.setData({ ExpandAction: action, IsExpand: !this.data.IsExpand });
 }
 
-// 点击顶部栏目
-function onTapTopBar(event){
-
+// 
+function onTouchMove(event) {
+  console.log(event);
 }
