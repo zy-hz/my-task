@@ -16,9 +16,9 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#2a5caa",
+    "color": "#b2b2b2",
     "selectedColor": "#2a5caa",
-    "backgroundColor": "#fffef9",
+    "backgroundColor": "#fffffb",
     "list": [
       {
         "pagePath": "pages/taskBlock/taskBlock",
