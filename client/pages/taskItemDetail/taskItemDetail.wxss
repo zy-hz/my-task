@@ -1,6 +1,6 @@
 .item-panel__hd {
   height: 250px;
-  background-color: #3297ed;
+  background-color: #2a5caa;
   text-align: center;
   color: #fff;
 }

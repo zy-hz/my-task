@@ -7,7 +7,8 @@
     "pages/introduce/introduce",
     "pages/createBlock/createBlock",
     "pages/taskItemList/taskItemList",
-    "pages/taskItemDetail/taskItemDetail"
+    "pages/taskItemDetail/taskItemDetail",
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,12 +26,8 @@
         "text": "作业"
       },
       {
-        "pagePath": "pages/index/index",
-        "text": "时间表"
-      },
-      {
-        "pagePath": "pages/chat/chat",
-        "text": "测试"
+        "pagePath": "pages/about/about",
+        "text": "我的"
       }
     ]
   }

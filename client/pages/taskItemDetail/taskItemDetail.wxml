@@ -1,6 +1,6 @@
 <!-- 作业项 细节头-->
 <view class="item-panel__hd">
-  <view class="item-course">{{TaskItem.CourseName}}</view>
+  <view class="item-course"></view>
   <view class="item-spend">
     <view class="item-spend__minute">{{DisplayTime.Hour}}:{{DisplayTime.Minute}}</view>
     <view class="item-spend__second ">.{{DisplayTime.Second}}</view>
@@ -10,7 +10,7 @@
 <!-- 作业项标题-->
 <view class="weui-flex ">
   <view class="weui-flex__item ">
-    <view class="item-title">{{TaskItem.ItemTitle}}</view>
+    <view class="item-title">【{{TaskItem.CourseName}}】{{TaskItem.ItemTitle}}</view>
   </view>
 </view>
 
