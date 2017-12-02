@@ -17,26 +17,7 @@ var onfire = require("../../vendor/wetask-k12-sdk/lib/onfire.js");
 
 // 用户保存当前页面引用
 var thatPage;
-
-// 当添加新作业块消息被传递时，做具体的事
-var eventObj = onfire.on('change_item_detail', function (data) {
-  console.log(data);
-  
-  // 判断是否为作业块对象
-  if (thatPage == null || data == null) return;
-
-  const { TaskItem } = data;
-  if (TaskItem == null) return;
-
-  // 更新作业项视图
-  op_Item4CourseGroup(thatPage, TaskItem.id, TaskItem.CourseId, function (itemIndex, course) {
-
-    // 显示用时
-    TaskItem.DisplayTime = getTaskItemSpendDisplayTime(TaskItem.SpendSecond);
-    course.TaskItems[itemIndex] = TaskItem;
-  })
-
-});
+var eventObj;
 
 // 页面函数，传入一个object对象作为参数
 Page(createPageObject());
@@ -58,7 +39,6 @@ function createPageObject() {
   obj.onLoad = onLoad;
   obj.onUnload = function (event) {
     onfire.un('change_item_detail');
-    onfire.un(eventObj);
   };
 
   obj.onTouchEnd = onTouchEnd;
@@ -68,6 +48,7 @@ function createPageObject() {
 
   obj.onTapItem = onTapItem;
   obj.onTapTopBar = onTapTopBar;
+
 
   return obj;
 }
@@ -80,8 +61,10 @@ function onLoad(options) {
   var thePage = this;
   thatPage = this;
 
-  common.showBusy("载入作业");
+  // 当添加新作业块消息被传递时，做具体的事
+  eventObj = createEventObject();
 
+  common.showBusy("载入作业");
   wetask.getTaskItems({
     BlockId: BlockId,
 
@@ -286,6 +269,28 @@ function getTaskItemSpendDisplayTime(sec) {
   return util.formatDate(dt, "H:mm");
 }
 
+// 创建事件对象
+function createEventObject(){
+  return onfire.on('change_item_detail', function (data) {
+    console.log(data);
+
+    // 判断是否为作业块对象
+    if (thatPage == null || data == null) return;
+
+    const { TaskItem } = data;
+    if (TaskItem == null) return;
+
+    // 更新作业项视图
+    op_Item4CourseGroup(thatPage, TaskItem.id, TaskItem.CourseId, function (itemIndex, course) {
+
+      // 显示用时
+      TaskItem.DisplayTime = getTaskItemSpendDisplayTime(TaskItem.SpendSecond);
+      course.TaskItems[itemIndex] = TaskItem;
+    })
+
+  });
+}
+
 //
 // 动画
 //
@@ -298,8 +303,8 @@ function onTapTopBar(event) {
 
 // 
 function onTouchEnd(event) {
-  if (this.data.IsExpand ) return;
-  
+  if (this.data.IsExpand) return;
+
   var action = anim.getExpandAction(this.data.IsExpand, 120);
   this.setData({ ExpandAction: action, IsExpand: !this.data.IsExpand });
 }
