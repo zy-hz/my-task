@@ -20,7 +20,8 @@ var thatPage;
 
 // 当添加新作业块消息被传递时，做具体的事
 var eventObj = onfire.on('change_item_detail', function (data) {
-
+  console.log(data);
+  
   // 判断是否为作业块对象
   if (thatPage == null || data == null) return;
 

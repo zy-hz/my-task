@@ -120,6 +120,7 @@ function recordTime(taskItem, timeType, callback) {
     success(result) {
       // 从服务器获得重新计算后的作业项
       const { TaskItem } = result.data;
+      console.log('fire');
 
       // 触发课程作业项信息变更事件
       onfire.fire('change_item_detail', { TaskItem });
