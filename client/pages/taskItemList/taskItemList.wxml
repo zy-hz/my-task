@@ -10,7 +10,7 @@
     <block wx:for="{{Item4Course}}" wx:key="{{item.id}}">
 
       <!--课程栏目头部-->
-      <view class="weui-cells__title" bindtouchend="onTouchEnd">{{item.CourseName}}</view>
+      <view class="weui-cells__title">{{item.CourseName}}</view>
 
       <!--作业列表区-->
       <view class="weui-cells weui-cells_after-title">

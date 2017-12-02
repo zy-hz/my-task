@@ -9,6 +9,10 @@
   background-color: #2a5caa;
 }
 
+.task-list__bd{
+
+}
+
 .task-list__ft {
   padding-bottom: 10px;
   text-align: center;

@@ -41,7 +41,6 @@ function createPageObject() {
     onfire.un('change_item_detail');
   };
 
-  obj.onTouchEnd = onTouchEnd;
   obj.onEditTaskItems = onEditTaskItems;
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.onRemoveTaskItem = onRemoveTaskItem;
@@ -297,14 +296,6 @@ function createEventObject(){
 
 // 点击顶部栏目
 function onTapTopBar(event) {
-  var action = anim.getExpandAction(this.data.IsExpand, 120);
-  this.setData({ ExpandAction: action, IsExpand: !this.data.IsExpand });
-}
-
-// 
-function onTouchEnd(event) {
-  if (this.data.IsExpand) return;
-
   var action = anim.getExpandAction(this.data.IsExpand, 120);
   this.setData({ ExpandAction: action, IsExpand: !this.data.IsExpand });
 }
