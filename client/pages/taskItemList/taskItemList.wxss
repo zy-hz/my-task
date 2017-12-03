@@ -5,7 +5,7 @@
 }
 
 .task-list__hd {
-  height: 120px;
+  height: 0px;
   background-color: #2a5caa;
 }
 
