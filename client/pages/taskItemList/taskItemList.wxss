@@ -5,17 +5,18 @@
 }
 
 .task-list__hd {
-  height: 0px;
-  background-color: #2a5caa;
-}
-
-.task-list__bd{
-
+  height: 1px;
 }
 
 .task-list__ft {
   padding-bottom: 10px;
   text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #2a5caa;
+  color: #fffffb;
+  z-index: 999;
 }
 
 .task-item__info {

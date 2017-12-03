@@ -1,7 +1,7 @@
 <!--作业列表-->
-<view class="task-list__page" animation="{{ExpandAction}}" >
+<view class="task-list__page" animation="{{ExpandAction}}">
   <!--页眉-->
-  <view class="task-list__hd" bindtap="onTapTopBar"></view>
+  <view class="task-list__hd"></view>
 
   <!--一份作业-->
   <view>
@@ -28,7 +28,7 @@
           <view class="weui-cell__ft">
 
             <view class="task-item__info" hidden="{{item.EnableRemove == true}}">{{item.DisplayTime}}</view>
-            <icon class="weui-icon-radio" type="clear"  size="20"  color='#e64340' data-itemid="{{item.id}}" data-courseid="{{item.CourseId}}" bindtap="onRemoveTaskItem" hidden="{{item.EnableRemove == false}}"></icon>
+            <icon class="weui-icon-radio" type="clear" size="20" color='#e64340' data-itemid="{{item.id}}" data-courseid="{{item.CourseId}}" bindtap="onRemoveTaskItem" hidden="{{item.EnableRemove == false}}"></icon>
           </view>
         </view>
 
@@ -45,4 +45,28 @@
   </view>
 
   <!--页脚-->
+  <view class='task-list__ft'>
+    <view class="weui-flex">
+      <view class="weui-flex__item">
+          <view class="weui-grid__icon">
+            <icon class="weui-icon-radio" type="clear" size="20"></icon>
+          </view>
+          <view class="weui-grid__label">Grid</view>
+      </view>
+
+      <view class="weui-flex__item">
+          <view class="weui-grid__icon">
+            <icon class="weui-icon-radio" type="clear" size="20"></icon>
+          </view>
+          <view class="weui-grid__label">Grid</view>
+      </view>
+
+      <view class="weui-flex__item">
+        <view class="placeholder">weui</view>
+      </view>
+      <view class="weui-flex__item">
+        <view class="placeholder">weui</view>
+      </view>
+    </view>
+  </view>
 </view>
