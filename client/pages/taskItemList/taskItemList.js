@@ -333,8 +333,9 @@ function onTouchMove(event) {
   if (!this.data.EnablePullDown) return;
 
   var newPos = event.changedTouches[0].pageY;
-  if (this.data.PullDownPos == 0) this.data.PullDownPos = newPos;
+  if (newPos < this.data.PullDownPos) return;
 
+  if (this.data.PullDownPos == 0) this.data.PullDownPos = newPos;
   var step = newPos - this.data.PullDownPos;
 
   var anim = wx.createAnimation({
