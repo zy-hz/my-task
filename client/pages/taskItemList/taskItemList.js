@@ -326,36 +326,45 @@ function onTouchStart(event) {
     }
   }
 
-  console.log("is enablePullDown = " + enablePullDown);
   this.data.EnablePullDown = enablePullDown;
 }
 
 function onTouchMove(event) {
   if (!this.data.EnablePullDown) return;
 
-  var newPos = event.changedTouches[0].pageY;
+  var newPos = event.touches[0].pageY;
+  var oldPos = this.data.PullDownPos;
 
-  if (newPos < this.data.PullDownPos) {
-    this.data.EnablePullDown = false;
+  if (oldPos == 0){
+    // 这是第一次滑动
+    this.data.PullDownPos = newPos;
     return;
   }
 
-  if (this.data.PullDownPos == 0) this.data.PullDownPos = newPos;
-  var step = newPos - this.data.PullDownPos;
+  console.log(`newPos = ${newPos} , oldPos = ${oldPos}`);
+  console.log(event);
+
+  if (newPos < oldPos) {
+    stopPullDown(this);
+    return;
+  }
 
   var anim = wx.createAnimation({
     duration: 1000,
   });
 
-  anim.translateY(step).step();
+  anim.translateY(0).step();
 
-  this.setData({ ExpandAction: anim.export(), PullDownPos: step });
-
-  console.log(event);
+  this.setData({ ExpandAction: anim.export(), PullDownPos: newPos });
 }
 
 function onTouchEnd(event) {
   if (!this.data.EnablePullDown) return;
-  this.data.IsExpand = true;
-  this.data.PullDownPos = false;
+  stopPullDown(this);
+}
+
+function stopPullDown(thePage) {
+  thePage.data.EnablePullDown = false;
+  thePage.data.IsExpand = true;
+  thePage.data.PullDownPos = 0;
 }
