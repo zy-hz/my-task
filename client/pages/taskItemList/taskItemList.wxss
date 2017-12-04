@@ -5,10 +5,11 @@
 }
 
 .task-list__hd {
-  height: 120px;
+  height: 1px;
 }
 
 .task-list__ft {
+  height: 120rpx;
   text-align: center;
 }
 
@@ -17,16 +18,26 @@
 }
 
 .custom_tab {
-  top: 0;
+  bottom: 0;
   position: fixed;
-  height: 120px;
-  border-bottom: 1px solid #dcdcdc;
+  height: 120rpx;
+  border-top: 1px solid #dcdcdc;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   font-size: 28rpx;
-  background-color: #2a5caa;
+  background-color: #fffffb;
   z-index: 999;
+}
+
+.custom_tab .weui-cell {
+  width: 100%;
+}
+
+.tab_item_img {
+  width: 64rpx;
+  height: 64rpx;
+  padding: 0 25rpx 0 25rpx;
 }

@@ -1,10 +1,6 @@
-<import src='../../vendor/tab-custom/tab.wxml' />
-
 <!--作业列表-->
-<view class="task-list__page" animation="{{ExpandAction}}" bindtouchstart='onTouchStart' bindtouchmove='onTouchMove' bindtouchend='onTouchEnd'>
-  <!-- 工具栏面板-->
-  <view class="custom_tab" bindtap='onTapTopBar'></view>
-  
+<view class="task-list__page" animation="{{ExpandAction}}">
+
   <!--页眉-->
   <view class="task-list__hd"></view>
 
@@ -50,4 +46,17 @@
   </view>
 
   <!--页脚-->
+  <view class='task-list__ft'></view>
+</view>
+
+<!-- 工具栏面板-->
+<view class="custom_tab">
+  <view class="weui-cell">
+    <view class="weui-cell__hd"></view>
+    <view class='weui-cell__bd'></view>
+    <view class="weui-cell__ft">
+      <image  class="tab_item_img" src='/images/edit_32.png'></image>
+      <image  class="tab_item_img" src='/images/list_32.png'></image>
+    </view>
+  </view>
 </view>
