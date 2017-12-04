@@ -1,3 +1,5 @@
+import tab from '../../vendor/tab-custom/tab.js'
+
 // 引入 wetask SDK
 var wetask = require('../../vendor/wetask-k12-sdk/index');
 
@@ -32,8 +34,7 @@ function createPageObject() {
     Item4Course: {},
     AddNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
 
-    // 工具页面展开
-    IsExpand: true,
+    chose_index: tab.chose_index,
   };
 
   obj.onLoad = onLoad;
@@ -48,6 +49,11 @@ function createPageObject() {
   obj.onTapItem = onTapItem;
   obj.onTapTopBar = onTapTopBar;
 
+  obj.tab_chose = function (e) {
+    this.setData({
+      chose_index: tab.tab_ch(e)
+    })
+  }
 
   return obj;
 }

@@ -1,3 +1,5 @@
+<import src='../../vendor/tab-custom/tab.wxml' /> 
+
 <!--作业列表-->
 <view class="task-list__page" animation="{{ExpandAction}}">
   <!--页眉-->
@@ -45,28 +47,7 @@
   </view>
 
   <!--页脚-->
-  <view class='task-list__ft'>
-    <view class="weui-flex">
-      <view class="weui-flex__item">
-          <view class="weui-grid__icon">
-            <icon class="weui-icon-radio" type="clear" size="20"></icon>
-          </view>
-          <view class="weui-grid__label">Grid</view>
-      </view>
-
-      <view class="weui-flex__item">
-          <view class="weui-grid__icon">
-            <icon class="weui-icon-radio" type="clear" size="20"></icon>
-          </view>
-          <view class="weui-grid__label">Grid</view>
-      </view>
-
-      <view class="weui-flex__item">
-        <view class="placeholder">weui</view>
-      </view>
-      <view class="weui-flex__item">
-        <view class="placeholder">weui</view>
-      </view>
-    </view>
-  </view>
+  <template is="tab" data="{{chose_index}}"></template>
 </view>
+
+

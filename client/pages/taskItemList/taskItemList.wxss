@@ -12,14 +12,12 @@
   padding-bottom: 10px;
   text-align: center;
   position: fixed;
-  bottom: 0;
-  width: 100%;
   background-color: #2a5caa;
-  color: #fffffb;
-  z-index: 999;
 }
 
 .task-item__info {
   font-size: 14px;
   display: inline;
 }
+
+@import "../../vendor/tab-custom/tab.wxss";
