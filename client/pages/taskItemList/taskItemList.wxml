@@ -1,7 +1,10 @@
-<import src='../../vendor/tab-custom/tab.wxml' /> 
+<import src='../../vendor/tab-custom/tab.wxml' />
 
 <!--作业列表-->
-<view class="task-list__page" animation="{{ExpandAction}}">
+<view class="task-list__page" animation="{{ExpandAction}}" bindtouchstart='onTouchStart' bindtouchmove='onTouchMove' bindtouchend='onTouchEnd'>
+  <!-- 工具栏面板-->
+  <view class="custom_tab" bindtap='onTapTopBar'></view>
+  
   <!--页眉-->
   <view class="task-list__hd"></view>
 
@@ -47,7 +50,4 @@
   </view>
 
   <!--页脚-->
-  <template is="tab" data="{{chose_index}}"></template>
 </view>
-
-

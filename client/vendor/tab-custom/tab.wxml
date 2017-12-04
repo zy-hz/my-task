@@ -1,30 +1,30 @@
 <template name="tab">
-    <view  class="custom_tab">
-<!--首页-->
+  <view class="custom_tab">
+    <!--首页-->
     <view class="custom_tab_item" data-id="0" bindtap="tab_chose">
-        <image class="tab_item_img" src="{{chose_index == 0 ? '../../images/tab_home_select_icon.png' : '../../images/tab_home_unselect_icon.png'}}"></image>
-        <text class="tab_item_title {{chose_index == 0 ? 'select_title' : ''}}">首页</text>
+      <image class="tab_item_img" src="{{chose_index == 0 ? '../../images/tab_home_select_icon.png' : '../../images/tab_home_unselect_icon.png'}}"></image>
+      <text class="tab_item_title {{chose_index == 0 ? 'select_title' : ''}}">首页</text>
     </view>
     <!--动态-->
-     <view class="custom_tab_item" data-id="1" bindtap="tab_chose">
-        <image class="tab_item_img" src="{{chose_index == 1 ? '../../images/tab_dynamic_select_icon.png' : '../../images/tab_dynamic_unselect_icon.png'}}"></image>
-        <text class="tab_item_title {{chose_index == 1 ? 'select_title' : ''}}">动态</text>
+    <view class="custom_tab_item" data-id="1" bindtap="tab_chose">
+      <image class="tab_item_img" src="{{chose_index == 1 ? '../../images/tab_dynamic_select_icon.png' : '../../images/tab_dynamic_unselect_icon.png'}}"></image>
+      <text class="tab_item_title {{chose_index == 1 ? 'select_title' : ''}}">动态</text>
     </view>
     <!--发布-->
     <view class="custom_tab_item" data-id="2" bindtap="tab_chose">
-        <image class="public_tab" src="../../images/tab_publish_icon.png"></image>
-        <text class="public_title {{chose_index == 2 ? 'select_title' : ''}}">发布</text>
+      <image class="public_tab" src="../../images/tab_publish_icon.png"></image>
+      <text class="public_title {{chose_index == 2 ? 'select_title' : ''}}">发布</text>
     </view>
     <!--消息-->
     <view class="custom_tab_item" data-id="3" bindtap="tab_chose">
-        <image class="tab_item_img" src="{{chose_index == 3 ? '../../images/tab_massage_selected_icon.png' : '../../images/tab_massage_unselect_icon.png'}}"></image>
-        <text class="tab_item_title {{chose_index == 3 ? 'select_title' : ''}}">消息</text>
+      <image class="tab_item_img" src="{{chose_index == 3 ? '../../images/tab_massage_selected_icon.png' : '../../images/tab_massage_unselect_icon.png'}}"></image>
+      <text class="tab_item_title {{chose_index == 3 ? 'select_title' : ''}}">消息</text>
     </view>
     <!--我的-->
     <view class="custom_tab_item" data-id="4" bindtap="tab_chose">
-        <image class="tab_item_img" src="{{chose_index == 4 ? '../../images/tab_mine_select_icon.png' : '../../images/tab_mine_unselect_icon.png'}}"></image>
-        <text class="tab_item_title {{chose_index == 4 ? 'select_title' : ''}}">我的</text>
+      <image class="tab_item_img" src="{{chose_index == 4 ? '../../images/tab_mine_select_icon.png' : '../../images/tab_mine_unselect_icon.png'}}"></image>
+      <text class="tab_item_title {{chose_index == 4 ? 'select_title' : ''}}">我的</text>
     </view>
-</view>
+  </view>
 
 </template>

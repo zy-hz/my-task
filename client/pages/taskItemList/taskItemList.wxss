@@ -1,23 +1,32 @@
 .task-list__page {
   background-color: #f8f8f8;
-  font-size: 16px;
+  font-size: 16rpx;
   font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
 
 .task-list__hd {
-  height: 1px;
+  height: 120px;
 }
 
 .task-list__ft {
-  padding-bottom: 10px;
   text-align: center;
-  position: fixed;
-  background-color: #2a5caa;
 }
 
 .task-item__info {
-  font-size: 14px;
   display: inline;
 }
 
-@import "../../vendor/tab-custom/tab.wxss";
+.custom_tab {
+  top: 0;
+  position: fixed;
+  height: 120px;
+  border-bottom: 1px solid #dcdcdc;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 28rpx;
+  background-color: #2a5caa;
+  z-index: 999;
+}

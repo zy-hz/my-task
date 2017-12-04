@@ -1,5 +1,3 @@
-import tab from '../../vendor/tab-custom/tab.js'
-
 // 引入 wetask SDK
 var wetask = require('../../vendor/wetask-k12-sdk/index');
 
@@ -34,7 +32,14 @@ function createPageObject() {
     Item4Course: {},
     AddNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
 
-    chose_index: tab.chose_index,
+    // 是否扩展
+    IsExpand: true,
+    // 是否滚到到顶部
+    IsScrollTop: true,
+    // 启动下拉
+    EnablePullDown: false,
+    // 下拉的位置
+    PullDownPos: 0,
   };
 
   obj.onLoad = onLoad;
@@ -42,18 +47,18 @@ function createPageObject() {
     onfire.un('change_item_detail');
   };
 
+
   obj.onEditTaskItems = onEditTaskItems;
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.onRemoveTaskItem = onRemoveTaskItem;
-
   obj.onTapItem = onTapItem;
-  obj.onTapTopBar = onTapTopBar;
 
-  obj.tab_chose = function (e) {
-    this.setData({
-      chose_index: tab.tab_ch(e)
-    })
-  }
+  // 工具栏面板事件
+  obj.onTapTopBar = onTapTopBar;
+  obj.onTouchStart = onTouchStart;
+  obj.onTouchMove = onTouchMove;
+  obj.onTouchEnd = onTouchEnd;
+  obj.onPageScroll = onPageScroll;
 
   return obj;
 }
@@ -275,7 +280,7 @@ function getTaskItemSpendDisplayTime(sec) {
 }
 
 // 创建事件对象
-function createEventObject(){
+function createEventObject() {
   return onfire.on('change_item_detail', function (data) {
     console.log(data);
 
@@ -304,4 +309,44 @@ function createEventObject(){
 function onTapTopBar(event) {
   var action = anim.getExpandAction(this.data.IsExpand, 120);
   this.setData({ ExpandAction: action, IsExpand: !this.data.IsExpand });
+}
+
+function onPageScroll(event) {
+  this.data.IsScrollTop = event.scrollTop == 0 ? true : false;
+}
+
+function onTouchStart(event) {
+  var enablePullDown = false;
+
+  // 在扩展模式下，不用下下拉
+  if (!this.data.IsExpand) {
+    // 页面滚动到定点
+    if (this.data.IsScrollTop) {
+      enablePullDown = true;
+    }
+  }
+
+  this.data.EnablePullDown = enablePullDown;
+}
+
+function onTouchMove(event) {
+  if (!this.data.EnablePullDown) return;
+
+  var newPos = event.changedTouches[0].pageY;
+  if (this.data.PullDownPos == 0) this.data.PullDownPos = newPos;
+
+  var step = newPos - this.data.PullDownPos;
+
+  var anim = wx.createAnimation({
+    duration: 1000,
+  });
+
+  anim.translateY(step).step();
+
+  this.setData({ ExpandAction: anim.export(), PullDownPos: step });
+}
+
+function onTouchEnd(event) {
+  if (!this.data.EnablePullDown) return;
+  this.data.IsExpand = true;
 }
