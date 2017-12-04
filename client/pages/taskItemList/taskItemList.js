@@ -326,6 +326,7 @@ function onTouchStart(event) {
     }
   }
 
+  console.log("is enablePullDown = " + enablePullDown);
   this.data.EnablePullDown = enablePullDown;
 }
 
@@ -333,7 +334,11 @@ function onTouchMove(event) {
   if (!this.data.EnablePullDown) return;
 
   var newPos = event.changedTouches[0].pageY;
-  if (newPos < this.data.PullDownPos) return;
+
+  if (newPos < this.data.PullDownPos) {
+    this.data.EnablePullDown = false;
+    return;
+  }
 
   if (this.data.PullDownPos == 0) this.data.PullDownPos = newPos;
   var step = newPos - this.data.PullDownPos;
@@ -345,9 +350,12 @@ function onTouchMove(event) {
   anim.translateY(step).step();
 
   this.setData({ ExpandAction: anim.export(), PullDownPos: step });
+
+  console.log(event);
 }
 
 function onTouchEnd(event) {
   if (!this.data.EnablePullDown) return;
   this.data.IsExpand = true;
+  this.data.PullDownPos = false;
 }
