@@ -297,7 +297,7 @@ function changeEditMode(thePage) {
   if (mode == null) mode = true; // 表示当前编辑模式为开启状态
 
   var anim = wx.createAnimation({
-    duration: 500,
+    duration: 400,
   });
 
   if (mode) {

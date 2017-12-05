@@ -58,7 +58,7 @@
     <view class="weui-cell__hd"></view>
     <view class='weui-cell__bd'></view>
     <view class="weui-cell__ft">
-      <image class="tab_item_img" src='/images/edit_32.png' bindtap='onChangeEditMode'></image>
+      <image class="tab_item_img" src="{{EnableEditMode == false ? '/images/edit_64_a.png' : '/images/edit_64_b.png' }}" bindtap='onChangeEditMode'></image>
       <image class="tab_item_img" src='/images/list_32.png'></image>
     </view>
   </view>
