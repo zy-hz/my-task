@@ -1,12 +1,7 @@
 <!--作业列表-->
 <view class="task-list">
+
   <!--页眉-->
-  <view class="task-list__hd weui-cell weui-cell_access">
-    <view class="weui-cell__bd">作业列表</view>
-    <view class="weui-cell__ft " style="font-size: 0">
-      <image class="wetask-toolbar-button" src="/images/add_32.png" bindtap="doAddTaskBlock"></image>
-    </view>
-  </view>
 
   <!--作业块列表-->
   <view class="weui-cells weui-cells_after-title block-list__bd">
@@ -27,5 +22,8 @@
 
   </view>
 
+</view>
 
+<view class="custom_tab ">
+  <image class="wetask-toolbar-button" src="/images/add_64.png" bindtap="doAddTaskBlock"></image>
 </view>

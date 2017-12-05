@@ -19,3 +19,15 @@
 .course-panel__ft input{
   width: 100%;
 }
+
+.custom_tab {
+  bottom: 50rpx;
+  right: 50rpx;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 28rpx;
+  z-index: 999;
+}
