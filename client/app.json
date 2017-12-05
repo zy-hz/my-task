@@ -15,20 +15,6 @@
     "navigationBarBackgroundColor": "#2a5caa",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "white"
-  },
-  "tabBar": {
-    "color": "#b2b2b2",
-    "selectedColor": "#2a5caa",
-    "backgroundColor": "#fffffb",
-    "list": [
-      {
-        "pagePath": "pages/taskBlock/taskBlock",
-        "text": "作业"
-      },
-      {
-        "pagePath": "pages/about/about",
-        "text": "我的"
-      }
-    ]
   }
+
 }

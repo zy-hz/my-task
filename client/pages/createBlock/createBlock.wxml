@@ -1,28 +1,6 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
-  <view class="page__hd">
-    <view class="page__title">新建作业</view>
-    <view class="page__desc"></view>
-  </view>
   <view class="page__bd">
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
-
-
-    <view class="weui-cells__title">作业类型</view>
-    <view class="weui-cells weui-cells_after-title">
-      <radio-group bindchange="folderChange">
-        <label class="weui-cell weui-check__label" wx:for="{{folders}}" wx:key="value">
-          <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}" />
-
-          <view class="weui-cell__bd">{{item.FolderName}}</view>
-          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
-            <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
-          </view>
-        </label>
-      </radio-group>
-      <view class="weui-cell weui-cell_link">
-        <view class="weui-cell__bd">添加更多</view>
-      </view>
-    </view>
 
 
     <view class="weui-cells__title">作业时间</view>
@@ -49,8 +27,27 @@
       </view>
     </view>
 
+    <view class="weui-cells__title">作业类型</view>
+    <view class="weui-cells weui-cells_after-title">
+      <radio-group bindchange="folderChange">
+        <label class="weui-cell weui-check__label" wx:for="{{folders}}" wx:key="value">
+          <radio class="weui-check" value="{{item.id}}" checked="{{item.checked}}" />
+
+          <view class="weui-cell__bd">{{item.FolderName}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-radio" wx:if="{{item.checked}}">
+            <icon class="weui-icon-radio" type="success_no_circle" size="16"></icon>
+          </view>
+        </label>
+      </radio-group>
+      <view class="weui-cell weui-cell_link" hidden='true'>
+        <view class="weui-cell__bd">添加更多</view>
+      </view>
+    </view>
+
+
     <view class="weui-btn-area">
       <button class="weui-btn" type="primary" bindtap="doCreateTaskBlock">确定</button>
+      <button class="weui-btn" type="default" bindtap="doCancelCreate">取消</button>
     </view>
   </view>
 </view>

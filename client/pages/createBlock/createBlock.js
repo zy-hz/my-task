@@ -32,12 +32,18 @@ function createPageObject() {
 
   obj.onLoad = onLoad;
   obj.doCreateTaskBlock = doCreateTaskBlock;
+  obj.doCancelCreate = doCancelCreate;
+
   return obj;
 }
 
 // 页面载入
 function onLoad(e) {
   var thePage = this;
+  wx.setNavigationBarTitle({
+    title: '新建作业',
+  })
+
   common.showBusy("预备数据");
 
   wetask.getTaskFolders({
@@ -152,4 +158,9 @@ function bindDateChange(e) {
 // 创建一份作业
 function doCreateBlock(e) {
 
+}
+
+// 取消
+function doCancelCreate() {
+  wx.navigateBack({});
 }

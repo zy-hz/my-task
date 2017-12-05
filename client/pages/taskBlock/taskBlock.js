@@ -42,7 +42,7 @@ function createPageObject() {
   obj.onUnload = function (event) {
     onfire.un('add_new_block');
     onfire.un(eventObj);
-   };
+  };
 
   obj.doAddTaskBlock = doAddTaskBlock;
 
@@ -55,6 +55,10 @@ function createPageObject() {
 function onLoad(options) {
   options.thePage = this;
   thatPage = this;
+  
+  wx.setNavigationBarTitle({
+    title: '作业列表',
+  })
 
   // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
   wx.getSetting({

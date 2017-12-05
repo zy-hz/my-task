@@ -21,8 +21,8 @@
 }
 
 .custom_tab {
-  bottom: 50rpx;
-  right: 50rpx;
+  bottom: 40rpx;
+  right: 40rpx;
   position: fixed;
   display: flex;
   flex-direction: row;
