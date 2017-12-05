@@ -2,13 +2,13 @@
 <view class="task-list__page">
 
   <!--页眉-->
-  <view class="task-list__hd"></view>
-
+  <view class='task-list__hd'></view>
+  
   <!--一份作业-->
-  <view>
+  <view class='course__hd'>
 
     <!--课程面板-->
-    <block wx:for="{{Item4Course}}" wx:key="{{item.id}}">
+    <view wx:for="{{Item4Course}}" wx:key="{{item.id}}" hidden="{{item.FolderCourseAction}}">
 
       <!--课程栏目头部-->
       <view class="weui-cells__title">{{item.CourseName}}</view>
@@ -34,7 +34,7 @@
         </view>
 
         <!--课程栏目底部-->
-        <view animation="{{FolderInputAction}}">
+        <view animation="{{item.FolderInputAction}}">
           <view class="weui-cell weui-cell_link">
             <view class="weui-cell__bd">
               <input placeholder=" + " id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{AddNewTaskPromotion}}" />
@@ -45,7 +45,9 @@
         <!--结束：作业列表区-->
       </view>
 
-    </block>
+      <!--结束：课程面板区-->
+    </view>
+
   </view>
 
   <!--页脚-->
@@ -59,7 +61,6 @@
     <view class='weui-cell__bd'></view>
     <view class="weui-cell__ft">
       <image class="tab_item_img" src="{{EnableEditMode == false ? '/images/edit_64_a.png' : '/images/edit_64_b.png' }}" bindtap='onChangeEditMode'></image>
-      <image class="tab_item_img" src='/images/list_32.png'></image>
     </view>
   </view>
 </view>

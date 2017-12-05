@@ -39,6 +39,10 @@ function onLoad(options) {
     return;
   }
 
+  wx.setNavigationBarTitle({
+    title: '计时',
+  })
+
   // 如果是中途离开，计算离开时间
   if (taskItem.IsRunning) taskItem.SpendSecond = taskItem.SpendSecond + calcuateLeaveTime(taskItem.LastDoTime);
 

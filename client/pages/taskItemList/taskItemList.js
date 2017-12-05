@@ -296,18 +296,33 @@ function changeEditMode(thePage) {
   var mode = thePage.data.EnableEditMode;
   if (mode == null) mode = true; // 表示当前编辑模式为开启状态
 
+  var item4Course = thePage.data.Item4Course;
+  for (var i = 0; i < item4Course.length; i++) {
+    var course = item4Course[i];
+    if (course.ItemCount > 0) {
+      // 设置新建的折叠
+      course.FolderInputAction = createFolderAction(mode, 42).export();
+    }
+    else {
+      // 设置课程的折叠
+      course.FolderCourseAction = mode;
+    }
+  }
+
+  thePage.setData({ Item4Course: item4Course, EnableEditMode: !mode });
+}
+
+function createFolderAction(mode, ty) {
   var anim = wx.createAnimation({
     duration: 400,
   });
 
   if (mode) {
-    anim.height(42).opacity(0).step().height(0).step();
-
+    anim.height(ty).opacity(0).step().height(0).step();
   }
   else {
-    anim.height(42).step().opacity(1).step();
+    anim.height(ty).step().opacity(1).step();
   }
-
-  thePage.setData({ FolderInputAction: anim.export(), EnableEditMode: !mode });
+  return anim;
 }
 

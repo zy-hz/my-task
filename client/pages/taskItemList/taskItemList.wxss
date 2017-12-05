@@ -17,6 +17,10 @@
   display: inline;
 }
 
+.course__hd {
+  background-color: #f8f8f8;
+}
+
 .custom_tab {
   bottom: 0;
   position: fixed;
