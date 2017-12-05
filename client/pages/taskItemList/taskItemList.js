@@ -167,10 +167,13 @@ function doAddNewTaskItem(event) {
 
 }
 
-// 编辑作业项事件
+// 编辑作业项事件,显示删除按钮
 function onEditTaskItems(event) {
   const { itemid, courseid } = event.currentTarget.dataset;
   if (itemid < 0 || courseid < 0) return;
+
+  // 没有启动编辑模式
+  if (this.data.EnableEditMode == false) return;
 
   op_Item4CourseGroup(this, itemid, courseid, function (itemIndex, course) {
     var item = course.TaskItems[itemIndex];
@@ -250,7 +253,6 @@ function onTapItem(event) {
     } else {
       //  导航到作业项细节页面
       var url = util.buildUrlWithObjectParams("/pages/taskItemDetail/taskItemDetail", item);
-      //var url = `/pages/taskItemDetail/taskItemDetail?ItemId=${item.id}`;
       wx.navigateTo({ url });
     }
 
