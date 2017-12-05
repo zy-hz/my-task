@@ -32,14 +32,6 @@ function createPageObject() {
     Item4Course: {},
     AddNewTaskPromotion: "",  // 添加作业的提示文字，为空的时候，可以出现提示 “添加作业”
 
-    // 是否扩展
-    IsExpand: true,
-    // 是否滚到到顶部
-    IsScrollTop: true,
-    // 启动下拉
-    EnablePullDown: false,
-    // 下拉的位置
-    PullDownPos: 0,
   };
 
   obj.onLoad = onLoad;
@@ -54,11 +46,7 @@ function createPageObject() {
   obj.onTapItem = onTapItem;
 
   // 工具栏面板事件
-  obj.onTapTopBar = onTapTopBar;
-  obj.onTouchStart = onTouchStart;
-  obj.onTouchMove = onTouchMove;
-  obj.onTouchEnd = onTouchEnd;
-  obj.onPageScroll = onPageScroll;
+  obj.onChangeEditMode = function (event) { changeEditMode(this) };
 
   return obj;
 }
@@ -302,69 +290,24 @@ function createEventObject() {
 }
 
 //
-// 动画
+// 工具面板事件
 //
-
-// 点击顶部栏目
-function onTapTopBar(event) {
-  var action = anim.getExpandAction(this.data.IsExpand, 120);
-  this.setData({ ExpandAction: action, IsExpand: !this.data.IsExpand });
-}
-
-function onPageScroll(event) {
-  this.data.IsScrollTop = event.scrollTop == 0 ? true : false;
-}
-
-function onTouchStart(event) {
-  var enablePullDown = false;
-
-  // 在扩展模式下，不用下下拉
-  if (!this.data.IsExpand) {
-    // 页面滚动到定点
-    if (this.data.IsScrollTop) {
-      enablePullDown = true;
-    }
-  }
-
-  this.data.EnablePullDown = enablePullDown;
-}
-
-function onTouchMove(event) {
-  if (!this.data.EnablePullDown) return;
-
-  var newPos = event.touches[0].pageY;
-  var oldPos = this.data.PullDownPos;
-
-  if (oldPos == 0){
-    // 这是第一次滑动
-    this.data.PullDownPos = newPos;
-    return;
-  }
-
-  console.log(`newPos = ${newPos} , oldPos = ${oldPos}`);
-  console.log(event);
-
-  if (newPos < oldPos) {
-    stopPullDown(this);
-    return;
-  }
+function changeEditMode(thePage) {
+  var mode = thePage.data.EnableEditMode;
+  if (mode == null) mode = true; // 表示当前编辑模式为开启状态
 
   var anim = wx.createAnimation({
-    duration: 1000,
+    duration: 500,
   });
 
-  anim.translateY(0).step();
+  if (mode) {
+    anim.height(42).opacity(0).step().height(0).step();
 
-  this.setData({ ExpandAction: anim.export(), PullDownPos: newPos });
+  }
+  else {
+    anim.height(42).step().opacity(1).step();
+  }
+
+  thePage.setData({ FolderInputAction: anim.export(), EnableEditMode: !mode });
 }
 
-function onTouchEnd(event) {
-  if (!this.data.EnablePullDown) return;
-  stopPullDown(this);
-}
-
-function stopPullDown(thePage) {
-  thePage.data.EnablePullDown = false;
-  thePage.data.IsExpand = true;
-  thePage.data.PullDownPos = 0;
-}

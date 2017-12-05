@@ -1,5 +1,5 @@
 <!--作业列表-->
-<view class="task-list__page" animation="{{ExpandAction}}">
+<view class="task-list__page">
 
   <!--页眉-->
   <view class="task-list__hd"></view>
@@ -34,12 +34,15 @@
         </view>
 
         <!--课程栏目底部-->
-        <view class="weui-cell weui-cell_link">
-          <view class="weui-cell__bd">
-            <input placeholder=" + " id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{AddNewTaskPromotion}}" />
+        <view animation="{{FolderInputAction}}">
+          <view class="weui-cell weui-cell_link">
+            <view class="weui-cell__bd">
+              <input placeholder=" + " id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{AddNewTaskPromotion}}" />
+            </view>
           </view>
         </view>
 
+        <!--结束：作业列表区-->
       </view>
 
     </block>
@@ -55,8 +58,8 @@
     <view class="weui-cell__hd"></view>
     <view class='weui-cell__bd'></view>
     <view class="weui-cell__ft">
-      <image  class="tab_item_img" src='/images/edit_32.png'></image>
-      <image  class="tab_item_img" src='/images/list_32.png'></image>
+      <image class="tab_item_img" src='/images/edit_32.png' bindtap='onChangeEditMode'></image>
+      <image class="tab_item_img" src='/images/list_32.png'></image>
     </view>
   </view>
 </view>
