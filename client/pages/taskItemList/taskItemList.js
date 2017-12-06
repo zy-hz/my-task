@@ -214,12 +214,17 @@ function onRemoveTaskItem(event) {
 }
 
 // 操作作业项数据集 - 课程视图
-function op_Item4CourseGroup(thePage, itemId, courseId, callback) {
+function op_Item4CourseGroup(thePage, itemId, courseId, callback , keepAction) {
   var itemGroup = thePage.data.Item4Course;
   var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseId; });
 
   if (courseIndex < 0) return;
   var course = itemGroup[courseIndex];
+
+  if (!keepAction){
+    // 清除输入框的动画
+    course.FolderInputAction = {};
+  }
 
   var itemIndex = course.TaskItems.findIndex(function (x) { return x.id == itemId; });
   if (itemIndex < 0) return;
