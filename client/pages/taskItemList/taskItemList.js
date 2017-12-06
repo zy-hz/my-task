@@ -223,7 +223,7 @@ function op_Item4CourseGroup(thePage, itemId, courseId, callback , keepAction) {
 
   if (!keepAction){
     // 清除输入框的动画
-    course.FolderInputAction = {};
+    delete course.FolderInputAction;
   }
 
   var itemIndex = course.TaskItems.findIndex(function (x) { return x.id == itemId; });
