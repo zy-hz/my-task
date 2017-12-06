@@ -2,12 +2,12 @@ const configs = require('../config')
 const taskdb = require('knex')({
   client: 'mysql',
   connection: {
-    host: configs.taskdb.host,
-    port: configs.taskdb.port,
-    user: configs.taskdb.user,
-    password: configs.taskdb.pass,
-    database: configs.taskdb.db,
-    charset: configs.taskdb.char
+    host: configs.mysql.host,
+    port: configs.mysql.port,
+    user: configs.mysql.user,
+    password: configs.mysql.pass,
+    database: "wetask",
+    charset: configs.mysql.char
   }
 })
 
