@@ -1,9 +1,16 @@
 <view class="page">
+  
   <view class='page__hd'>
     <view class='page__title'>嗨，</view>
-    <view class='page__desc'>亲，我们需要您的授权</view>
+    <view class='page__desc'>为了给您提供更好的产品体验，我们需要获得您在微信上的公开信息（昵称和头像等）。</view>
+    <view class='page__desc'>我们需要您的授权</view>
   </view>
-  <view class='page__ft page__bd_spacing'>
-    <button type='primary' size='default' open-type='getUserInfo' bindgetuserinfo='doGetUserInfo' disabled='{{hasAuthorized}}'>前往授权</button>
+
+  <view class='page__ft'>
+    <view class="weui-btn-area">
+      <button  class="weui-btn"  type='primary' open-type='getUserInfo' bindgetuserinfo='doGetUserInfo' disabled='{{hasAuthorized}}'>前往授权</button>
+      <button  class="weui-btn"  type='default'>取消</button>
+    </view>
   </view>
+
 </view>
