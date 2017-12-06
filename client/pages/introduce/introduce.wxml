@@ -1,4 +1,9 @@
-<view>
-<view>亲，我们需要您的授权</view>
-<button type='primary' size='default' open-type='getUserInfo' bindgetuserinfo='doGetUserInfo' disabled='{{hasAuthorized}}'>授权</button>
+<view class="page">
+  <view class='page__hd'>
+    <view class='page__title'>嗨，</view>
+    <view class='page__desc'>亲，我们需要您的授权</view>
+  </view>
+  <view class='page__ft page__bd_spacing'>
+    <button type='primary' size='default' open-type='getUserInfo' bindgetuserinfo='doGetUserInfo' disabled='{{hasAuthorized}}'>前往授权</button>
+  </view>
 </view>
