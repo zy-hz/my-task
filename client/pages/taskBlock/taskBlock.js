@@ -72,7 +72,7 @@ function onLoad(options) {
           },
           fail() {
             // 用户不同意使用小程序
-            wx.navigateTo({ url: '/pages/introduce/introduce' });
+            wx.reLaunch({ url: '/pages/introduce/introduce' });
           }
         })
       } else {

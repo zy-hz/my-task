@@ -1,8 +1,8 @@
 <view class="page">
   
   <view class='page__hd'>
-    <view class='page__title'>嗨，</view>
-    <view class='page__desc'>我们在产品中需要用到您在微信上的公开信息，比如：昵称和头像。请前往授权。</view>
+    <view class='page__title'>{{NoticeTitle}}</view>
+    <view class='page__desc'>{{NoticeContent}}</view>
   </view>
 
   <view class='page__ft'>

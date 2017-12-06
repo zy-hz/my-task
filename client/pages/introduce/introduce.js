@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hasAuthorized: false
+    hasAuthorized: false,
+    NoticeTitle: "嗨，",
+    NoticeContent: "我们在产品中需要用到您在微信上的公开信息，比如：昵称和头像。请前往授权。",
   },
 
   // 点击用户授权
@@ -14,6 +16,12 @@ Page({
       wx.reLaunch({
         url: '/pages/taskBlock/taskBlock',
       })
+    }
+    else {
+      this.setData({
+        NoticeTitle: "亲，",
+        NoticeContent: "您可以点击取消按钮，前往产品的体验版本。如果您觉得有必要，可以回来给我们授权。",
+      });
     }
   },
 
@@ -25,7 +33,7 @@ Page({
       title: '授权',
     })
     var thePage = this;
-   
+
     wx.getSetting({
       success(res) {
         var isAuth = res.authSetting['scope.userInfo'];
