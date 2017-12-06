@@ -2,8 +2,7 @@
   
   <view class='page__hd'>
     <view class='page__title'>嗨，</view>
-    <view class='page__desc'>为了给您提供更好的产品体验，我们需要获得您在微信上的公开信息（昵称和头像等）。</view>
-    <view class='page__desc'>我们需要您的授权</view>
+    <view class='page__desc'>我们在产品中需要用到您在微信上的公开信息，比如：昵称和头像。请前往授权。</view>
   </view>
 
   <view class='page__ft'>
