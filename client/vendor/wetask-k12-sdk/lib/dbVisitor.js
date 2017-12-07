@@ -116,12 +116,13 @@ function addNewTaskItem(options) {
  *
  * @param {Object} options 函数配置
  * @param {Function} options.ItemId 作业项编号
+ * @param {Function} options.BlockId 作业编号
  * @param {Function} options.success() 登录成功后的回调函数 
  * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
  */
 function deleteTaskItem(options) {
   options.login = true;
-  options.url = `${config.service.host}/weapp/wetask/deletetaskitem?ItemId=${options.ItemId}`;
+  options.url = `${config.service.host}/weapp/wetask/deletetaskitem?ItemId=${options.ItemId}&BlockId=${options.BlockId}`;
 
   qcloud.request(options);
 

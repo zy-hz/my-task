@@ -158,6 +158,10 @@ async function addnewtaskitem(ctx, next) {
 
   var result = await taskdb("wetask_item").returning('id').insert(item);
   var taskItems = await taskdb("wetask_item").where('wetask_item.id', result[0]).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
+
+  // 增加作业中的作业项数量
+  await taskdb("wetask_block").where('id', BlockId).increment('TaskItemCount',1);
+
   ctx.body = { TaskItem: taskItems[0] };
 }
 
@@ -168,9 +172,13 @@ async function deletetaskitem(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
-  const { ItemId } = ctx.query;
+  const { ItemId, BlockId } = ctx.query;
 
   var result = await taskdb("wetask_item").where('id', ItemId).update({ IsDeleted: 1 }, 'id');
+
+  // 删除作业中的作业项数量
+  await taskdb("wetask_block").where('id', BlockId).decrement('TaskItemCount', 1);
+
   ctx.body = { result };
 }
 
@@ -212,8 +220,6 @@ async function recorditemtime(ctx, next) {
   await taskdb("wetask_item").where('id', ItemId).update(spendInfo).returning();
 
   var taskItems = await taskdb("wetask_item").where('wetask_item.id', ItemId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
-  await tjTaskBlockInfo(taskItems[0].BlockId);
-
   ctx.body = { TaskItem: taskItems[0] };
 }
 
@@ -265,12 +271,6 @@ function getTaskItemSpendInfo(timeGroup) {
 // 计算两个时间的差
 function getPassSecond(tm1, tm2) {
   return (tm2.getTime() - tm1.getTime()) / 1000;
-}
-
-// 统计作业信息
-async function tjTaskBlockInfo(bid) {
-  var result = await taskdb("wetask_item").where({ 'BlockId': bid, 'IsDeleted': false });
-  console.log(result);
 }
 
 /**

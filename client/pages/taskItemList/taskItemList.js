@@ -190,6 +190,7 @@ function onRemoveTaskItem(event) {
 
   wetask.deleteTaskItem({
     ItemId: itemid,
+    BlockId: thePage.data.TaskBlock.id,
 
     success() {
       op_Item4CourseGroup(thePage, itemid, courseid, function (itemIndex, course) {
@@ -270,6 +271,7 @@ function getTaskItemSpendDisplayTime(sec) {
 }
 
 // 创建事件对象
+// 作业项的内容发生改变
 function createEventObject() {
   return onfire.on('change_item_detail', function (data) {
 
