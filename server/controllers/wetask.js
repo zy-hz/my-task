@@ -160,7 +160,7 @@ async function addnewtaskitem(ctx, next) {
   var taskItems = await taskdb("wetask_item").where('wetask_item.id', result[0]).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
 
   // 增加作业中的作业项数量
-  await taskdb("wetask_block").where('id', BlockId).increment('TaskItemCount',1);
+  await taskdb("wetask_block").where('id', BlockId).increment('TaskItemCount', 1);
 
   // 统计作业中的课程数量
   await tjCourseCountInTaskBlock(BlockId);
@@ -280,9 +280,10 @@ function getPassSecond(tm1, tm2) {
 }
 
 // 统计作业中的课程数量
-async function tjCourseCountInTaskBlock(bid){
-  var cnt = await taskdb("wetask_item").where({ 'BlockId': bid, 'IsDeleted': false }).countDistinct('CourseId');
-  console.log(cnt);
+async function tjCourseCountInTaskBlock(bid) {
+  var result = await taskdb("wetask_item").where({ 'BlockId': bid, 'IsDeleted': false }).countDistinct('CourseId as CourseCount');
+  var cnt = result[0].CourseCount;
+  await taskdb("wetask_block").where('id', bid).update('CourseCount', cnt);
 }
 
 /**
