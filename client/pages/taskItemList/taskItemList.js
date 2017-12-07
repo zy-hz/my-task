@@ -272,7 +272,6 @@ function getTaskItemSpendDisplayTime(sec) {
 // 创建事件对象
 function createEventObject() {
   return onfire.on('change_item_detail', function (data) {
-    console.log(data);
 
     // 判断是否为作业块对象
     if (thatPage == null || data == null) return;
@@ -295,6 +294,13 @@ function createEventObject() {
 // 工具面板事件
 //
 function changeEditMode(thePage) {
+  // 检查动画过程是否完成
+  var animationDone = thePage.data.animationDone;
+  if (animationDone == false) return;
+
+  // 标记为动画过程开始，防止其他点击事件进入
+  thePage.data.animationDone = false;
+
   var mode = thePage.data.EnableEditMode;
   if (mode == null) mode = true; // 表示当前编辑模式为开启状态
 
@@ -309,6 +315,8 @@ function changeEditMode(thePage) {
 
   var folderAction = createFolderAction(mode, 42);
   thePage.setData({ Item4Course: item4Course, EnableEditMode: !mode, FolderInputAction: folderAction.export() });
+
+  setTimeout(function () { thePage.data.animationDone = true }, 1000);
 }
 
 function createFolderAction(mode, ty) {
@@ -324,4 +332,3 @@ function createFolderAction(mode, ty) {
   }
   return anim;
 }
-
