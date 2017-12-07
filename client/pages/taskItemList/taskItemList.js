@@ -214,17 +214,12 @@ function onRemoveTaskItem(event) {
 }
 
 // 操作作业项数据集 - 课程视图
-function op_Item4CourseGroup(thePage, itemId, courseId, callback , keepAction) {
+function op_Item4CourseGroup(thePage, itemId, courseId, callback) {
   var itemGroup = thePage.data.Item4Course;
   var courseIndex = itemGroup.findIndex(function (x) { return x.id == courseId; });
 
   if (courseIndex < 0) return;
   var course = itemGroup[courseIndex];
-
-  if (!keepAction){
-    // 清除输入框的动画
-    delete course.FolderInputAction;
-  }
 
   var itemIndex = course.TaskItems.findIndex(function (x) { return x.id == itemId; });
   if (itemIndex < 0) return;
@@ -306,17 +301,14 @@ function changeEditMode(thePage) {
   var item4Course = thePage.data.Item4Course;
   for (var i = 0; i < item4Course.length; i++) {
     var course = item4Course[i];
-    if (course.ItemCount > 0) {
-      // 设置新建的折叠
-      course.FolderInputAction = createFolderAction(mode, 42).export();
-    }
-    else {
+    if (course.ItemCount == 0) {
       // 设置课程的折叠
       course.FolderCourseAction = mode;
     }
   }
 
-  thePage.setData({ Item4Course: item4Course, EnableEditMode: !mode });
+  var folderAction = createFolderAction(mode, 42);
+  thePage.setData({ Item4Course: item4Course, EnableEditMode: !mode, FolderInputAction: folderAction.export() });
 }
 
 function createFolderAction(mode, ty) {
