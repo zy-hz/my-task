@@ -162,6 +162,9 @@ async function addnewtaskitem(ctx, next) {
   // 增加作业中的作业项数量
   await taskdb("wetask_block").where('id', BlockId).increment('TaskItemCount',1);
 
+  // 统计作业中的课程数量
+  await tjCourseCountInTaskBlock(BlockId);
+
   ctx.body = { TaskItem: taskItems[0] };
 }
 
@@ -178,6 +181,9 @@ async function deletetaskitem(ctx, next) {
 
   // 删除作业中的作业项数量
   await taskdb("wetask_block").where('id', BlockId).decrement('TaskItemCount', 1);
+
+  // 统计作业中的课程数量
+  await tjCourseCountInTaskBlock(BlockId);
 
   ctx.body = { result };
 }
@@ -271,6 +277,12 @@ function getTaskItemSpendInfo(timeGroup) {
 // 计算两个时间的差
 function getPassSecond(tm1, tm2) {
   return (tm2.getTime() - tm1.getTime()) / 1000;
+}
+
+// 统计作业中的课程数量
+async function tjCourseCountInTaskBlock(bid){
+  var cnt = await taskdb("wetask_item").where({ 'BlockId': bid, 'IsDeleted': false }).countDistinct('CourseId');
+  console.log(cnt);
 }
 
 /**

@@ -23,6 +23,7 @@ CREATE TABLE `wetask_block` (
 	`CreateDate` DATETIME COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '布置作业日期',
 	`DeliverDate` DATETIME COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '发布作业日期',
 	`TaskItemCount` INT(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '作业项数量',
+	`CourseCount` INT(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '有作业项的课程数量',
 	`uid` VARCHAR(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户编号',
 	INDEX `uid` (`uid`),	
 	INDEX `FolderId` (`FolderId`),	
