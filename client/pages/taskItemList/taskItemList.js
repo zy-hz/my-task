@@ -311,7 +311,7 @@ function changeEditMode(thePage) {
     var course = item4Course[i];
     if (course.ItemCount == 0) {
       // 设置课程的折叠
-      course.FolderCourseAction = mode;
+      //course.FolderCourseAction = mode;
     }
   }
 
