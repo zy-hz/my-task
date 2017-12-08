@@ -34,7 +34,7 @@
         </view>
 
         <!--课程栏目底部-->
-        <view animation="{{FolderInputAction}}">
+        <view animation="{{item.FolderInputAction}}">
           <view class="weui-cell weui-cell_link">
             <view class="weui-cell__bd">
               <input placeholder=" + " id="{{item.id}}" bindblur="doAddNewTaskItem" value="{{AddNewTaskPromotion}}" />

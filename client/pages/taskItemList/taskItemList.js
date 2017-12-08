@@ -193,14 +193,14 @@ function onRemoveTaskItem(event) {
     BlockId: thePage.data.TaskBlock.id,
 
     success() {
-      op_Item4CourseGroup(thePage, itemid, courseid, function (itemIndex, course) {
-        // 从课程视图数组中删除
-        course.TaskItems.splice(itemIndex, 1);
-      });
-
       op_TaskItems(thePage, itemid, function (idx) {
         // 从作业数组中删除
         thePage.data.TaskItems.splice(idx, 1);
+      });
+
+      op_Item4CourseGroup(thePage, itemid, courseid, function (itemIndex, course) {
+        // 从课程视图数组中删除
+        course.TaskItems.splice(itemIndex, 1);
       });
 
       common.showSuccess();
@@ -307,16 +307,20 @@ function changeEditMode(thePage) {
   if (mode == null) mode = true; // 表示当前编辑模式为开启状态
 
   var item4Course = thePage.data.Item4Course;
+
   for (var i = 0; i < item4Course.length; i++) {
     var course = item4Course[i];
     if (course.ItemCount == 0) {
       // 设置课程的折叠
-      //course.FolderCourseAction = mode;
+      course.FolderCourseAction = mode;
+    }
+    else {
+      var folderAction = createFolderAction(mode, 42);
+      course.FolderInputAction = folderAction.export();
     }
   }
 
-  var folderAction = createFolderAction(mode, 42);
-  thePage.setData({ Item4Course: item4Course, EnableEditMode: !mode, FolderInputAction: folderAction.export() });
+  thePage.setData({ Item4Course: item4Course, EnableEditMode: !mode });
 
   setTimeout(function () { thePage.data.animationDone = true }, 1000);
 }
