@@ -321,7 +321,21 @@ function changeEditMode(thePage) {
 
   thePage.setData({ Item4Course: item4Course, EnableEditMode: !mode });
 
-  setTimeout(function () { thePage.data.animationDone = true }, 1000);
+  setTimeout(function () {
+    // 标记动画完成
+    thePage.data.animationDone = true;
+
+    // 清除动画
+    for (var i = 0; i < item4Course.length; i++) {
+      var course = item4Course[i];
+      if (course.ItemCount > 0) {
+        var folderAction = createTestAction(mode, 42);
+        course.FolderInputAction = folderAction.export();
+      }
+    }
+    thePage.data.Item4Course = item4Course;
+    
+  }, 1000);
 }
 
 function createFolderAction(mode, ty) {
@@ -335,5 +349,13 @@ function createFolderAction(mode, ty) {
   else {
     anim.height(ty).step().opacity(1).step();
   }
+  return anim;
+}
+
+function createTestAction(mode, ty) {
+  var anim = wx.createAnimation({
+    duration: 400,
+  });
+
   return anim;
 }
