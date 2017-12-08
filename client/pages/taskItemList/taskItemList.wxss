@@ -9,7 +9,7 @@
 }
 
 .task-list__ft {
-  height: 110rpx;
+  height: 100rpx;
   text-align: center;
 }
 
@@ -24,7 +24,7 @@
 .custom_tab {
   bottom: 0;
   position: fixed;
-  height: 110rpx;
+  height: 100rpx;
   border-top: 1px solid #dcdcdc;
   width: 100%;
   display: flex;
@@ -43,5 +43,6 @@
 .tab_item_img {
   width: 64rpx;
   height: 64rpx;
+  padding-top: 10rpx;
   padding-left: 40rpx;
 }
