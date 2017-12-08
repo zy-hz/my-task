@@ -82,6 +82,11 @@ function onLoad(options) {
         onfire.fire('add_new_block', TaskBlock);
       }
 
+      // 如果至少有一个作业项，启动折叠模式
+      if(TaskItems.length > 0 ){
+        changeEditMode(thePage);
+      }
+      
       common.showSuccess();
     },
 
@@ -329,12 +334,12 @@ function changeEditMode(thePage) {
     for (var i = 0; i < item4Course.length; i++) {
       var course = item4Course[i];
       if (course.ItemCount > 0) {
-        var folderAction = createTestAction(mode, 42);
-        course.FolderInputAction = folderAction.export();
+        course.FolderInputAction = {};
       }
     }
+    // 不用通知界面刷新
     thePage.data.Item4Course = item4Course;
-    
+
   }, 1000);
 }
 
@@ -349,13 +354,5 @@ function createFolderAction(mode, ty) {
   else {
     anim.height(ty).step().opacity(1).step();
   }
-  return anim;
-}
-
-function createTestAction(mode, ty) {
-  var anim = wx.createAnimation({
-    duration: 400,
-  });
-
   return anim;
 }
