@@ -198,10 +198,9 @@ function onRemoveTaskItem(event) {
         thePage.data.TaskItems.splice(idx, 1);
       });
 
-      op_Item4CourseGroup(thePage, itemid, courseid, function (itemIndex, course) {
-        // 从课程视图数组中删除
-        course.TaskItems.splice(itemIndex, 1);
-      });
+      // 作业项目按照课程排序
+      var item4Course = groupItemByCourse(thePage.data.TaskItems, thePage.data.Courses);
+      thePage.setData({ Item4Course: item4Course });
 
       common.showSuccess();
     },
