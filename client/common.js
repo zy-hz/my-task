@@ -30,8 +30,18 @@ var showModel = (title, content) => {
   });
 };
 
+var showLoading = function(){
+  wx.showNavigationBarLoading();
+}
+
+var hideLoading = function(){
+  wx.hideNavigationBarLoading();
+}
+
 module.exports = {
   showBusy: showBusy,
   showSuccess: showSuccess,
   showModel: showModel,
+  showLoading: showLoading,
+  hideLoading: hideLoading,
 }

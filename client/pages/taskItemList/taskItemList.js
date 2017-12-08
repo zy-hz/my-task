@@ -142,6 +142,8 @@ function doAddNewTaskItem(event) {
   if (event.detail.value == "") return;
   var thePage = this;
 
+  common.showLoading();
+
   wetask.addNewTaskItem({
     CourseId: event.target.id,
     BlockId: thePage.data.TaskBlock.id,
@@ -160,7 +162,7 @@ function doAddNewTaskItem(event) {
       var item4Course = groupItemByCourse(taskItems, courses);
       thePage.setData({ TaskItems: taskItems, Item4Course: item4Course, AddNewTaskPromotion: "" });
 
-      common.showSuccess();
+      common.hideLoading();
     },
 
     fail(error) {
@@ -192,7 +194,7 @@ function onRemoveTaskItem(event) {
   if (itemid < 0 || courseid < 0) return;
 
   var thePage = this;
-
+  common.showLoading()
   wetask.deleteTaskItem({
     ItemId: itemid,
     BlockId: thePage.data.TaskBlock.id,
@@ -207,7 +209,7 @@ function onRemoveTaskItem(event) {
       var item4Course = groupItemByCourse(thePage.data.TaskItems, thePage.data.Courses);
       thePage.setData({ Item4Course: item4Course });
 
-      common.showSuccess();
+      common.hideLoading();
     },
 
     fail(error) {
