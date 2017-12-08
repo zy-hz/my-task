@@ -11,12 +11,12 @@
         <image class="weui-media-box__thumb" src="/images/folder_1.png" />
       </view>
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-        <view class="weui-media-box__title">{{item.BlockName}} {{item.FolderName}}</view>
-        <view class="weui-media-box__desc">共 5 门课，9 项作业</view>
-        <view class="weui-media-box__info">
-          <view class="weui-media-box__info__meta">用时 2小时32分钟</view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">完成率 100%</view>
+        <view class="weui-media-box__title">
+{{item.BlockName}} {{item.FolderName}}
         </view>
+
+        <view class=" weui-media-box__desc ">共 5 门课，9 项作业共 5 门课</view>
+
       </view>
     </navigator>
 
@@ -24,6 +24,7 @@
 
 </view>
 
+<!--工具栏-->
 <view class="custom_tab ">
-  <image class="wetask-toolbar-button" src="/images/add_64.png" bindtap="doAddTaskBlock"></image>
+  <image class="wetask-toolbar-button " src="/images/add_64.png " bindtap="doAddTaskBlock "></image>
 </view>
