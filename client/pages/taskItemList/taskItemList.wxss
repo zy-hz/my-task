@@ -11,6 +11,7 @@
 .task-list__ft {
   height: 100rpx;
   text-align: center;
+  background-color: #ffffff;
 }
 
 .task-item__info {
