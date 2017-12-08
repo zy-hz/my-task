@@ -56,24 +56,30 @@ function onLoad(options) {
 // 事件：开始
 function onStart(event) {
   var thePage = this;
+  if (thePage.data.StartDisabled == true) return;
 
   var isRunning = thePage.data.TaskItem.IsRunning;
   var timeType = isRunning ? "pause" : "start";
 
-  recordTime(thePage.data.TaskItem, timeType, function (taskItem) {
-    if (!isRunning) {
-      thePage.timer = setInterval((function () {
-        updateTimer(thePage)
-      }).bind(thePage), 1000)
+  common.showLoading();
+  thePage.setData({ StartDisabled: true });
 
-    }
-    else {
-      stopTimer(thePage)
-    }
+  setTimeout(function () {
+    recordTime(thePage.data.TaskItem, timeType, function (taskItem) {
+      if (!isRunning) {
+        thePage.timer = setInterval((function () {
+          updateTimer(thePage)
+        }).bind(thePage), 1000)
 
-    thePage.setData({ TaskItem: taskItem });
+      }
+      else {
+        stopTimer(thePage)
+      }
 
-  });
+      common.hideLoading();
+      thePage.setData({ TaskItem: taskItem, StartDisabled: false });
+    })
+  }, 500);
 }
 
 // 自动启动
@@ -89,16 +95,18 @@ function onComplete(event) {
   if (thePage.data.DoneDisabled == true) return;
 
   common.showLoading();
-  thePage.setData({ DoneDisabled:true});
+  thePage.setData({ DoneDisabled: true });
 
-  recordTime(this.data.TaskItem, "done", function () {
-    stopTimer(thePage);
+  setTimeout(function () {
+    recordTime(thePage.data.TaskItem, "done", function () {
+      stopTimer(thePage);
 
-    common.hideLoading();
-    thePage.setData({ DoneDisabled: false });
-    
-    wx.navigateBack();
-  });
+      common.hideLoading();
+      thePage.setData({ DoneDisabled: false });
+
+      wx.navigateBack();
+    });
+  }, 500);
 }
 
 // 更新定时器
