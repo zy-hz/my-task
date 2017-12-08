@@ -20,6 +20,6 @@
     <button type='primary' bindtap="onStart">{{!TaskItem.IsRunning ? '开始' : '暂停'}}</button>
   </view>
   <view class="weui-flex__item " bindtap="onComplete">
-    <button type='primary'>完成</button>
+    <button type='primary' disabled="{{DoneDisabled}}">完成</button>
   </view>
 </view>

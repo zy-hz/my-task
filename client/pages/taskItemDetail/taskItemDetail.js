@@ -86,9 +86,17 @@ function doAutoStart(thePage) {
 // 事件：完成
 function onComplete(event) {
   var thePage = this;
+  if (thePage.data.DoneDisabled == true) return;
+
+  common.showLoading();
+  thePage.setData({ DoneDisabled:true});
 
   recordTime(this.data.TaskItem, "done", function () {
     stopTimer(thePage);
+
+    common.hideLoading();
+    thePage.setData({ DoneDisabled: false });
+    
     wx.navigateBack();
   });
 }
