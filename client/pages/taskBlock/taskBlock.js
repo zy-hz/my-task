@@ -141,7 +141,7 @@ function onShow(options) {
   var thePage = this;
   // 如果LastEditTaskBlockId = 0 表示第一次运行，不需要show
   if (thePage.data.LastEditTaskBlockId == 0) return;
-  
+
   common.showLoading();
 
   wetask.findTaskBlock({
@@ -150,7 +150,18 @@ function onShow(options) {
       common.hideLoading();
 
       const { TaskBlock } = result.data;
-      console.log(TaskBlock);
+      setBlockAddtionInfo(TaskBlock);
+
+      var blockList = thePage.data.blocks;
+      var idx = blockList.findIndex(element => { return element.id == TaskBlock.id });
+      if(idx < 0 ){
+        blockList.unshift(TaskBlock);
+      }
+      else {
+        blockList[idx] = TaskBlock;
+      }
+
+      thePage.setData({ blocks: blockList })
     },
     fail(error) {
       common.showModel('载入TaskBlock失败', error);
