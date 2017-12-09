@@ -77,16 +77,14 @@ function onLoad(options) {
       var item4Course = groupItemByCourse(TaskItems, Courses);
       thePage.setData({ TaskBlock, TaskItems, Courses, Item4Course: item4Course });
 
-      // 如果是新的作业块，触发新建作业块事件
-      if (IsNewBlock) {
-        onfire.fire('add_new_block', TaskBlock);
-      }
+      // 开始编辑作业块
+      onfire.fire('begin_edit_block', TaskBlock.id);
 
       // 如果至少有一个作业项，启动折叠模式
-      if(TaskItems.length > 0 ){
+      if (TaskItems.length > 0) {
         changeEditMode(thePage);
       }
-      
+
       common.showSuccess();
     },
 

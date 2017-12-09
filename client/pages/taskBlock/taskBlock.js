@@ -16,15 +16,11 @@ var onfire = require('../../vendor/wetask-k12-sdk/lib/onfire.js');
 // 用户保存当前页面引用
 var thatPage;
 
-// 当添加新作业块消息被传递时，做具体的事
-var eventObj = onfire.on('add_new_block', function (taskBlock) {
+// 当开始编辑作业块消息被传递时，做具体的事
+var eventObj = onfire.on('begin_edit_block', function (taskBlockId) {
   // 判断是否为作业块对象
-  if (taskBlock == null || taskBlock.BlockName == null || thatPage == null) return;
-
-  var blockGroup = thatPage.data.blocks;
-  blockGroup.unshift(taskBlock);
-
-  thatPage.setData({ blocks: blockGroup });
+  if (taskBlockId == null || thatPage == null) return;
+  thatPage.setData({ LastEditTaskBlockId: taskBlockId });
 });
 
 // 页面函数，传入一个object对象作为参数
@@ -39,6 +35,9 @@ function createPageObject() {
     folders: {},
 
     taskBlock: {},
+
+    // 最后一个编辑的作业块编号
+    LastEditTaskBlockId: 0,
   };
 
   obj.onLoad = onLoad;
@@ -47,6 +46,7 @@ function createPageObject() {
     onfire.un(eventObj);
   };
 
+  obj.onShow = onShow;
   obj.doAddTaskBlock = doAddTaskBlock;
 
   return obj;
@@ -58,7 +58,7 @@ function createPageObject() {
 function onLoad(options) {
   options.thePage = this;
   thatPage = this;
-  
+
   wx.setNavigationBarTitle({
     title: '作业列表',
   })
@@ -136,6 +136,15 @@ function init(thePage) {
   });
 }
 
+// 页面显示
+function onShow(options) {
+  var thePage = this;
+  // 如果LastEditTaskBlockId = 0 表示第一次运行，不需要show
+  if (thePage.data.LastEditTaskBlockId == 0) return;
+
+  console.log(thePage.data.LastEditTaskBlockId);
+}
+
 // 添加一个作业块
 function doAddTaskBlock(options) {
   wx.navigateTo({
@@ -144,7 +153,7 @@ function doAddTaskBlock(options) {
 }
 
 // 设置作业块的额外信息
-function setBlockAddtionInfo(taskBlock){
+function setBlockAddtionInfo(taskBlock) {
   taskBlock.TaskItemLeftCount = taskBlock.TaskItemCount - taskBlock.TaskItemCompletedCount;
-  taskBlock.CreateDateDays = util.formatDate(new Date(taskBlock.CreateDate),"d");
+  taskBlock.CreateDateDays = util.formatDate(new Date(taskBlock.CreateDate), "d");
 }

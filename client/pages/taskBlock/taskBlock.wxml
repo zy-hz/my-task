@@ -28,6 +28,6 @@
 </view>
 
 <!--工具栏-->
-<view class="custom_tab ">
-  <image class="wetask-toolbar-button " src="/images/add_64.png " bindtap="doAddTaskBlock "></image>
+<view class="custom_tab">
+  <image class="wetask-toolbar-button" src="/images/add_64.png" bindtap="doAddTaskBlock"></image>
 </view>

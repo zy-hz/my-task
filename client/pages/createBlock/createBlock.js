@@ -62,8 +62,8 @@ function onLoad(e) {
     },
 
     fail(error) {
-      common.showModel('获取设置失败', error);
-      console.log('获取设置失败');
+      common.showModel('创建作业失败', error);
+      console.log('创建作业失败');
     }
   });
 }
@@ -104,8 +104,8 @@ function doCreateTaskBlock(e) {
     },
 
     fail() {
-      common.showModel('获取设置失败');
-      console.log('获取设置失败');
+      common.showModel('创建作业失败', error);
+      console.log('创建作业失败');
     }
   });
 
