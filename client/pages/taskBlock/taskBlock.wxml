@@ -6,13 +6,29 @@
   <!--作业块列表-->
   <view class="weui-cells weui-cells_after-title block-list__bd">
 
+    <view class="weui-cell">
+      <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+        <image src="/images/folder_1.png" style="width: 50px; height: 50px; display: block" />
+        <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">8</view>
+      </view>
+      <view class="weui-cell__bd">
+        <view>联系人名称</view>
+        <view style="font-size: 13px;color: #888888;">摘要信息</view>
+      </view>
+      <view class="weui-cell__ft">
+        <view>a</view>
+        <view style="font-size: 13px;color: #888888;">b</view>
+      </view>
+
+    </view>
+
     <navigator url="/pages/taskItemList/taskItemList?BlockId={{item.id}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{blocks}}" wx:key="{{item.id}}">
       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
         <image class="weui-media-box__thumb" src="/images/folder_1.png" />
       </view>
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
         <view class="weui-media-box__title">
-{{item.BlockName}} {{item.FolderName}}
+          {{item.BlockName}} {{item.FolderName}}
         </view>
 
         <view class=" weui-media-box__desc ">共 5 门课，9 项作业共 5 门课</view>
