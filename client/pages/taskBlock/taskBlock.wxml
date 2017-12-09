@@ -9,7 +9,7 @@
     <!--begin:作业-->
     <navigator url="/pages/taskItemList/taskItemList?BlockId={{item.id}}" class="weui-cell" hover-class="weui-cell_active" wx:for="{{blocks}}" wx:key="{{item.id}}">
       <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-        <image style="width: 50px; height: 50px; display: block" src="/images/calendar_a.png" />
+        <image style="width: 50px; height: 50px; display: block" src="/images/folder_1.png" />
         <view class="weui-badge wetask-badge__tr" hidden="{{item.TaskItemLeftCount == 0}}">{{item.TaskItemLeftCount}}</view>
         <view class="wetask-badge__mid">{{item.CreateDateDays}}日</view>
       </view>

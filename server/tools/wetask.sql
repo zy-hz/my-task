@@ -1,4 +1,4 @@
-CREATE TABLE `wetask_course` (
+﻿CREATE TABLE `wetask_course` (
 	`id` BIGINT(20) COLLATE utf8mb4_unicode_ci NOT NULL AUTO_INCREMENT COMMENT '作业所在课目',
 	`CourseName` VARCHAR(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '课目',
 	`uid` VARCHAR(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户编号',
@@ -10,6 +10,9 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci  COMMENT='课�
 CREATE TABLE `wetask_folder` (
 	`id` BIGINT(20) COLLATE utf8mb4_unicode_ci NOT NULL AUTO_INCREMENT COMMENT '所在文件夹编号-作业分类用',
 	`FolderName` VARCHAR(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '文件夹',
+	`AsBlockName` TINYINT(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '作为作业项名称',
+	`FolderIcon` VARCHAR(1024) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '文件夹图标',
+	`DaysOnIcon` TINYINT(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '图标上显示日期',
 	`uid` VARCHAR(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户编号',
 	INDEX `uid` (`uid`),	
 	PRIMARY KEY (`id`)
@@ -23,6 +26,7 @@ CREATE TABLE `wetask_block` (
 	`CreateDate` DATETIME COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '布置作业日期',
 	`DeliverDate` DATETIME COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0001-01-01 00:00:00' COMMENT '发布作业日期',
 	`TaskItemCount` INT(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '作业项数量',
+	`TaskItemCompletedCount` INT(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '完成的作业项数量',
 	`CourseCount` INT(11) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 0 COMMENT '有作业项的课程数量',
 	`uid` VARCHAR(128) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '用户编号',
 	INDEX `uid` (`uid`),	
