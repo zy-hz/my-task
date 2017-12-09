@@ -141,8 +141,22 @@ function onShow(options) {
   var thePage = this;
   // 如果LastEditTaskBlockId = 0 表示第一次运行，不需要show
   if (thePage.data.LastEditTaskBlockId == 0) return;
+  
+  common.showLoading();
 
-  console.log(thePage.data.LastEditTaskBlockId);
+  wetask.findTaskBlock({
+    BlockId: thePage.data.LastEditTaskBlockId,
+    success(result) {
+      common.hideLoading();
+
+      const { TaskBlock } = result.data;
+      console.log(TaskBlock);
+    },
+    fail(error) {
+      common.showModel('载入TaskBlock失败', error);
+      console.log('载入TaskBlock失败', error);
+    }
+  })
 }
 
 // 添加一个作业块

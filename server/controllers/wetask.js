@@ -203,6 +203,21 @@ async function findTaskItem(ctx, next) {
 }
 
 /**
+ * 查找作业块
+ */
+async function findTaskBlock(ctx, next) {
+  // 用户必须登录
+  if (verify_request(ctx) == -1) return;
+  var uid = ctx.state.$wxInfo.userinfo.openId;
+  const { BlockId } = ctx.query;
+
+  // 获得作业列表
+  var blocks = await taskdb("wetask_block").where({ 'wetask_block.id': BlockId }).select(SELECT_TASKBLOCK).leftJoin('wetask_folder', 'wetask_block.FolderId', 'wetask_folder.id');
+
+  ctx.body = { TaskBlock:blocks[0] };
+}
+
+/**
  * 记录作业项的开始，暂停，完成时间（pause,start,done）
  */
 async function recordItemTime(ctx, next) {
@@ -343,5 +358,6 @@ module.exports = {
   addNewTaskItem,
   deleteTaskItem,
   findTaskItem,
+  findTaskBlock,
   recordItemTime,
 }

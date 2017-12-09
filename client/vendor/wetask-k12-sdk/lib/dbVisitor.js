@@ -130,22 +130,6 @@ function deleteTaskItem(options) {
 
 /**
  * @method
- * 查找一个作业项
- *
- * @param {Object} options 函数配置
- * @param {Function} options.ItemId 作业项编号
- * @param {Function} options.success(result) 登录成功后的回调函数 ,result.data = taskItem
- * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
- */
-function findTaskItem(options) {
-  options.login = true;
-  options.url = `${config.service.host}/weapp/wetask/findtaskitem?ItemId=${options.ItemId}`;
-
-  qcloud.request(options);
-}
-
-/**
- * @method
  * 记录一个作业项的时间
  *
  * @param {Object} options 函数配置
@@ -162,6 +146,40 @@ function recordItemTime(options) {
 
   qcloud.request(options);
 }
+
+/**
+ * @method
+ * 查找一个作业项
+ *
+ * @param {Object} options 函数配置
+ * @param {Function} options.ItemId 作业项编号
+ * @param {Function} options.success(result) 登录成功后的回调函数 ,result.data = taskItem
+ * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
+ */
+function findTaskItem(options) {
+  options.login = true;
+  options.url = `${config.service.host}/weapp/wetask/findtaskitem?ItemId=${options.ItemId}`;
+
+  qcloud.request(options);
+}
+
+
+/**
+ * @method
+ * 查找一个作业块
+ *
+ * @param {Object} options 函数配置
+ * @param {Function} options.BlockId 作业项编号
+ * @param {Function} options.success(result) 登录成功后的回调函数 ,result.data = TaskBlock
+ * @param {Function} options.fail(error) 登录失败后的回调函数，参数 error 错误信息
+ */
+function findTaskBlock(options) {
+  options.login = true;
+  options.url = `${config.service.host}/weapp/wetask/findtaskblock?BlockId=${options.BlockId}`;
+
+  qcloud.request(options);
+}
+
 
 /**
  * @method
@@ -265,6 +283,7 @@ module.exports = {
   getTaskItems: getTaskItems,
   addNewTaskItem: addNewTaskItem,
   deleteTaskItem: deleteTaskItem,
-  findTaskItem: findTaskItem,
   recordItemTime: recordItemTime,
+  findTaskItem: findTaskItem,
+  findTaskBlock: findTaskBlock,
 };

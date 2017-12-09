@@ -40,8 +40,9 @@ router.get('/wetask/addnewtaskblock', validationMiddleware, controllers.wetask.a
 router.get('/wetask/gettaskitems', validationMiddleware, controllers.wetask.getTaskItems)
 router.get('/wetask/addnewtaskitem', validationMiddleware, controllers.wetask.addNewTaskItem)
 router.get('/wetask/deletetaskitem', validationMiddleware, controllers.wetask.deleteTaskItem)
-router.get('/wetask/findtaskitem', validationMiddleware, controllers.wetask.findTaskItem)
 router.get('/wetask/recorditemtime', validationMiddleware, controllers.wetask.recordItemTime)
+router.get('/wetask/findtaskitem', validationMiddleware, controllers.wetask.findTaskItem)
+router.get('/wetask/findtaskblock', validationMiddleware, controllers.wetask.findTaskBlock)
 
 // mydemo
 router.get('/demo', controllers.demo)
