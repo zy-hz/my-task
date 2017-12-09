@@ -29,6 +29,20 @@
   right: -.4em;
 }
 
+.wetask-badge__br {
+  position: absolute;
+  bottom: -.4em;
+  right: -.4em;
+}
+
+.badge-running {
+  width: 0;
+  height: 0;
+  border-top: 15rpx solid transparent;
+  border-left: 30rpx solid #e64340;
+  border-bottom: 15rpx solid transparent;
+}
+
 .custom_tab {
   bottom: 40rpx;
   right: 40rpx;
