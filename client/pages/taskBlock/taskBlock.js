@@ -7,6 +7,9 @@ var qcloud = require('../../vendor/wafer2-client-sdk/index');
 // 引入通用脚本
 var common = require('../../common.js');
 
+// 引入工具脚本
+var util = require('../../utils.js');
+
 // 注册事件
 var onfire = require('../../vendor/wetask-k12-sdk/lib/onfire.js');
 
@@ -117,6 +120,8 @@ function init(thePage) {
     success(result) {
       const { folders, blocks, courses } = result.data;
 
+      blocks.forEach(setBlockAddtionInfo);
+
       thePage.setData({ folders: folders });
       thePage.setData({ courses: courses });
       thePage.setData({ blocks: blocks });
@@ -136,4 +141,10 @@ function doAddTaskBlock(options) {
   wx.navigateTo({
     url: '/pages/createBlock/createBlock',
   })
+}
+
+// 设置作业块的额外信息
+function setBlockAddtionInfo(taskBlock){
+  taskBlock.TaskItemLeftCount = taskBlock.TaskItemCount - taskBlock.TaskItemCompletedCount;
+  taskBlock.CreateDateDays = util.formatDate(new Date(taskBlock.CreateDate),"d");
 }

@@ -35,6 +35,14 @@
   right: -.4em;
 }
 
+.wetask-badge__mid {
+  position: absolute;
+  top: 0.999em;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
 .badge-running {
   width: 0;
   height: 0;
