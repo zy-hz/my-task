@@ -4,6 +4,12 @@ UPDATE `wetask_block` a,
 SET a.TaskItemCount = b.TaskItemCount
 where a.id = b.BlockId
 
+# 统计作业完成项数量
+UPDATE `wetask_block` a,
+(SELECT `BlockId` , COUNT(*) as TaskItemCompletedCount FROM `wetask_item` WHERE `IsDeleted` = 0 and IsCompleted= 1 group by `BlockId`) b
+SET a.TaskItemCompletedCount= b.TaskItemCompletedCount
+where a.id = b.BlockId
+
 # 统计课程中的作业项目
 UPDATE `wetask_block` a,
 (select `BlockId`,count(*) as CourseCount from (

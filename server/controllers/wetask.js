@@ -11,7 +11,7 @@ const taskdb = require('knex')({
   }
 })
 
-var SELECT_TASKBLOCK = ['wetask_block.id', 'wetask_block.BlockName', 'wetask_block.FolderId', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate', 'wetask_block.TaskItemCount', 'wetask_block.CourseCount'];
+var SELECT_TASKBLOCK = ['wetask_block.id', 'wetask_block.BlockName', 'wetask_block.FolderId', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate', 'wetask_block.TaskItemCount', 'wetask_block.TaskItemCompletedCount', 'wetask_block.CourseCount' ];
 
 var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.FolderId', 'wetask_item.BlockId', 'wetask_item.CourseId', 'wetask_item.ItemTitle', 'wetask_course.CourseName', 'wetask_item.SpendSecond', 'wetask_item.IsCompleted', 'wetask_item.IsRunning', 'wetask_item.EnableRemove', 'wetask_item.LastDoTime'];
 
@@ -225,7 +225,13 @@ async function recorditemtime(ctx, next) {
   var spendInfo = getTaskItemSpendInfo(timeGroup);
   await taskdb("wetask_item").where('id', ItemId).update(spendInfo).returning();
 
+  // 获得作业项
   var taskItems = await taskdb("wetask_item").where('wetask_item.id', ItemId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
+
+  // 统计作业块
+  var bid = taskItems[0].BlockId;
+  await tjTaskItemIsCompletedCount(bid);
+
   ctx.body = { TaskItem: taskItems[0] };
 }
 
@@ -284,6 +290,13 @@ async function tjCourseCountInTaskBlock(bid) {
   var result = await taskdb("wetask_item").where({ 'BlockId': bid, 'IsDeleted': false }).countDistinct('CourseId as CourseCount');
   var cnt = result[0].CourseCount;
   await taskdb("wetask_block").where('id', bid).update('CourseCount', cnt);
+}
+
+// 统计作业中的完成的作业项目数量
+async function tjTaskItemIsCompletedCount(bid) {
+  var result = await taskdb("wetask_item").where({ 'BlockId': bid, 'IsDeleted': false, 'IsCompleted': true }).count('IsCompleted as TaskItemCompletedCount');
+  var cnt = result[0].TaskItemCompletedCount;
+  await taskdb("wetask_block").where('id', bid).update('TaskItemCompletedCount', cnt);
 }
 
 /**
