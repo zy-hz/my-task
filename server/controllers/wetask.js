@@ -73,7 +73,7 @@ async function getTargetCount(target, uid) {
 /**
  * 获得用户的文件夹
  */
-async function gettaskfolders(ctx, next) {
+async function getTaskFolders(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
@@ -85,7 +85,7 @@ async function gettaskfolders(ctx, next) {
 /**
  * 添加作业块
  */
-async function addnewtaskblock(ctx, next) {
+async function addNewTaskBlock(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
@@ -121,7 +121,7 @@ async function addnewtaskblock(ctx, next) {
 /**
  * 获取作业项
  */
-async function gettaskitems(ctx, next) {
+async function getTaskItems(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
@@ -142,7 +142,7 @@ async function gettaskitems(ctx, next) {
 /**
  * 添加作业项
  */
-async function addnewtaskitem(ctx, next) {
+async function addNewTaskItem(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
@@ -171,7 +171,7 @@ async function addnewtaskitem(ctx, next) {
 /**
  * 删除作业项
  */
-async function deletetaskitem(ctx, next) {
+async function deleteTaskItem(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
@@ -191,7 +191,7 @@ async function deletetaskitem(ctx, next) {
 /**
  * 查找作业项
  */
-async function findtaskitem(ctx, next) {
+async function findTaskItem(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
@@ -205,7 +205,7 @@ async function findtaskitem(ctx, next) {
 /**
  * 记录作业项的开始，暂停，完成时间（pause,start,done）
  */
-async function recorditemtime(ctx, next) {
+async function recordItemTime(ctx, next) {
   // 用户必须登录
   if (verify_request(ctx) == -1) return;
   var uid = ctx.state.$wxInfo.userinfo.openId;
@@ -337,11 +337,11 @@ function verify_request(ctx) {
 module.exports = {
   get,
   init,
-  gettaskfolders,
-  addnewtaskblock,
-  gettaskitems,
-  addnewtaskitem,
-  deletetaskitem,
-  findtaskitem,
-  recorditemtime,
+  getTaskFolders,
+  addNewTaskBlock, 
+  getTaskItems,
+  addNewTaskItem,
+  deleteTaskItem,
+  findTaskItem,
+  recordItemTime,
 }
