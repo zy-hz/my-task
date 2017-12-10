@@ -11,7 +11,7 @@ const taskdb = require('knex')({
   }
 })
 
-var SELECT_TASKBLOCK = ['wetask_block.id', 'wetask_block.BlockName', 'wetask_block.FolderId', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate', 'wetask_block.TaskItemCount', 'wetask_block.TaskItemCompletedCount', 'wetask_block.CourseCount' ];
+var SELECT_TASKBLOCK = ['wetask_block.id', 'wetask_block.BlockName', 'wetask_block.FolderId', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate', 'wetask_block.TaskItemCount', 'wetask_block.TaskItemCompletedCount', 'wetask_block.CourseCount', 'wetask_folder.AsBlockName', 'wetask_folder.FolderIcon', 'wetask_folder.DaysOnIcon' ];
 
 var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.FolderId', 'wetask_item.BlockId', 'wetask_item.CourseId', 'wetask_item.ItemTitle', 'wetask_course.CourseName', 'wetask_item.SpendSecond', 'wetask_item.IsCompleted', 'wetask_item.IsRunning', 'wetask_item.EnableRemove', 'wetask_item.LastDoTime'];
 
