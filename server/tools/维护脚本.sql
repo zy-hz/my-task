@@ -17,3 +17,10 @@ SELECT `BlockId` ,`CourseId` FROM `wetask_item` WHERE `IsDeleted` = 0 group by `
 group by sub_a.`BlockId`) b
 SET a.CourseCount = b.CourseCount
 where a.id = b.BlockId
+
+# É¾³ý²âÊÔÊý¾Ý
+DELETE FROM `wetask_folder` WHERE `uid` = 'odq0h0Re4kSp1rAjxiGaLR_neNu4';
+DELETE FROM `wetask_block` WHERE `uid` = 'odq0h0Re4kSp1rAjxiGaLR_neNu4';
+DELETE FROM `wetask_course` WHERE `uid` = 'odq0h0Re4kSp1rAjxiGaLR_neNu4';
+DELETE FROM `wetask_item` WHERE `uid` = 'odq0h0Re4kSp1rAjxiGaLR_neNu4';
+DELETE FROM `wetask_time` WHERE `uid` = 'odq0h0Re4kSp1rAjxiGaLR_neNu4';
