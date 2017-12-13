@@ -11,7 +11,7 @@ const taskdb = require('knex')({
   }
 })
 
-var SELECT_TASKBLOCK = ['wetask_block.id', 'wetask_block.BlockName', 'wetask_block.FolderId', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate', 'wetask_block.TaskItemCount', 'wetask_block.TaskItemCompletedCount', 'wetask_block.CourseCount', 'wetask_folder.AsBlockName', 'wetask_folder.FolderIcon', 'wetask_folder.DaysOnIcon' ];
+var SELECT_TASKBLOCK = ['wetask_block.id', 'wetask_block.BlockName', 'wetask_block.FolderId', 'wetask_folder.FolderName', 'wetask_block.CreateDate', 'wetask_block.DeliverDate', 'wetask_block.TaskItemCount', 'wetask_block.TaskItemCompletedCount', 'wetask_block.CourseCount', 'wetask_folder.AsBlockName', 'wetask_folder.FolderIcon', 'wetask_folder.DaysOnIcon'];
 
 var SELECT_TASKITEM = ['wetask_item.id', 'wetask_item.FolderId', 'wetask_item.BlockId', 'wetask_item.CourseId', 'wetask_item.ItemTitle', 'wetask_course.CourseName', 'wetask_item.SpendSecond', 'wetask_item.IsCompleted', 'wetask_item.IsRunning', 'wetask_item.EnableRemove', 'wetask_item.LastDoTime'];
 
@@ -45,11 +45,11 @@ async function init(ctx, next) {
 // 为用户构建默认数组
 function createDefaultFolders(uid) {
   return [
-    { FolderName: "回家作业", uid: uid },
-    { FolderName: "新东方", uid: uid },
-    { FolderName: "学而思", uid: uid },
-    { FolderName: "暑假作业", uid: uid },
-    { FolderName: "寒假作业", uid: uid }
+    { FolderName: "回家作业", AsBlockName: 0, FolderIcon: "folder_1", DaysOnIcon: 1, uid: uid },
+    { FolderName: "新东方", AsBlockName: 1, FolderIcon: "folder_2", DaysOnIcon: 1,  uid: uid },
+    { FolderName: "学而思", AsBlockName: 1, FolderIcon: "folder_2", DaysOnIcon: 1, uid: uid },
+    { FolderName: "暑假作业", AsBlockName: 1, FolderIcon: "folder_3", DaysOnIcon: 0, uid: uid },
+    { FolderName: "寒假作业", AsBlockName: 1, FolderIcon: "folder_4", DaysOnIcon: 0, uid: uid }
   ];
 }
 
@@ -214,7 +214,7 @@ async function findTaskBlock(ctx, next) {
   // 获得作业列表
   var blocks = await taskdb("wetask_block").where({ 'wetask_block.id': BlockId }).select(SELECT_TASKBLOCK).leftJoin('wetask_folder', 'wetask_block.FolderId', 'wetask_folder.id');
 
-  ctx.body = { TaskBlock:blocks[0] };
+  ctx.body = { TaskBlock: blocks[0] };
 }
 
 /**
@@ -353,7 +353,7 @@ module.exports = {
   get,
   init,
   getTaskFolders,
-  addNewTaskBlock, 
+  addNewTaskBlock,
   getTaskItems,
   addNewTaskItem,
   deleteTaskItem,
