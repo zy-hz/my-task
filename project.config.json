@@ -22,7 +22,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -46,7 +46,13 @@
 					"id": 3,
 					"name": "作业项列表",
 					"pathName": "pages/taskItemList/taskItemList",
-					"query": "BlockId=1&IsNewBlock=true"
+					"query": "BlockId=26&IsNewBlock=true"
+				},
+				{
+					"id": -1,
+					"name": "批量编辑",
+					"pathName": "pages/batchEditor/batchEditor",
+					"query": "json=%5B%7B%22id%22:16,%22CourseName%22:%22%E8%AF%AD%E6%96%87%22,%22uid%22:%22odq0h0Re4kSp1rAjxiGaLR_neNu4%22,%22SpendTime%22:0,%22DoneItemCount%22:0,%22TaskItems%22:%5B%7B%22id%22:178,%22FolderId%22:16,%22BlockId%22:26,%22CourseId%22:16,%22ItemTitle%22:%22adf%22,%22CourseName%22:%22%E8%AF%AD%E6%96%87%22,%22SpendSecond%22:0,%22IsCompleted%22:0,%22IsRunning%22:0,%22EnableRemove%22:0,%22LastDoTime%22:%222000-12-31T16:00:00.000Z%22,%22DisplayTime%22:%220:00%22%7D%5D,%22SpendTimeDisplay%22:%220:00%22,%22ItemCount%22:1,%22FolderInputAction%22:%7B%7D%7D,%7B%22id%22:17,%22CourseName%22:%22%E6%95%B0%E5%AD%A6%22,%22uid%22:%22odq0h0Re4kSp1rAjxiGaLR_neNu4%22,%22SpendTime%22:0,%22DoneItemCount%22:0,%22TaskItems%22:%5B%7B%22id%22:179,%22FolderId%22:16,%22BlockId%22:26,%22CourseId%22:17,%22ItemTitle%22:%22ddd%22,%22CourseName%22:%22%E6%95%B0%E5%AD%A6%22,%22SpendSecond%22:0,%22IsCompleted%22:0,%22IsRunning%22:1,%22EnableRemove%22:0,%22LastDoTime%22:%222017-12-14T00:35:08.000Z%22,%22DisplayTime%22:%220:00%22%7D%5D,%22SpendTimeDisplay%22:%220:00%22,%22ItemCount%22:1,%22FolderInputAction%22:%7B%7D%7D,%7B%22id%22:18,%22CourseName%22:%22%E8%8B%B1%E8%AF%AD%22,%22uid%22:%22odq0h0Re4kSp1rAjxiGaLR_neNu4%22,%22SpendTime%22:66255,%22DoneItemCount%22:1,%22TaskItems%22:%5B%7B%22id%22:180,%22FolderId%22:16,%22BlockId%22:26,%22CourseId%22:18,%22ItemTitle%22:%22aaa%22,%22CourseName%22:%22%E8%8B%B1%E8%AF%AD%22,%22SpendSecond%22:66255,%22IsCompleted%22:1,%22IsRunning%22:0,%22EnableRemove%22:0,%22LastDoTime%22:%222017-12-14T00:23:49.000Z%22,%22DisplayTime%22:%2218:24%22%7D%5D,%22SpendTimeDisplay%22:%2218:24%22,%22ItemCount%22:1,%22FolderInputAction%22:%7B%7D%7D,%7B%22id%22:19,%22CourseName%22:%22%E7%A7%91%E5%AD%A6%22,%22uid%22:%22odq0h0Re4kSp1rAjxiGaLR_neNu4%22,%22SpendTime%22:0,%22DoneItemCount%22:0,%22TaskItems%22:%5B%5D,%22SpendTimeDisplay%22:%220:00%22,%22ItemCount%22:0,%22FolderCourseAction%22:true%7D,%7B%22id%22:20,%22CourseName%22:%22%E7%A4%BE%E4%BC%9A%22,%22uid%22:%22odq0h0Re4kSp1rAjxiGaLR_neNu4%22,%22SpendTime%22:0,%22DoneItemCount%22:0,%22TaskItems%22:%5B%5D,%22SpendTimeDisplay%22:%220:00%22,%22ItemCount%22:0,%22FolderCourseAction%22:true%7D%5D"
 				}
 			]
 		}

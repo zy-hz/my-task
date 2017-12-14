@@ -6,3 +6,30 @@
   width:90rpx; 
   height: 90rpx;
 }
+
+
+.custom_tab {
+  bottom: 0;
+  position: fixed;
+  height: 100rpx;
+  border-top: 1px solid #dcdcdc;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 28rpx;
+  background-color: #fffffb;
+  z-index: 999;
+}
+
+.custom_tab .weui-cell {
+  width: 100%;
+}
+
+.tab_item_img {
+  width: 64rpx;
+  height: 64rpx;
+  padding-top: 10rpx;
+  padding-left: 40rpx;
+}

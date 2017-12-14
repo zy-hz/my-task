@@ -1,0 +1,8 @@
+page,batch-editor {
+  height: 100%;
+}
+
+.weui-textarea {
+  height: 100%;
+  margin-bottom: 100px;
+}

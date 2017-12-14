@@ -41,6 +41,7 @@ function createPageObject() {
 
 
   obj.onEditTaskItems = onEditTaskItems;
+  obj.onBatchInput = onBatchInput;
   obj.doAddNewTaskItem = doAddNewTaskItem;
   obj.onRemoveTaskItem = onRemoveTaskItem;
   obj.onTapItem = onTapItem;
@@ -169,6 +170,14 @@ function doAddNewTaskItem(event) {
     }
 
   });
+
+}
+
+// 开始批量编辑
+function onBatchInput(event){
+  //  导航到作业项细节页面
+  var url = util.buildUrlWithObjectParams("/pages/batchEditor/batchEditor", this.data.Item4Course);
+  wx.navigateTo({ url });
 
 }
 

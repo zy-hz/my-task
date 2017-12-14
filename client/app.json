@@ -8,7 +8,8 @@
     "pages/createBlock/createBlock",
     "pages/taskItemList/taskItemList",
     "pages/taskItemDetail/taskItemDetail",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/batchEditor/batchEditor"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,5 +17,4 @@
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "white"
   }
-
 }

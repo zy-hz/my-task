@@ -60,6 +60,7 @@
     <view class="weui-cell__hd"></view>
     <view class='weui-cell__bd'></view>
     <view class="weui-cell__ft">
+      <image class="tab_item_img" src="{{'/images/keyboard_a.png'}}" bindtap='onBatchInput'></image>
       <image class="tab_item_img" src="{{EnableEditMode == false ? '/images/edit_64_a.png' : '/images/edit_64_b.png' }}" bindtap='onChangeEditMode'></image>
     </view>
   </view>
