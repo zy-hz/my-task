@@ -26,19 +26,64 @@ function createPageObject() {
   obj.onBlur = onBlur;
   obj.onInput = onInput;
 
+  obj.onNavigateBack = onNavigateBack;
+  obj.onSave = onSave;
+
   return obj;
 }
 
 // 页面载入
-function onLoad(options){
+function onLoad(options) {
   var item4Course = util.getObjectFromOptions(options);
+  this.setData({ CourseText: convertCourse2Text(item4Course) });
   console.log(item4Course);
 }
 
-function onBlur(event){
+function onBlur(event) {
   console.log(event);
 }
 
-function onInput(event){
+function onInput(event) {
   console.log(event.detail);
+}
+
+function onNavigateBack(event) {
+  wx.navigateBack();
+}
+
+// 保存修改
+function onSave(event) {
+  var item4Course = convertText2Course(this.data.CourseText);
+
+}
+
+// 作业内容编辑
+function convertCourse2Text(item4Course) {
+  var result = new Array();
+
+  for (var i = 0; i < item4Course.length; i++) {
+    var course = item4Course[i];
+    var txt = convertTaskItems2Text(course.TaskItems);
+    if (txt == "") continue;
+    txt = `${course.CourseName}\r\n${txt}`;
+    result.push(txt);
+  }
+
+  return result.join('\r\n\r\n');
+}
+
+function convertTaskItems2Text(taskItems) {
+  var result = new Array();
+  for (var i = 0; i < taskItems.length; i++) {
+    result.push(taskItems[i].ItemTitle);
+  }
+  return result.join('\r\n');
+}
+
+// 文本转换为课程
+function convertText2Course(txt) {
+  var ary = txt.split('\r\n\r\n');
+  return ary.map(line => {
+    return line;
+  });
 }

@@ -33,3 +33,11 @@
   padding-top: 10rpx;
   padding-left: 40rpx;
 }
+
+.weui-cell__hd .tab_item_img{
+  padding-left: 0rpx;  
+}
+
+.custom_tab .weui-cell__bd{
+  text-align: center;
+}
