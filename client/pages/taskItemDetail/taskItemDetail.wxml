@@ -8,8 +8,8 @@
 </view>
 
 <!-- 作业项标题-->
-<view class="weui-flex ">
-  <view class="weui-flex__item ">
+<view class="weui-flex">
+  <view class="weui-flex__item">
     <view class="item-title">【{{TaskItem.CourseName}}】{{TaskItem.ItemTitle}}</view>
   </view>
 </view>
@@ -17,7 +17,7 @@
 <!-- 操作区 -->
 <view class="weui-flex op-panel ">
   <view class="weui-flex__item ">
-    <button type='primary'  disabled="{{StartDisabled}}" bindtap="onStart">{{!TaskItem.IsRunning ? '开始' : '暂停'}}</button>
+    <button type='primary' disabled="{{StartDisabled}}" bindtap="onStart">{{!TaskItem.IsRunning ? '开始' : '暂停'}}</button>
   </view>
   <view class="weui-flex__item " bindtap="onComplete">
     <button type='primary' disabled="{{DoneDisabled}}">完成</button>
