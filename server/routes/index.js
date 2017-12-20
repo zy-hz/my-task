@@ -43,6 +43,7 @@ router.get('/wetask/deletetaskitem', validationMiddleware, controllers.wetask.de
 router.get('/wetask/recorditemtime', validationMiddleware, controllers.wetask.recordItemTime)
 router.get('/wetask/findtaskitem', validationMiddleware, controllers.wetask.findTaskItem)
 router.get('/wetask/findtaskblock', validationMiddleware, controllers.wetask.findTaskBlock)
+router.get('/wetask/updatetaskitemtitle', validationMiddleware, controllers.wetask.updateTaskItemTitle)
 
 // mydemo
 router.get('/demo', controllers.demo)

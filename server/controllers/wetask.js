@@ -46,7 +46,7 @@ async function init(ctx, next) {
 function createDefaultFolders(uid) {
   return [
     { FolderName: "回家作业", AsBlockName: 0, FolderIcon: "folder_1", DaysOnIcon: 1, uid: uid },
-    { FolderName: "新东方", AsBlockName: 1, FolderIcon: "folder_2", DaysOnIcon: 1,  uid: uid },
+    { FolderName: "新东方", AsBlockName: 1, FolderIcon: "folder_2", DaysOnIcon: 1, uid: uid },
     { FolderName: "学而思", AsBlockName: 1, FolderIcon: "folder_2", DaysOnIcon: 1, uid: uid },
     { FolderName: "暑假作业", AsBlockName: 1, FolderIcon: "folder_3", DaysOnIcon: 0, uid: uid },
     { FolderName: "寒假作业", AsBlockName: 1, FolderIcon: "folder_4", DaysOnIcon: 0, uid: uid }
@@ -200,6 +200,19 @@ async function findTaskItem(ctx, next) {
   // 获得作业列表
   var taskItems = await taskdb("wetask_item").where('wetask_item.id', ItemId).select(SELECT_TASKITEM).leftJoin('wetask_course', 'wetask_item.CourseId', 'wetask_course.id');
   ctx.body = { taskItems };
+}
+
+/**
+ * 更新作业标题
+ */
+async function updateTaskItemTitle(ctx, next) {
+  // 用户必须登录
+  if (verify_request(ctx) == -1) return;
+  var uid = ctx.state.$wxInfo.userinfo.openId;
+  const { ItemId, ItemTitle } = ctx.query;
+
+  var result = await taskdb("wetask_item").where('id', ItemId).update({ ItemTitle });
+  ctx.body = { result };
 }
 
 /**
@@ -360,4 +373,5 @@ module.exports = {
   findTaskItem,
   findTaskBlock,
   recordItemTime,
+  updateTaskItemTitle,
 }

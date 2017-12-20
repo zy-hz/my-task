@@ -22,13 +22,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 3,
 			"list": [
 				{
 					"id": 0,
 					"name": "taskItemDetail",
 					"pathName": "pages/taskItemDetail/taskItemDetail",
-					"query": "json=%7B%22id%22:1,%22FolderId%22:1,%22BlockId%22:1,%22CourseId%22:1,%22ItemTitle%22:%22aaa%22,%22CourseName%22:%22%E8%AF%AD%E6%96%87%22,%22SpendSecond%22:64,%22IsCompleted%22:1,%22canRemove%22:false,%22DisplayTime%22:%220:01%22%7D"
+					"query": "json=%7B%22id%22:17,%22FolderId%22:1,%22BlockId%22:1,%22CourseId%22:1,%22ItemTitle%22:%22aaa%22,%22CourseName%22:%22%E8%AF%AD%E6%96%87%22,%22SpendSecond%22:64,%22IsCompleted%22:1,%22canRemove%22:false,%22DisplayTime%22:%220:01%22%7D"
 				},
 				{
 					"id": -1,
