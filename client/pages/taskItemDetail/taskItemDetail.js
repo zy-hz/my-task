@@ -197,6 +197,26 @@ function onSaveTitle(event) {
 function onFinishEdit(event) {
   var taskItem = this.data.TaskItem;
   taskItem.ItemTitle = event.detail.value;
+  var thePage = this;
 
-  this.setData({ TaskItem: taskItem });
+  common.showLoading();
+  wetask.updateTaskItemTitle({
+    ItemId: taskItem.id,
+    ItemTitle: taskItem.ItemTitle,
+
+    success(result) {
+      thePage.setData({ TaskItem: taskItem, EditTitleMode: false });
+
+      // 触发课程作业项信息变更事件
+      onfire.fire('change_item_detail', { TaskItem: taskItem });
+
+      common.hideLoading();
+    },
+
+    fail(error) {
+      common.showModel('计时到服务器失败', error);
+      console.log('计时到服务器失败');
+    }
+
+  });
 }

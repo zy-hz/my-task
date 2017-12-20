@@ -12,4 +12,5 @@ var exports = module.exports = {
   recordItemTime: dbVisitor.recordItemTime,
   findTaskItem: dbVisitor.findTaskItem,
   findTaskBlock: dbVisitor.findTaskBlock,
+  updateTaskItemTitle: dbVisitor.updateTaskItemTitle,
 };

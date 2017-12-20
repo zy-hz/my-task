@@ -15,7 +15,7 @@
   </view>
   <view hidden='{{EditTitleMode == false}}'>
     <icon class="weui-icon-radio item-title__btn" type="success_no_circle" size="18" bindtap='onSaveTitle'></icon>
-    <input class="item-title__input" focus="{{EditTitleMode}}" bindblur = "onFinishEdit" value='{{TaskItem.ItemTitle}}' />
+    <input class="item-title__input" focus="{{EditTitleMode}}" bindconfirm = "onFinishEdit" bindblur = "onFinishEdit" value='{{TaskItem.ItemTitle}}' />
   </view>
 </view>
 
