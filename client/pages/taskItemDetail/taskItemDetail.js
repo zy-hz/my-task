@@ -20,9 +20,14 @@ function createPageObject() {
     TaskItem: {},
 
     DisplayTime: { Hour: "0", Minute: '00', Second: '00' },
+
+    EditTitleMode: false,
   };
 
   obj.onLoad = onLoad;
+  obj.onEditTitle = onEditTitle;
+  obj.onSaveTitle = onSaveTitle;
+  obj.onFinishEdit = onFinishEdit;
   obj.onStart = onStart;
   obj.onComplete = onComplete;
 
@@ -176,4 +181,22 @@ function calcuateLeaveTime(lastDoTime) {
   var start = util.formatDate(new Date(lastDoTime), 'yyyy-MM-dd HH:mm:ss');
   var end = util.formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss');
   return util.DateDiff(start, end, "second");
+}
+
+// 编辑标题
+function onEditTitle(event) {
+  this.setData({ EditTitleMode: true });
+}
+
+// 保存编辑的内容
+function onSaveTitle(event) {
+  this.setData({ EditTitleMode: false });
+}
+
+// 保存编辑的内容
+function onFinishEdit(event) {
+  var taskItem = this.data.TaskItem;
+  taskItem.ItemTitle = event.detail.value;
+
+  this.setData({ TaskItem: taskItem });
 }

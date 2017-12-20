@@ -8,10 +8,14 @@
 </view>
 
 <!-- 作业项标题-->
-<view class="weui-flex">
-  <view class="weui-flex__item">
-    <image class="item-title__btn" src="/images/pen_32_a.png" bindtap='onBatchInput'></image>
-    <view class="item-title">【{{TaskItem.CourseName}}】{{TaskItem.ItemTitle}}</view>
+<view class="item-title">
+  <view class="" hidden='{{EditTitleMode == true}}'>
+    <image class="item-title__btn" src="/images/pen_32_a.png" bindtap='onEditTitle'></image>
+    <view class="item-title__bd">【{{TaskItem.CourseName}}】{{TaskItem.ItemTitle}}</view>
+  </view>
+  <view hidden='{{EditTitleMode == false}}'>
+    <icon class="weui-icon-radio item-title__btn" type="success_no_circle" size="18" bindtap='onSaveTitle'></icon>
+    <input class="item-title__input" focus="{{EditTitleMode}}" bindblur = "onFinishEdit" value='{{TaskItem.ItemTitle}}' />
   </view>
 </view>
 
