@@ -31,6 +31,15 @@
   border-bottom: 1px solid #f2f2f2;
 }
 
+.item-title__btn{
+  position: fixed;
+  right: 0;
+  width: 32rpx;
+  height: 32rpx;
+  padding-top: 30rpx;
+  padding-right: 30rpx;
+}
+
 .op-panel {
   padding: 20px 20px;
 }

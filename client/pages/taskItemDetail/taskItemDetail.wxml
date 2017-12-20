@@ -10,6 +10,7 @@
 <!-- 作业项标题-->
 <view class="weui-flex">
   <view class="weui-flex__item">
+    <image class="item-title__btn" src="/images/pen_32_a.png" bindtap='onBatchInput'></image>
     <view class="item-title">【{{TaskItem.CourseName}}】{{TaskItem.ItemTitle}}</view>
   </view>
 </view>
