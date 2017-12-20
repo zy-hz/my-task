@@ -192,8 +192,9 @@ function findTaskBlock(options) {
  */
 function updateTaskItemTitle(options){
   options.login = true;
-  options.url = `${config.service.host}/weapp/wetask/updatetaskitemtitle?ItemId=${options.ItemId}&ItemTitle=${options.ItemTitle}`;
+  var title = encodeURI(options.ItemTitle);
 
+  options.url = `${config.service.host}/weapp/wetask/updatetaskitemtitle?ItemId=${options.ItemId}&ItemTitle=${title}`;
   qcloud.request(options);
 }
 
